@@ -1,7 +1,6 @@
-import React, { Suspense, lazy, useEffect, useState } from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "./contexts/LanguageContext.jsx";
-
 import "./App.css";
 import Loader from "./components/Loader";
 
@@ -33,21 +32,11 @@ const NewsDetails = lazy(() => import("./pages/NewsDetails"));
 const ContactUs = lazy(() => import("./pages/ContactUs"));
 
 function App() {
-  const [booting, setBooting] = useState(true);
-
-  useEffect(() => {
-    const id = setTimeout(() => setBooting(false), 300);
-    return () => clearTimeout(id);
-  }, []);
-
-  if (booting) return <Loader fullscreen />;
-
   return (
     <Router>
       <LanguageProvider>
-        <Suspense fallback={<Loader fullscreen />}>
+        <Suspense fallback={<Loader fullscreen size={90} color="#FF8D47" />}>
           <Navbar />
-
           <Routes>
             <Route path="/" element={<HomePage />} />
 
@@ -73,7 +62,6 @@ function App() {
 
             <Route path="/contact" element={<ContactUs />} />
           </Routes>
-
           <Footer />
         </Suspense>
       </LanguageProvider>

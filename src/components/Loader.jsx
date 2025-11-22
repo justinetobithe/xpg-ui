@@ -4,8 +4,9 @@ import {
     enableBodyScroll,
     clearAllBodyScrollLocks,
 } from "body-scroll-lock";
+import { Circles } from "react-loader-spinner";
 
-function Loader({ fullscreen = true, className = "" }) {
+function Loader({ fullscreen = true, className = "", size = 80, color = "#ff8a00" }) {
     const targetRef = useRef(null);
 
     useEffect(() => {
@@ -29,12 +30,13 @@ function Loader({ fullscreen = true, className = "" }) {
                 className
             }
         >
-            <div className="sk-folding-cube" aria-label="Loading">
-                <div className="sk-cube1 sk-cube" />
-                <div className="sk-cube2 sk-cube" />
-                <div className="sk-cube4 sk-cube" />
-                <div className="sk-cube3 sk-cube" />
-            </div>
+            <Circles
+                height={size}
+                width={size}
+                color={color}
+                ariaLabel="circles-loading"
+                visible={true}
+            />
         </div>
     );
 }
