@@ -1,9 +1,4 @@
-import React, {
-    useEffect,
-    useState,
-    useMemo,
-    useTransition,
-} from "react";
+import React, { useEffect, useState, useMemo, useTransition } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../firebase";
 import Loader from "./Loader";
@@ -24,7 +19,7 @@ function Navbar() {
     const [isHovered, setIsHovered] = useState(null);
     const [games, setGames] = useState([]);
     const [isLoading, setLoading] = useState(true);
-    const [isPending, startTransition] = useTransition();
+    const [, startTransition] = useTransition();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -146,7 +141,6 @@ function Navbar() {
                 setLoading(false);
             }
         );
-
         return () => unsubscribe();
     }, []);
 
@@ -190,7 +184,10 @@ function Navbar() {
                     type="button"
                     className={`${toggle ? "text-[#5f5f5f]" : "lg:text-[#5f5f5f] text-black"
                         } text-3xl p-1 z-10 cursor-pointer select-none block sticky lg:hidden bg-[#fff6] rounded`}
-                    onClick={() => setToggle((prev) => !prev)}
+                    onClick={() => {
+                        setToggle((prev) => !prev);
+                        setIsHovered(null);
+                    }}
                 >
                     {toggle ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
                 </button>
@@ -202,10 +199,7 @@ function Navbar() {
             >
                 <div className="flex flex-row w-full h-20 items-center justify-between md:px-0 px-4">
                     <div className="flex flex-row h-full items-center w-full md:pl-2">
-                        <Link
-                            to="/"
-                            className="text-[1.6em] mr-[1rem] cursor-pointer"
-                        >
+                        <Link to="/" className="text-[1.6em] mr-[1rem] cursor-pointer">
                             <img
                                 src={logoBlack}
                                 alt="Company Logo"
@@ -214,8 +208,7 @@ function Navbar() {
                             <img
                                 src={
                                     toggle ||
-                                        (!toggle &&
-                                            exemptLocation.includes(location.pathname)) ||
+                                        (!toggle && exemptLocation.includes(location.pathname)) ||
                                         /^\/news\/[A-Za-z0-9]+$/.test(location.pathname)
                                         ? logoBlack
                                         : logoWhite
@@ -264,8 +257,7 @@ function Navbar() {
                                         <div
                                             style={{
                                                 display:
-                                                    item.contents.length > 0 &&
-                                                        isHovered === item.name
+                                                    item.contents.length > 0 && isHovered === item.name
                                                         ? "block"
                                                         : "none",
                                             }}
@@ -298,8 +290,7 @@ function Navbar() {
                                         <div
                                             style={{
                                                 display:
-                                                    item.contents.length > 0 &&
-                                                        isHovered === item.name
+                                                    item.contents.length > 0 && isHovered === item.name
                                                         ? "block"
                                                         : "none",
                                             }}
@@ -329,19 +320,17 @@ function Navbar() {
                             ))}
 
                             <div className="relative ml-4 z-[1100] border-0">
-                                <div className="flex items-center gap-2">
-                                    <ReactFlagsSelect
-                                        countries={languages.map((l) => l.countryCode)}
-                                        customLabels={countryToLabel}
-                                        selected={selectedCountryCode}
-                                        onSelect={handleFlagSelect}
-                                        selectButtonClassName="border border-gray-300 rounded-md px-2 py-1 flex items-center gap-2 border-0"
-                                        showSelectedLabel={false}
-                                        showSecondarySelectedLabel={false}
-                                        showOptionLabel={true}
-                                        optionsSize={14}
-                                    />
-                                </div>
+                                <ReactFlagsSelect
+                                    countries={languages.map((l) => l.countryCode)}
+                                    customLabels={countryToLabel}
+                                    selected={selectedCountryCode}
+                                    onSelect={handleFlagSelect}
+                                    selectButtonClassName="border border-gray-300 rounded-md px-2 py-1 flex items-center gap-2 border-0"
+                                    showSelectedLabel={false}
+                                    showSecondarySelectedLabel={false}
+                                    showOptionLabel
+                                    optionsSize={14}
+                                />
                             </div>
                         </ul>
                     </div>
@@ -350,94 +339,100 @@ function Navbar() {
                 {toggle && (
                     <div className="h-full w-full bg-white drop-shadow-md fixed">
                         <div className="w-full flex flex-col items-center px-8 mb-4 pt-4 pb-8 lg:hidden absolute">
-                            {navItems.map((item) => (
-                                <React.Fragment key={item.name}>
-                                    <li
-                                        className={`${isHovered === item.name ? "bg-[#eee]" : ""
-                                            } px-6 max-w-[390px] text-[#5f5f5f] cursor-pointer items-center list-none w-full h-full transition-all ease-in-out duration-500`}
-                                    >
-                                        <div className="h-12 w-full flex items-center justify-between">
-                                            {item.isLink ? (
-                                                <a
-                                                    href="https://www.xpgdemo.com/"
-                                                    target="_blank"
-                                                    rel="noreferrer"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        setToggle(false);
-                                                    }}
-                                                    className="text-primary lg:text-xl text-lg uppercase font-semibold"
-                                                >
-                                                    {item.name}
-                                                </a>
-                                            ) : (
-                                                <button
-                                                    type="button"
-                                                    onClick={() => {
-                                                        navigate(item.link);
-                                                        setToggle(false);
-                                                    }}
-                                                    className="lg:text-xl text-lg uppercase font-semibold"
-                                                >
-                                                    {item.name}
-                                                </button>
-                                            )}
-                                            {item.contents.length > 0 && (
-                                                <button
-                                                    type="button"
-                                                    className="w-3 h-3 pl-4 flex items-center justify-center"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        setIsHovered(
-                                                            isHovered !== item.name ? item.name : null
-                                                        );
-                                                    }}
-                                                >
-                                                    {isHovered === item.name ? (
-                                                        <ChevronUp className="w-3 h-3" />
-                                                    ) : (
-                                                        <ChevronDown className="w-3 h-3" />
-                                                    )}
-                                                </button>
-                                            )}
-                                        </div>
-                                    </li>
+                            {navItems.map((item) => {
+                                const open = isHovered === item.name;
+                                const hasChildren = item.contents.length > 0;
 
-                                    <div
-                                        style={{
-                                            height:
-                                                isHovered === item.name
-                                                    ? `${item.contents.length * 40}px`
-                                                    : "0px",
-                                        }}
-                                        className="overflow-hidden flex flex-col w-full gap-1 max-w-[390px] px-6 bg-[#eee] border-b border-b-[#0000001a] border-l-[3px] border-l-primary transition-all duration-200"
-                                    >
-                                        {item.contents.map((i) => (
-                                            <li
-                                                key={i.id}
-                                                className="px-6 text-[#5f5f5f] border-b border-b-[#0000001a] cursor-pointer pt-1 pb-2 list-none w-full"
-                                                onClick={() => {
-                                                    navigate(`${item.link}/${i.id}`);
-                                                    setIsHovered(
-                                                        isHovered !== item.name ? item.name : null
-                                                    );
-                                                    setToggle(false);
-                                                }}
-                                            >
-                                                <p className="lg:text-base text-sm uppercase font-semibold">
-                                                    {i.name}
-                                                    {item.link === "/solution" &&
-                                                        i.id === "smart-studio" && (
-                                                            <span className="ml-2 text-[10px] font-bold text-white bg-red-500 px-2 py-[2px] rounded-full">
-                                                                {t("navbar.badge.new")}
-                                                            </span>
+                                return (
+                                    <div key={item.name} className="w-full max-w-[390px]">
+                                        <div
+                                            className={`px-4 text-[#5f5f5f] w-full transition-all ease-in-out duration-300 ${open ? "bg-[#eee]" : "bg-white"
+                                                }`}
+                                        >
+                                            <div className="h-12 w-full flex items-center justify-between">
+                                                {item.isLink ? (
+                                                    <a
+                                                        href="https://www.xpgdemo.com/"
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            setToggle(false);
+                                                            setIsHovered(null);
+                                                        }}
+                                                        className="text-primary text-lg uppercase font-semibold"
+                                                    >
+                                                        {item.name}
+                                                    </a>
+                                                ) : (
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => {
+                                                            navigate(item.link);
+                                                            setToggle(false);
+                                                            setIsHovered(null);
+                                                        }}
+                                                        className="text-lg uppercase font-semibold"
+                                                    >
+                                                        {item.name}
+                                                    </button>
+                                                )}
+
+                                                {hasChildren && (
+                                                    <button
+                                                        type="button"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            setIsHovered(open ? null : item.name);
+                                                        }}
+                                                        className={`ml-3 h-8 w-8 flex items-center justify-center rounded border ${open
+                                                                ? "border-primary bg-primary/10 text-primary"
+                                                                : "border-primary text-primary"
+                                                            }`}
+                                                        aria-label={`${item.name} menu toggle`}
+                                                    >
+                                                        {open ? (
+                                                            <ChevronUp className="w-5 h-5" />
+                                                        ) : (
+                                                            <ChevronDown className="w-5 h-5" />
                                                         )}
-                                                </p>
-                                            </li>
-                                        ))}
+                                                    </button>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        {hasChildren && (
+                                            <div
+                                                className={`overflow-hidden bg-[#eee] border-b border-b-[#0000001a] border-l-[3px] border-l-primary transition-all duration-300 ${open ? "max-h-[520px] py-1" : "max-h-0 py-0"
+                                                    }`}
+                                            >
+                                                {item.contents.map((i) => (
+                                                    <button
+                                                        key={i.id}
+                                                        type="button"
+                                                        onClick={() => {
+                                                            navigate(`${item.link}/${i.id}`);
+                                                            setToggle(false);
+                                                            setIsHovered(null);
+                                                        }}
+                                                        className="w-full text-left px-6 py-2 border-b border-b-[#0000001a] last:border-b-0"
+                                                    >
+                                                        <span className="text-sm uppercase font-semibold text-[#5f5f5f]">
+                                                            {i.name}
+                                                            {item.link === "/solution" &&
+                                                                i.id === "smart-studio" && (
+                                                                    <span className="ml-2 text-[10px] font-bold text-white bg-red-500 px-2 py-[2px] rounded-full">
+                                                                        {t("navbar.badge.new")}
+                                                                    </span>
+                                                                )}
+                                                        </span>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        )}
                                     </div>
-                                </React.Fragment>
-                            ))}
+                                );
+                            })}
 
                             <div className="relative w-full max-w-[375px] mt-4 z-[1100]">
                                 <ReactFlagsSelect
@@ -448,7 +443,7 @@ function Navbar() {
                                     selectButtonClassName="flex justify-between items-center w-full bg-white px-4 py-2 rounded-md text-base font-semibold text-[#5f5f5f] hover:bg-gray-100"
                                     showSelectedLabel={false}
                                     showSecondarySelectedLabel={false}
-                                    showOptionLabel={true}
+                                    showOptionLabel
                                     optionsSize={14}
                                 />
                             </div>
@@ -467,6 +462,7 @@ function Navbar() {
                                     e.stopPropagation();
                                     navigate("/contact");
                                     setToggle(false);
+                                    setIsHovered(null);
                                 }}
                                 className="h-10 py-2 w-full max-w-[375px] bg-text uppercase rounded-md text-white"
                             >
