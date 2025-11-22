@@ -15,19 +15,28 @@
     "aos": "^2.3.4",
     "body-scroll-lock": "^4.0.0-beta.0",
     "date-fns": "^4.1.0",
+    "dompurify": "^3.3.0",
     "firebase": "^12.6.0",
+    "i18next": "^25.6.2",
+    "i18next-browser-languagedetector": "^8.2.0",
+    "lite-youtube-embed": "^0.3.4",
     "lucide-react": "^0.554.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-flags-select": "^2.5.0",
     "react-google-recaptcha": "^3.1.0",
-    "react-helmet": "^6.1.0",
+    "react-helmet-async": "^2.0.5",
+    "react-i18next": "^16.3.3",
     "react-icons": "^5.5.0",
     "react-paginate": "^8.3.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^7.9.6",
     "react-slick": "^0.31.0",
     "slick-carousel": "^1.8.1",
-    "swiper": "^12.0.3"
+    "swiper": "^12.0.3",
+    "tailwind-merge": "^3.4.0",
+    "tailwind-scrollbar-hide": "^4.0.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
@@ -41,7 +50,7 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.17",
+    "tailwindcss": "^3.4.18",
     "vite": "^7.2.2"
   }
 }

@@ -1,0 +1,572 @@
+{
+    "navbar": {
+        "navItems": {
+            "company": {
+                "name": "Empresa",
+                "contents": {
+                    "getToKnowXPG": "Conheça a XPG",
+                    "ourLiveStudios": "Nossos estúdios ao vivo",
+                    "ourPartners": "Nossos parceiros",
+                    "fairGaming": "Jogo justo"
+                }
+            },
+            "solutions": {
+                "name": "Soluções",
+                "contents": {
+                    "smartStudio": "Estúdio Inteligente",
+                    "apiIntegration": "Integração de API",
+                    "whiteLabel": "White Label",
+                    "html5Mobile": "HTML5 Mobile",
+                    "privateTables": "Mesas privadas",
+                    "printingMaterials": "Materiais de impressão"
+                }
+            },
+            "liveGames": {
+                "name": "Jogos ao vivo"
+            },
+            "news": {
+                "name": "Notícias"
+            },
+            "liveDemo": {
+                "name": "Demo ao vivo"
+            }
+        },
+        "buttons": {
+            "clientArea": "Área do Cliente",
+            "contactUs": "Contate-nos"
+        },
+        "badge": {
+            "new": "Novo"
+        }
+    },
+    "featureSection": {
+        "games": {
+            "title": "Jogos",
+            "description": "O maior portfólio de jogos de dealer ao vivo e jogos virtuais em uma única API."
+        },
+        "euStudios": {
+            "title": "Estúdios da UE",
+            "description": "Estúdios de última geração recém-renovados no coração da Europa."
+        },
+        "html5": {
+            "title": "HTML5",
+            "description": "Solução multiplataforma para jogos ininterruptos em qualquer dispositivo e local."
+        },
+        "whiteLabel": {
+            "title": "White Label",
+            "description": "Pacote de produtos personalizado para operadores com base na região de operação."
+        }
+    },
+    "followUs": "Siga-nos",
+    "footer": {
+        "content": "O logotipo e os materiais gráficos da XPG Live são propriedade intelectual exclusiva da XPG Live e não podem ser copiados, reproduzidos, distribuídos ou exibidos sem o consentimento prévio por escrito da XPG Live. A XPG Live opera em total conformidade com as regulamentações de jogos em várias jurisdições. Estamos comprometidos em proteger sua privacidade.",
+        "copyright": "Copyright © 2008 - {YEAR} XPG. Todos os direitos reservados."
+    },
+    "aboutSection": {
+        "title": {
+            "xpg": "XPG",
+            "concept": "Conceito"
+        },
+        "intro": "A XPG é uma provedora líder de software de cassino ao vivo B2B, entregando jogos de dealer ao vivo de ponta e soluções abrangentes de iGaming para operadores de cassinos online. Oferecemos uma plataforma flexível de marca branca que permite aos operadores integrar perfeitamente nossa suíte de cassino ao vivo sob sua própria marca por meio de uma robusta integração de API para configuração rápida e fácil.",
+        "main": {
+            "ourDiverse": "Nosso portfólio diversificado apresenta jogos populares de dealer ao vivo, como",
+            "andMore": "e mais",
+            "everyGame": "Cada jogo é apresentado por dealers profissionais e transmitido via streaming HD ao vivo de nossos estúdios de última geração. Com mais de 12 anos de experiência na indústria e um compromisso com a inovação, a XPG capacita os operadores a engajar os jogadores com uma experiência de jogo autêntica e imersiva.",
+            "manyOperators": "Junte-se aos muitos operadores que confiam na XPG para elevar suas ofertas de cassino ao vivo",
+            "connectWithUs": " – conecte-se conosco ",
+            "today": "hoje para saber mais sobre como nossas soluções podem beneficiar seu negócio de iGaming."
+        }
+    },
+    "liveGames": {
+        "live": "Ao vivo",
+        "games": "Jogos",
+        "learnMore": "Saiba mais"
+    },
+    "workTogether": {
+        "12": "12",
+        "taglineLine1": "Soluções de Jogos B2B Desde 2008",
+        "taglineLine2": "Confiado por Operadores em Todo o Mundo",
+        "workTogether": "Trabalhar Juntos"
+    },
+    "news": {
+        "title": "Notícias",
+        "recent": "Recente",
+        "recentNews": "Notícias Recentes",
+        "readMore": "Leia mais",
+        "notFound": "Nenhuma notícia encontrada para"
+    },
+    "newsLetter": {
+        "title": "Assine nossa Newsletter",
+        "description": "Fique por dentro! Receba as últimas notícias e promoções especiais diretamente na sua caixa de entrada.",
+        "stayUpdated": "Mantenha-se atualizado",
+        "form": {
+            "fullName": "Nome completo",
+            "contactNumber": "Número de contato",
+            "email": "Endereço de e-mail",
+            "subscribe": "Assinar",
+            "submitting": "Enviando...",
+            "agreement": "Ao assinar, você concorda com nossa",
+            "privacyPolicy": "Política de Privacidade",
+            "privacyComingSoon": "Política de Privacidade (em breve)"
+        },
+        "successMessage": "Assinatura bem-sucedida!",
+        "errorMessage": "Falha na assinatura. Tente novamente."
+    },
+    "ourCompany": {
+        "our": "Nossa",
+        "company": "Empresa",
+        "contents": {
+            "getToKnowXPG": {
+                "title": "Conheça a XPG"
+            },
+            "ourLiveStudios": {
+                "title": "Veja nossos estúdios ao vivo"
+            },
+            "ourPartners": {
+                "title": "Apresentando nossos parceiros"
+            },
+            "fairGaming": {
+                "title": "Jogo justo"
+            }
+        }
+    },
+    "xpgSolutions": {
+        "xpg": "XPG",
+        "solutions": "Soluções",
+        "contents": {
+            "apiIntegration": {
+                "title": "Integração de API"
+            },
+            "whiteLabel": {
+                "title": "Marca Branca"
+            },
+            "html5Mobile": {
+                "title": "HTML5 Mobile"
+            },
+            "privateTables": {
+                "title": "Mesas privadas"
+            },
+            "printingMaterials": {
+                "title": "Materiais de impressão"
+            }
+        }
+    },
+    "getToKnowXPG": {
+        "heading": {
+            "leading": "Líder.",
+            "trustWorthy": "Confiável.",
+            "getToKnowXPG": "Conheça a",
+            "xpg": "XPG"
+        },
+        "intro": "A XPG é uma provedora de software de Cassino com Dealer ao Vivo única que existe há mais de uma década; pertence a um grupo de empresas que tornam a indústria de cassinos ao vivo o que é hoje – uma substituição moderna definitiva para jogos de azar em um cassino físico real.",
+        "vision": {
+            "title": "Nossa Visão",
+            "description": "Tornar-se o provedor número um na indústria de cassinos ao vivo. Manter-se sempre à frente, desenvolvendo e implementando novos serviços e produtos."
+        },
+        "mission": {
+            "title": "Nossa Missão",
+            "description": "Aumentar a retenção de jogadores, o lucro e o reconhecimento da marca dos operadores, fornecendo soluções sofisticadas e flexíveis e um sistema de cassino ao vivo moderno com a mais ampla seleção de jogos de qualidade no mercado para seus jogadores."
+        },
+        "coreValues": {
+            "core": "Valores",
+            "values": "Essenciais",
+            "items": [
+                {
+                    "title": "Flexibilidade e simplicidade",
+                    "description": "que proporcionam a mais alta satisfação possível do cliente"
+                },
+                {
+                    "title": "Desenvolvimento e inovação",
+                    "description": "que determinam vantagens contínuas sobre os concorrentes"
+                },
+                {
+                    "title": "Profissionalismo",
+                    "description": "que garante o sucesso comercial a longo prazo"
+                },
+                {
+                    "title": "Transparência",
+                    "description": "que constrói verdadeira confiança e cooperação"
+                }
+            ]
+        },
+        "benefits": {
+            "title": "Benefícios",
+            "forOperators": {
+                "title": "Para Operadores",
+                "items": [
+                    "Solução flexível e econômica adaptada a todas as suas necessidades",
+                    "A mais ampla seleção de jogos ao vivo no mercado, continuamente atualizada",
+                    "Abordagem individual",
+                    "Várias opções de personalização para aumentar o reconhecimento da marca",
+                    "Altas taxas de retenção",
+                    "Transmissão e suporte de jogos ao vivo 24/7"
+                ]
+            },
+            "forPlayers": {
+                "title": "Para Jogadores",
+                "items": [
+                    "Uma experiência de jogo puramente ao vivo, criada em nossos vastos e bem equipados estúdios na Bulgária e Romênia",
+                    "Comunicação e companhia de dealers envolventes e conversadores",
+                    "A mais ampla seleção de jogos com recursos únicos e apostas laterais",
+                    "Caça-níqueis parceiros impressionantes e outros jogos virtuais",
+                    "Interface amigável",
+                    "Sistema multiplataforma – com os mesmos detalhes de login para PC, smartphone, tablet"
+                ]
+            }
+        }
+    },
+    "previous": "Anterior",
+    "next": "Próximo",
+    "liveStudios": {
+        "heroTitleLine1": "Europeu.",
+        "heroTitleLine2": "Sofisticado.",
+        "sectionTitle": "Veja nossos",
+        "sectionTitleBold": "Estúdios ao Vivo",
+        "description": "Transmitindo de estúdios de última geração, a XPG oferece aos seus jogadores a chance de ver crupiês interativos e experientes distribuindo cartas e girando a roleta em tempo real. Localizados no coração da Europa – na Bulgária e na Moldávia –, nossos estúdios são equipados com equipamentos de cassino de ponta, incluindo os mais avançados equipamentos de gravação de áudio e vídeo da líder da indústria Cammegh. Isso nos permite adquirir o mais alto nível de imersão no jogo e ajuda a criar uma experiência de cassino ao vivo pura pela qual a XPG é conhecida.",
+        "facilityTitle": "Estúdio",
+        "facilityTitleBold": "Instalação",
+        "features": {
+            "equipment": "Equipamento de última geração da líder da indústria Cammegh",
+            "design": "Design clássico de cassino real que é atraente e familiar",
+            "technology": "Tecnologia avançada de gravação de áudio e vídeo",
+            "dealers": "Dealers profissionais, experientes e agradáveis",
+            "atmosphere": "Atmosfera relaxada e amigável",
+            "streaming": "Streaming HD 24/7"
+        },
+        "section1": {
+            "paragraph1": "Nossos estúdios são gerenciados e operados por chefes de mesa profissionais, gerentes de cassino competentes e dealers experientes, cujo conhecimento e habilidades combinadas contribuem para a segurança e a experiência geral de nossos jogadores. Devemos ter certeza de que a qualidade da experiência de jogo é mantida 24 horas por dia, 7 dias por semana, e que os desafios diários são enfrentados com consistência.",
+            "paragraph2": "Para proporcionar a melhor experiência ao vivo possível, os estúdios devem ser confortáveis para todos: jogadores, dealers, gerentes e todos os membros da equipe do estúdio, portanto, há um conceito pelo qual gerenciamos nossos estúdios – universalidade.",
+            "features": {
+                "renovatedStudios": "Estúdios recém-renovados",
+                "cuttingEdgeTech": "Tecnologias de ponta",
+                "hdStreaming": "Streaming HD 24 horas por dia",
+                "femaleDealers": "Dealers femininas profissionais"
+            }
+        },
+        "section2": {
+            "chromaKey": {
+                "title": "Marca Dinâmica com Chroma Key",
+                "description": "O Virtual Studio da XPG utiliza tecnologia avançada de chroma key para fornecer aos operadores ambientes de dealer ao vivo totalmente personalizáveis. Esta solução permite que uma única mesa represente múltiplas marcas, alterando dinamicamente os planos de fundo para apresentar logotipos, temas ou conteúdo promocional específicos. Seja uma ocasião festiva como o Natal ou um grande evento esportivo como a Copa do Mundo, os operadores podem facilmente atualizar o cenário visual para aumentar o engajamento do jogador. Essa flexibilidade elimina a necessidade de mesas físicas adicionais ou espaço de estúdio, oferecendo uma maneira econômica de oferecer experiências de jogo personalizadas."
+            },
+            "tailoredStudios": {
+                "title": "Estúdios de Cassino Ao Vivo Personalizados",
+                "descriptionPrefix": "A XPG oferece ambientes de cassino ao vivo dedicados, projetados para refletir a identidade única de cada operador. Com opções para hospedar mesas no seu cassino físico ou dentro da rede global de estúdios da XPG, os operadores podem escolher entre uma variedade de jogos de mesa, incluindo ",
+                "andMore": "e mais",
+                "descriptionSuffix": ". Cada configuração é personalizável para se alinhar com a estética da sua marca, garantindo uma experiência coesa e imersiva para o jogador. Nossa equipe de suporte técnico dedicada está disponível 24 horas por dia, 7 dias por semana para auxiliar com quaisquer necessidades operacionais, garantindo jogabilidade perfeita e streaming de alta qualidade."
+            },
+            "finalNote": "Ao integrar o Virtual Studio e os Ambientes Dedicados da XPG em sua plataforma, você pode oferecer aos jogadores uma experiência de cassino ao vivo única e envolvente que se destaca no competitivo mercado de iGaming."
+        }
+    },
+    "ourPartners": {
+        "pageTitle": "Parceiros",
+        "heroHeading": "Parceiros",
+        "sectionHeading": {
+            "pre": "Aprimore seu cassino online com",
+            "highlight": "os dealers ao vivo de classe mundial da XPG"
+        },
+        "sectionDescription": {
+            "intro": "Oferecendo uma experiência de jogo premium e imersiva. Nossos dealers profissionalmente treinados, configuração de estúdio de alta qualidade e streaming HD criam uma atmosfera de cassino autêntica que cativa os jogadores. Com suporte multilíngue e uma seleção diversificada de jogos como",
+            "andMore": "e mais",
+            "conclusion": ", a XPG garante engajamento contínuo para um público global."
+        },
+        "partnersHeading": {
+            "pre": "Nossos",
+            "highlight": "PARCEIROS"
+        },
+        "partnersSubheading": "Trabalhando ao lado dos melhores do setor"
+    },
+    "fairGaming": {
+        "heroTitle1": "Seguro.",
+        "heroTitle2": "Transparente.",
+        "title": {
+            "pre": "Jogo",
+            "highlight": "Justo"
+        },
+        "intro": "Conhecida por sua excelente reputação na indústria, a XPG garante a transparência e a imparcialidade de seu software, mantém e gerencia seus princípios de Jogo Justo, que são continuamente monitorados, aprimorados e atualizados. Como provedora B2B de sistemas e jogos de cassino com dealer ao vivo, a XPG não tem relação direta com os jogadores, no entanto, uma reputação impecável e alta credibilidade permanecem os principais fatores para criar e manter um ambiente de jogo confiável, verdadeiramente justo, transparente e seguro em nosso negócio. Portanto, desenvolver e promover o conceito de princípios de Jogo Justo é uma parte importante para a criação de nosso ambiente de jogo fundado no espírito do fair play.",
+        "certificationTitle": "Certificação e regulamentação",
+        "certificationDescription": "Compreendendo nossa responsabilidade no mercado de jogos regulamentado, a XPG adere a regras e regulamentos rigorosos estabelecidos por organizações independentes que monitoram e auditam a jogabilidade em nosso sistema para garantir os mais altos padrões. Como parte do processo de certificação, o sistema de cassino com dealer ao vivo da XPG é oficialmente certificado pela iTech Labs, que é um dos mais conceituados órgãos de certificação independentes com mais de 12 anos de experiência e clientes em todo o mundo. Portanto, todos os jogos da XPG são submetidos a testes independentes rigorosos por terceiros independentes.",
+        "toolsTitle": "Ferramentas de Jogo Responsável",
+        "toolsDescription": "Como parte integrante do nosso software de sistema Live, as ferramentas de jogo responsável da XPG incluem uma opção de autoexclusão, interface para jogadores compulsivos, opção de verificação de idade e um sistema de tempo limite. Cuidando de nossos operadores, fornecemos um serviço de suporte profissional para garantir que nossos clientes não tenham problemas com o uso das ferramentas de jogo responsável.",
+        "items": [
+            {
+                "title": "Política Anti-Fraude e Anti-Lavagem de Dinheiro",
+                "description": "Um dos valores centrais da XPG é a nossa elevada postura moral para com os nossos parceiros, operadores e seus jogadores. Como fornecedora de software responsável que não tolera atividades fraudulentas, a XPG projetou especialmente um mecanismo de monitoramento complexo e extremamente poderoso para detectar e proteger contra fraudes e lavagem de dinheiro. Usando o monitoramento abrangente de transações e o controle do comportamento de jogo, a XPG garante um nível elevado de segurança e total proteção contra fraudes."
+            },
+            {
+                "title": "Prevenção de Jogo Compulsivo",
+                "description": "Pensando em nossos operadores e seus jogadores, queremos garantir que as pessoas sempre desfrutem de sua experiência com o sistema de cassino com dealer ao vivo da XPG. Ao mesmo tempo, admitimos que, embora a maioria das pessoas jogue para se divertir, para algumas isso pode sair do controle. É por isso que fornecemos aos nossos clientes recursos de jogo responsável, oferecendo links com todas as informações necessárias sobre os riscos do jogo e como jogar com segurança, incluindo pesquisas de autoavaliação. Nossos operadores são capazes de verificar a atividade dos jogadores e analisar padrões de comportamento que podem ajudar a identificar um risco potencial."
+            },
+            {
+                "title": "Jogo por Menores de Idade",
+                "description": "A XPG tomou medidas para confirmar que nosso sistema e os websites que usam nosso software não atraem pessoas menores de idade em sua jurisdição. Com o uso de um sistema de verificação de idade de terceiros, nosso sistema de cassino com dealer ao vivo exige um exame rigoroso das credenciais do jogador."
+            },
+            {
+                "title": "Limites",
+                "description": "A XPG oferece funcionalidade para definir limites de jogabilidade que podem ser controlados pelo jogador. Esses limites incluem limites de aposta por sessão, dia, semana, mês, duração da sessão, limites de aposta para um jogo específico e aposta única máxima por jogo. A XPG também oferece a capacidade de fornecer mensagens no jogo quando os limites foram atingidos e quais são os limites."
+            },
+            {
+                "title": "Ferramentas de Autoexclusão",
+                "description": "Mediante solicitação, a XPG fechará a conta de um cliente por um período determinado que pode variar de um dia a 12 meses, durante o qual não será possível reabrir a conta por qualquer motivo. Durante este período de autoexclusão, o jogador não receberá nenhum e-mail promocional e faremos tudo para evitar que novas contas sejam abertas."
+            }
+        ],
+        "studioSafetyNote": "Os jogos ao vivo acontecem em estúdios estritamente controlados e são totalmente gravados e monitorados. Como resultado, a imparcialidade e a natureza aleatória dos produtos oferecidos são inspecionadas e atualizadas com os mais recentes métodos e tecnologia sofisticada. Não é apenas nossa missão fornecer aos operadores o sistema de jogos mais divertido, mas também é nosso dever prevenir o uso compulsivo e o acesso de menores de idade aos nossos produtos de jogos."
+    },
+    "apiIntegration": {
+        "heroTitleLine1": "Simples.",
+        "heroTitleLine2": "Flexível.",
+        "sectionTitle": {
+            "pre": "Integração de",
+            "highlight": "API"
+        },
+        "introText": "Adicionar jogos de cassino ao vivo à sua plataforma de cassino existente é a maneira mais rápida de obter maiores receitas e melhor retenção de jogadores...",
+        "subSectionTitle": {
+            "pre": "Sistema de Cassino com",
+            "highlight": "Dealer ao Vivo da XPG"
+        },
+        "integrationBox": {
+            "label": "integração"
+        },
+        "apiBox": {
+            "label": "API"
+        },
+        "gamesBox": {
+            "label": "jogos",
+            "noGames": "Nenhum jogo disponível"
+        },
+        "partnersBox": {
+            "label": "parceiros"
+        },
+        "statsBox": {
+            "virtualGamesLabel": "jogos virtuais",
+            "gamesDescription": "Caça-níqueis Clássicos, Vídeo Caça-níqueis, Mini Caça-níqueis, Keno, Raspadinha, Jogos de Mesa, Vídeo Poker, Esportes Virtuais"
+        },
+        "xpgLiveDealerCasinoSystem": {
+            "apiIntegration": {
+                "title": "1 Integração de API",
+                "description": "Conecte e aprimore sua plataforma de cassino online sem complicações."
+            },
+            "games": {
+                "title": "JOGOS",
+                "description": ""
+            },
+            "partners": {
+                "title": "100+ PARCEIROS",
+                "description": ""
+            },
+            "virtualGames": {
+                "title": "500+ JOGOS VIRTUAIS",
+                "description": "Caça-níqueis clássicos, caça-níqueis em vídeo, mini slots, keno, raspadinha, jogos de mesa, vídeo pôquer e esportes virtuais."
+            }
+        },
+        "integrationProcess": {
+            "title": {
+                "pre": "Processo de",
+                "highlight": "Integração:"
+            },
+            "steps": [
+                "Programação e compreensão das chamadas da API XPG em nossos servidores PP (PP – Pré-Produção)",
+                "Exame do seu front-end por nossa equipe de suporte",
+                "Abertura do ambiente Live no lado da XPG",
+                "Alterações de integração no seu lado para habilitar o ambiente Live"
+            ]
+        },
+        "walletOptions": {
+            "seamlessWallet": {
+                "title": "Carteira Integrada (Seamless Wallet)",
+                "items": [
+                    "Tempo de integração: 2-3 meses",
+                    "O jogador realiza menos ações, pois as informações são atualizadas automaticamente no sistema.",
+                    "Processo de integração de API complexo que exige muitos recursos de TI e desenvolvedores de ambas as empresas."
+                ]
+            },
+            "balanceTransfer": {
+                "title": "Transferência de Saldo",
+                "items": [
+                    "Tempo de integração: 1-2 semanas",
+                    "O jogador realiza mais ações ao transferir seus fundos de um sistema de cassino para outro.",
+                    "A API é muito rápida e simples, não exigindo muitos recursos de ambas as empresas."
+                ]
+            }
+        }
+    },
+    "whiteLabel": {
+        "titleLine1": "Funcional.",
+        "titleLine2": "Transparente.",
+        "sectionTitle": {
+            "pre": "Solução",
+            "highlight": "White Label"
+        },
+        "introParagraph1": "Assim como em todos os nossos modelos de negócios, oferecemos aos nossos Parceiros White Label suporte técnico completo 24 horas por dia e permitimos que você mantenha o controle total e seguro de seu valioso banco de dados. Nenhum outro sistema de cassino ao vivo no mercado pode oferecer o tipo de serviços instantâneos que estamos configurados para fornecer aos empreendedores White Label. Entre em contato conosco agora para obter detalhes sobre como você pode iniciar seu próprio site de Cassino ao Vivo White Label de forma rápida e fácil.",
+        "introParagraph2": "Nosso sistema de jogos flexível pode ser personalizado para atender às necessidades específicas de cada cliente em praticamente qualquer idioma. Nosso sistema multilíngue atualmente suporta inglês, italiano, espanhol, francês, húngaro, turco, grego, alemão, português, russo, chinês, japonês, tailandês, malaio e coreano.",
+        "introParagraph3": "Podemos conectá-lo ao nosso fluxo de vídeo ao vivo, desenvolver um site completo de acordo com suas especificações, fornecer serviços de tradução e conectá-lo ao nosso avançado back office.",
+        "standAlone": {
+            "title": "Website Autônomo",
+            "paragraph": "O Sistema de Agente Autônomo é uma solução turnkey meticulosamente projetada para salas de jogos e empreendedores que trabalham com o mercado de dinheiro em qualquer lugar do mundo. Essencialmente, é um website personalizado pronto para uso com o sistema de cassino ao vivo da XPG, seleção completa de jogos e um back office intuitivo e amigável para gerenciar jogadores, finanças e estatísticas. Com o Sistema de Agente Autônomo da XPG, você poderá iniciar seu cassino online totalmente operacional em 7 a 10 dias com quase nenhum esforço de sua parte."
+        },
+        "downloadClient": {
+            "title": "Cliente para Download",
+            "paragraph": "A XPG também oferece o Cliente para Download para operadores que trabalham em regiões com conexão de internet ruim. É muito popular em países asiáticos. Os jogadores precisam baixar um pequeno arquivo de instalação do site do seu cassino para seus dispositivos, instalar nosso sistema e começar a jogar. O processo é muito simples e leva alguns minutos. Levaremos no máximo 7 a 10 dias úteis, ou até mais rápido, para preparar o DC para você, então você estará pronto para iniciar a operação."
+        },
+        "navigation": {
+            "previous": "← Anterior",
+            "next": "Próximo →"
+        }
+    },
+    "html5Mobile": {
+        "titleLine1": "Multi-",
+        "titleLine2": "plataforma",
+        "sectionTitle": {
+            "pre": "Solução",
+            "highlight": "Mobile"
+        },
+        "intro": "A XPG demonstra uma abordagem evolutiva para o desenvolvimento móvel ao criar uma solução HTML5 Mobile. Muitas de suas características foram adaptadas considerando a execução em dispositivos de baixa potência, como smartphones e tablets. Importante ressaltar que, embora seja executado em um navegador da web, não está vinculado ao sistema operacional subjacente. Já é suportado nos navegadores da web mais recentes e oferece uma experiência de jogo ao vivo incomparável. Para aqueles que ainda preferem baixar o aplicativo, a XPG criou um aplicativo móvel amigável e confiável para dispositivos Android com uma interface clara e navegação intuitiva.",
+        "features": {
+            "play": "Jogue",
+            "playOn": "Jogue em",
+            "playIn": "Jogue em",
+            "anytime": "a qualquer hora",
+            "anywhere": "em qualquer lugar",
+            "at": "em",
+            "of": "de",
+            "anyDevice": "qualquer dispositivo",
+            "anyBrowser": "qualquer navegador",
+            "anyGame": "qualquer jogo",
+            "choice": "escolha"
+        },
+        "sectionTitle2": {
+            "pre": "Solução",
+            "highlight": "Multiplataforma"
+        },
+        "sectionIntro2": "A plataforma cruzada da XPG é uma solução única que pode ser adaptada em múltiplos canais, permitindo que os jogadores transitem perfeitamente entre os produtos. Ela conecta operadores online, terrestres e móveis. Portanto, os jogadores podem usar os mesmos detalhes de login e desfrutar de uma experiência de jogo sem fronteiras, movendo-se constantemente de um local para outro."
+    },
+    "privateTables": {
+        "titleLine1": "Eficiente.",
+        "titleLine2": "Personalize.",
+        "sectionTitle": {
+            "pre": "Mesas",
+            "highlight": "privadas"
+        },
+        "introParagraph": "Se você deseja uma solução de mesa privada definitiva, oferecemos uma opção vencedora. Nosso sistema de cassino ao vivo tem a mais ampla seleção de jogos ao vivo no mercado, e todos eles podem estar disponíveis para seus jogadores em mesas privadas. Também oferecemos uma linha de opções de personalização de mesa de diferentes escalas para aumentar fundamentalmente o reconhecimento de sua marca. Com a XPG, tudo é negociável e pronto para ser adaptado às suas necessidades, incluindo a criação de um novo jogo do zero exclusivamente para sua mesa privada. Não importa quais jogos e opções de personalização você escolha, será uma combinação vencedora que resultará em maiores taxas de retenção e mais lucro para o seu sistema de cassino.",
+        "customizationTitle": "Opções de personalização mais comuns:",
+        "customizationOptions": [
+            "Alterar marca d'água da mesa na UI",
+            "Colocar logotipo em um jogo",
+            "Personalizar uniforme do dealer, cartas, etc.",
+            "Escolher um dealer específico",
+            "Escolher o idioma falado pelo dealer",
+            "Colocar publicidade e promoções ao vivo",
+            "E mais!"
+        ],
+        "brandAwarenessTitle": "Consciência da Marca",
+        "brandAwarenessDescription": "Nossa opção de mesas privadas oferece possibilidades surpreendentes para aumentar drasticamente a consciência da sua marca. Com mais de 10 jogos ao vivo diferentes e dezenas de jogos virtuais de nossos parceiros em 40 mesas de nossos 3 vastos estúdios, mais jogadores reconhecerão – e se lembrarão – do seu cassino online. Somos também o único provedor de cassino ao vivo que oferece muitos jogos diferentes para mercados com alta densidade de jogadores, como Ásia, Índia e Turquia. Com a XPG, a consciência da sua marca aumentará e se diversificará. Em última análise, isso também aumentará o fluxo nas mesas públicas."
+    },
+    "printingMaterials": {
+        "title": "Materiais de Impressão",
+        "sectionTitle": {
+            "pre": "Brochura da",
+            "highlight": "XPG"
+        },
+        "description": "Aqui todos podem baixar as informações atualizadas sobre a empresa XPG, suas tecnologias de fluxo de jogo e os próprios jogos. Se desejar imprimir a Brochura A5 da XPG, por favor, envie-nos a solicitação através do formulário de contato no rodapé deste site e nós lhe enviaremos o arquivo .pdf com qualidade de impressão.",
+        "downloadButton": "Baixar Brochura"
+    },
+    "gameDetails": {
+        "notFound": {
+            "title": "Jogo Não Encontrado",
+            "description": "O jogo que você procura não existe ou pode ter sido removido.",
+            "back": "Voltar aos Jogos"
+        },
+        "multiGames": "Multijogos",
+        "interestingFacts": "Fatos Interessantes",
+        "seeMore": "Saiba mais...",
+        "seeLess": "Mostrar menos"
+    },
+    "contactUs": {
+        "success": "Obrigado! Sua mensagem foi enviada. Entraremos em contato o mais rápido possível!",
+        "failure": "Falha ao enviar sua mensagem, por favor, tente novamente.",
+        "get": "Entre",
+        "inTouch": "em contato",
+        "interested": "Interessado em trabalhar juntos?",
+        "description": "Entre em contato conosco preenchendo o formulário abaixo ou enviando um e-mail para encontrar a melhor solução para você e sua empresa.",
+        "form": {
+            "name": "Nome",
+            "phone": "Telefone",
+            "email": "E-mail",
+            "subject": "Assunto",
+            "message": "Mensagem",
+            "send": "Enviar"
+        },
+        "container": {
+            "phoneLabel": "Telefone",
+            "emailLabel": "E-mail",
+            "addressLabel": "Endereço"
+        }
+    },
+    "smartStudio": {
+        "heroTitleLine1": "Smart",
+        "heroTitleLine2": "Studio",
+        "title": "Smart Studio",
+        "subTitle": "Liberte o poder do Smart Studio",
+        "description": "Com o Smart Studio, os operadores podem personalizar totalmente nossos jogos de cassino ao vivo, criando ambientes imersivos e de marca que dão vida à sua visão e cativam os jogadores.",
+        "aboutSmartStudio": {
+            "title": "Por que o Smart Studio da XPG?",
+            "description1": "Em um mercado de cassino ao vivo concorrido, destacar-se visual e emocionalmente é essencial.",
+            "preTitle": "Smart Studio da XPG",
+            "description2": "capacita os operadores a expressar sua identidade de marca sem a necessidade de estúdios personalizados.",
+            "description3": "Com ambientes totalmente personalizáveis, sua marca se torna parte da jogabilidade, construindo um reconhecimento mais forte e lealdade do jogador a cada giro, distribuição e rolagem."
+        },
+        "keyBenefits": {
+            "title": "Principais benefícios do Smart Studio",
+            "items": [
+                {
+                    "title": "Personalização de marca completa",
+                    "description": "Projete cada aspecto para refletir a identidade da sua marca — desde o traje do dealer até os layouts das mesas e visuais temáticos."
+                },
+                {
+                    "title": "Custo-eficiente e escalável",
+                    "description": "Elimine o alto custo de construções de estúdios físicos e escale eficientemente à medida que seu negócio cresce."
+                },
+                {
+                    "title": "Implantação rápida e flexível",
+                    "description": "Lance ambientes de cassino ao vivo de marca em dias, não semanas — ideal para promoções, temporadas ou campanhas."
+                },
+                {
+                    "title": "Pronto para várias marcas",
+                    "description": "Opere várias identidades de marca a partir de uma única configuração — tudo dentro de uma experiência de cassino ao vivo perfeita e imersiva."
+                }
+            ]
+        },
+        "customBranding": {
+            "title": "Recursos de personalização de marca",
+            "description": "O Smart Studio desbloqueia um poderoso conjunto de recursos de personalização que permitem projetar um ambiente de cassino ao vivo tão único quanto sua marca. Cada detalhe pode ser adaptado para elevar o envolvimento do jogador e o reconhecimento da marca, desde elementos visuais até interações de voz:",
+            "items": [
+                {
+                    "title": "Plano de fundo",
+                    "description": "aplique obras de arte personalizadas para marcar completamente seu cenário."
+                },
+                {
+                    "title": "Pódio do Croupier",
+                    "description": "adicione seu logotipo e escolha cores ou texturas personalizadas."
+                },
+                {
+                    "title": "Conteúdo promocional",
+                    "description": "exiba banners, vídeos (exceto Auto Mega Roulette) e logotipos animados."
+                },
+                {
+                    "title": "Locuções",
+                    "description": "use anúncios pré-gravados nos idiomas preferidos dos seus jogadores para um toque personalizado."
+                }
+            ]
+        },
+        "smartStudioCompatibility": {
+            "title": "Compatibilidade com Smart Studio",
+            "description": "O Smart Studio foi projetado para se integrar perfeitamente aos jogos de cassino ao vivo existentes da XPG, garantindo uma experiência de jogador consistente e de alta qualidade. Ele suporta todos os principais tipos de jogos, incluindo:",
+            "note": "Nota: Alguns recursos de personalização podem variar de acordo com o jogo."
+        },
+        "standOut": {
+            "title": "Procurando se destacar nas mesas?",
+            "description1": "O Smart Studio permite que sua marca fale por si.",
+            "description2": "Estamos sempre abertos a novas ideias e oportunidades. Se você está pronto para elevar seu cassino ao vivo, vamos conversar sobre como a XPG pode dar vida à sua visão.",
+            "button": "Vamos conversar"
+        }
+    }
+}

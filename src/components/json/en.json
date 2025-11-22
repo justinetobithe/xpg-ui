@@ -1,0 +1,575 @@
+{
+    "navbar": {
+        "navItems": {
+            "company": {
+                "name": "Company",
+                "contents": {
+                    "getToKnowXPG": "Get to know XPG",
+                    "ourLiveStudios": "Our live studios",
+                    "ourPartners": "Our partners",
+                    "fairGaming": "Fair gaming"
+                }
+            },
+            "solutions": {
+                "name": "Solutions",
+                "contents": {
+                    "smartStudio": "Smart Studio",
+                    "apiIntegration": "API integration",
+                    "whiteLabel": "White label",
+                    "html5Mobile": "HTML5 Mobile",
+                    "privateTables": "Private tables",
+                    "printingMaterials": "Printing materials"
+                }
+            },
+            "liveGames": {
+                "name": "Live Games"
+            },
+            "news": {
+                "name": "News"
+            },
+            "liveDemo": {
+                "name": "Live Demo"
+            }
+        },
+        "buttons": {
+            "clientArea": "Client Area",
+            "contactUs": "Contact us"
+        },
+        "badge": {
+            "new": "New"
+        }
+    },
+    "featureSection": {
+        "games": {
+            "title": "Games",
+            "description": "The biggest game portfolio of Live dealer and virtual games within one API."
+        },
+        "euStudios": {
+            "title": "EU Studios",
+            "description": "Newly renovated state-of-the-art studios in the heart of Europe."
+        },
+        "html5": {
+            "title": "HTML5",
+            "description": "Cross-platform solution for non-stop gaming on any device and location."
+        },
+        "whiteLabel": {
+            "title": "White label",
+            "description": "Customized product package for operators based on region of operation."
+        }
+    },
+    "followUs": "Follow Us",
+    "footer": {
+        "content": "XPG Live’s logo and graphic materials are the exclusive intellectual property of XPG Live and may not be copied, reproduced, distributed, or displayed without prior written consent from XPG Live. XPG Live operates in full compliance with gaming regulations across multiple jurisdictions. We are committed to protecting your privacy.",
+        "copyright": "Copyright © 2008 - {YEAR} XPG. All Rights Reserved."
+    },
+    "aboutSection": {
+        "title": {
+            "xpg": "XPG",
+            "concept": "Concept"
+        },
+        "intro": "XPG is a leading B2B live casino software provider delivering cutting-edge live dealer games and comprehensive iGaming solutions to online casino operators. We offer a flexible white-label platform that enables operators to seamlessly integrate our live casino suite under their own brand through robust API integration for quick, easy setup.",
+        "main": {
+            "ourDiverse": "Our diverse portfolio features popular live dealer games such as",
+            "andMore": "and more",
+            "everyGame": "Every game is hosted by professional dealers and delivered via HD live streaming from our state-of-the-art studios. With over 12 years of industry experience and a commitment to innovation, XPG empowers operators to engage players with an authentic, immersive gaming experience.",
+            "manyOperators": "Join the many operators who trust XPG to elevate their live casino offerings",
+            "connectWithUs": " – connect with us ",
+            "today": "today to learn more about how our solutions can benefit your iGaming business."
+        }
+    },
+    "liveGames": {
+        "live": "Live",
+        "games": "Games",
+        "learnMore": "Learn more"
+    },
+    "workTogether": {
+        "12": "12",
+        "taglineLine1": "B2B Gaming Solutions Since 2008",
+        "taglineLine2": "Trusted by Operators Worldwide",
+        "workTogether": "Work Together"
+    },
+    "news": {
+        "title": "Latest News",
+        "recent": "Recent",
+        "recentNews": "Recent News",
+        "readMore": "Read more",
+        "notFound": "No news found for"
+    },
+    "newsLetter": {
+        "title": "Subscribe to our Newsletter",
+        "description": "Stay in the loop! Get the latest news and special promotions delivered straight to your inbox.",
+        "stayUpdated": "Stay up to date",
+        "form": {
+            "fullName": "Full Name",
+            "contactNumber": "Contact Number",
+            "email": "Email address",
+            "subscribe": "Subscribe",
+            "submitting": "Submitting...",
+            "agreement": "By subscribing you agree to our",
+            "privacyPolicy": "Privacy Policy",
+            "privacyComingSoon": "Privacy Policy (coming soon)"
+        },
+        "successMessage": "Subscription successful!",
+        "errorMessage": "Subscription failed. Try again."
+    },
+    "ourCompany": {
+        "our": "Our",
+        "company": "Company",
+        "contents": {
+            "getToKnowXPG": {
+                "title": "Get to know XPG"
+            },
+            "ourLiveStudios": {
+                "title": "See our live studios"
+            },
+            "ourPartners": {
+                "title": "Introducing our partners"
+            },
+            "fairGaming": {
+                "title": "Fair gaming"
+            }
+        }
+    },
+    "xpgSolutions": {
+        "xpg": "XPG",
+        "solutions": "Solutions",
+        "contents": {
+            "apiIntegration": {
+                "title": "API Integration"
+            },
+            "smartStudio": {
+                "title": "Smart Studio"
+            },
+            "whiteLabel": {
+                "title": "White Label"
+            },
+            "html5Mobile": {
+                "title": "HTML5 mobile"
+            },
+            "privateTables": {
+                "title": "Private tables"
+            },
+            "printingMaterials": {
+                "title": "Printing materials"
+            }
+        }
+    },
+    "getToKnowXPG": {
+        "heading": {
+            "leading": "Leading.",
+            "trustWorthy": "TrustWorthy.",
+            "getToKnowXPG": "Get to know",
+            "xpg": "XPG"
+        },
+        "intro": "XPG is a unique Live Dealer Casino software provider that has been around for over a decade; it belongs to a cohort of companies that makes the Live casino industry what it is now – an ultimate modern replacement for gambling in a real land based casino.",
+        "vision": {
+            "title": "Vision",
+            "description": "To become the number one provider in the Live casino industry. To always stay ahead of the curve, developing and implementing new services and products"
+        },
+        "mission": {
+            "title": "Mission",
+            "description": "Increase player retention, profit, and brand recognition of the operators by providing sophisticated and flexible solutions and a modern Live casino system with the widest selection of quality games on the market for their players."
+        },
+        "coreValues": {
+            "core": "Core",
+            "values": "Values",
+            "items": [
+                {
+                    "title": "Flexibility and simplicity",
+                    "description": "that deliver the highest client satisfaction possible"
+                },
+                {
+                    "title": "Development and innovation",
+                    "description": "that determine continuous advantages over competitors"
+                },
+                {
+                    "title": "Professionalism",
+                    "description": "that guarantees long-term business success"
+                },
+                {
+                    "title": "Transparency",
+                    "description": "that builds true trust and cooperation"
+                }
+            ]
+        },
+        "benefits": {
+            "title": "Benefits",
+            "forOperators": {
+                "title": "For Operators",
+                "items": [
+                    "Flexible and cost-effective solution tailored to all your needs",
+                    "The widest selection of Live games on the market that is continuously updated",
+                    "Individual approach",
+                    "Various customization options to boost brand awareness",
+                    "High retention rates",
+                    "24/7 Live games streaming and support"
+                ]
+            },
+            "forPlayers": {
+                "title": "For Players",
+                "items": [
+                    "A pure Live gaming experience, created in our vast and well-equipped studios set in Bulgaria and Romania",
+                    "Communication and company of engaging and chatty dealers",
+                    "Widest selection of games with unique features and side bets",
+                    "Eye-popping partner slots and other virtual games",
+                    "User-friendly interface",
+                    "Cross-platform system – with the same login details for PC, smartphone, tablet"
+                ]
+            }
+        }
+    },
+    "previous": "Previous",
+    "next": "Next",
+    "liveStudios": {
+        "heroTitleLine1": "European.",
+        "heroTitleLine2": "Sophisticated.",
+        "sectionTitle": "See our",
+        "sectionTitleBold": "Live Studios",
+        "description": "Broadcasting from state-of-the-art studios, XPG offers a chance for your players to see interactive and experienced croupiers dealing cards and spinning the roulette wheel in real time. Being in the heart of Europe - in Bulgaria and Moldova, our studious are fit out with cutting-edge casino equipment, including the most advanced audio & video recording equipment from the industry-leading company Cammegh. It allows us to acquire the highest level of game immersion and helps to create a pure Live casino experience that XPG is known for.",
+        "facilityTitle": "Studio",
+        "facilityTitleBold": "Facility",
+        "features": {
+            "equipment": "Cutting-edge equipment from the industry leader Cammegh",
+            "design": "Classic real casino design that is appealing and familiar",
+            "technology": "Advanced audio & video recording technology",
+            "dealers": "Professional, experienced and pleasant dealers",
+            "atmosphere": "Relaxed and friendly atmosphere",
+            "streaming": "24/7 HD streaming"
+        },
+        "section1": {
+            "paragraph1": "Our studios are managed and operated by professional pit bosses, competent casino managers, and experienced dealers whose combined knowledge and skills all add to our players' security and overall experience. We must be confident that the quality of gaming experience is kept 24/7 and everyday challenges are met with consistency.",
+            "paragraph2": "To provide the best Live experience possible, the studios should be comfortable for everyone: players, dealers, managers, and all the members of the studio team, therefore, there is a concept by which we manage our studios - universality.",
+            "features": {
+                "renovatedStudios": "Newly renovated studios",
+                "cuttingEdgeTech": "Cutting edge technologies",
+                "hdStreaming": "Round-the-clock HD Streaming",
+                "femaleDealers": "Professional female dealers"
+            }
+        },
+        "section2": {
+            "chromaKey": {
+                "title": "Dynamic Branding with Chroma Key",
+                "description": "XPG's Virtual Studio leverages advanced chroma key technology to provide operators with fully customizable live dealer environments. This solution allows a single table to represent multiple brands by dynamically changing backgrounds to feature specific logos, themes, or promotional content. Whether it's a festive occasion like Christmas or a major sporting event like the World Cup, operators can effortlessly update the visual setting to enhance player engagement. This flexibility eliminates the need for additional physical tables or studio space, offering a cost-effective way to deliver personalized gaming experiences."
+            },
+            "tailoredStudios": {
+                "title": "Tailored Live Casino Studios",
+                "descriptionPrefix": "XPG offers dedicated live casino environments designed to reflect the unique identity of each operator. With options to host tables on your casino floor or within XPG's global network of studios, operators can choose from a variety of table games, including ",
+                "andMore": "and more",
+                "descriptionSuffix": ", Each setup is customizable to align with your brand's aesthetics, ensuring a cohesive and immersive experience for the player. Our dedicated technical support team is available 24/7 to assist with any operational needs, ensuring seamless gameplay and high-quality streaming."
+            },
+            "finalNote": "By integrating XPG's Virtual Studio and Dedicated Environments into your platform, you can offer players a unique and engaging live casino experience that stands out in the competitive iGaming market."
+        }
+    },
+    "ourPartners": {
+        "pageTitle": "Partners",
+        "heroHeading": "Partners",
+        "sectionHeading": {
+            "pre": "Enhance your online casino with",
+            "highlight": "XPG’s world-class live dealers"
+        },
+        "sectionDescription": {
+            "intro": "Delivering a premium and immersive gaming experience. Our professionally trained dealers, high-end studio setup, and HD streaming create an authentic casino atmosphere that captivates players. With multilingual support and a diverse selection of games such as",
+            "andMore": "and more",
+            "conclusion": ", XPG ensures seamless engagement for a global audience."
+        },
+        "partnersHeading": {
+            "pre": "Our",
+            "highlight": "PARTNERS"
+        },
+        "partnersSubheading": "Working alongside the best in the business"
+    },
+    "fairGaming": {
+        "heroTitle1": "Secure",
+        "heroTitle2": "Transparent",
+        "title": {
+            "pre": "Fair",
+            "highlight": "Gaming"
+        },
+        "intro": "Being well-known for its outstanding reputation in the industry, XPG guarantees the transparency and fairness of its software, maintains and manages its Fair Gaming principles, which are continually monitored, improved and updated. As a premier B2B provider of Live dealer casino system and games, XPG has no direct relationship with the players, however an impeccable reputation and high credibility remain the major factors for creating and maintaining a reliable, truly fair, transparent, and secure gambling environment in our business. Therefore, developing and promoting the concept of Fair Gaming principles is an important part for the creation of our gaming environment founded on the spirit of fair play.",
+        "certificationTitle": "Certification and regulation",
+        "certificationDescription": "Understanding our responsibility on the regulated gaming market, XPG adheres to strict rules and regulations set by independent organizations that monitor and audit the gameplay on our system to ensure the highest standards are maintained. As part of the certification process, XPG Live dealer casino system is officially certified by iTech Labs, which is one of the most reputable independent certifying bodies with more than 12 years track record and customers worldwide. Therefore, all XPG games are put through rigorous independent testing by independent 3rd parties.",
+        "toolsTitle": "Responsible Gaming Tools",
+        "toolsDescription": "As an integral part of our Live system software, XPG responsible gaming tools include a self-exclusion option, compulsive gamblers' interface, age verification option, and a time-out system. Taking care of our operators, we provide professional support service to be assured that our customers have no problem with the usage of the responsible gaming tools.",
+        "items": [
+            {
+                "title": "Anti-Fraud and Anti-Money Laundering Policy",
+                "description": "One of the XPG core values is our moral high ground to our partners, our operators, and their players. As a responsible software provider that does not tolerate fraudulent activity, XPG specially designed a complex and extremely powerful monitoring mechanism to detect and protect from fraud and money laundering. Using comprehensive monitoring of transactions and controlling gaming behavior, XPG guarantees an elevated level of security and complete safety from fraud."
+            },
+            {
+                "title": "Compulsive Gambling Prevention",
+                "description": "Thinking about our operators and their players, we want to ensure that people always enjoy their experience with XPG Live dealer casino system. At the same time, we admit whilst the majority of people do gamble for entertainment, for some it can spiral out of control. This is the reason why we provide our customers with responsible gaming resources by providing links with all necessary information on the risks of gambling and how to gamble safely, including self-evaluation surveys. Our operators are able to check players’ activity and analyze behavior standards that can help to identify a potential risk."
+            },
+            {
+                "title": "Underage play",
+                "description": "XPG has taken steps to confirm that our system and the websites that use our software do not attract people underage in their jurisdiction. With the use of a 3rd party age verification system, our Live dealer casino system demands strict player’s credentials examination."
+            },
+            {
+                "title": "Limits",
+                "description": "XPG provides functionality for setting gameplay limits that can be controlled by the player. These limits include bet limits per session, day, week, month, session length, bet limits for a specific game and maximum single bet by game. XPG also offers the ability to provide in-game messages when limits have been reached and what the limits are."
+            },
+            {
+                "title": "Self-exclusion Tools",
+                "description": "On request, XPG will close a customer’s account for a definite period of time that can be from one day to 12 months, during which time it will not be possible for the account to be re-opened for any reason. During this period of self-exclusion the player will not receive any promotional emails and we do all to prevent new accounts being opened."
+            }
+        ],
+        "studioSafetyNote": "Live games take place in strictly controlled studios and they are fully recorded and monitored. As a result, fairness and the random nature of the products offered are inspected and updated with the latest methods and sophisticated technology. Not only is it our mission to provide operators with the most entertaining gaming system, but it is also our duty to prevent compulsive usage and underage access of our gaming products."
+    },
+    "apiIntegration": {
+        "heroTitleLine1": "Simple",
+        "heroTitleLine2": "Flexible",
+        "sectionTitle": {
+            "pre": "API",
+            "highlight": "Integration"
+        },
+        "introText": "Adding live casino games to your existing casino platform is the quickest way to higher revenues and better player retention...",
+        "subSectionTitle": {
+            "pre": "XPG Live Dealer",
+            "highlight": "Casino System"
+        },
+        "integrationBox": {
+            "label": "integration"
+        },
+        "apiBox": {
+            "label": "api"
+        },
+        "gamesBox": {
+            "label": "games",
+            "noGames": "No games available"
+        },
+        "partnersBox": {
+            "label": "partners"
+        },
+        "statsBox": {
+            "virtualGamesLabel": "virtual games",
+            "gamesDescription": "Classic slots, Video slots, Mini slots, Keno, Scratch card, Table games, Video Poker, Virtual sport"
+        },
+        "xpgLiveDealerCasinoSystem": {
+            "apiIntegration": {
+                "title": "1 API Integration",
+                "description": "Seamlessly connect and enhance your online casino platform."
+            },
+            "games": {
+                "title": "GAMES",
+                "description": ""
+            },
+            "partners": {
+                "title": "100+ PARTNERS",
+                "description": ""
+            },
+            "virtualGames": {
+                "title": "500+ VIRTUAL GAMES",
+                "description": "Classic Slots, Video Slots, Mini Slots, Keno, Scratch Card, Table Games, Video Poker, and Virtual Sports."
+            }
+        },
+        "integrationProcess": {
+            "title": {
+                "pre": "Integration",
+                "highlight": "Process:"
+            },
+            "steps": [
+                "Programming and understanding XPG API calls on our PP servers (PP – PreProduction)",
+                "Examination of your front end by our support personnel",
+                "Opening Live environment on XPG side",
+                "Integration changes on your side to enable Live environment"
+            ]
+        },
+        "walletOptions": {
+            "seamlessWallet": {
+                "title": "Seamless Wallet",
+                "items": [
+                    "Integration time: 2-3 months",
+                    "Player performs fewer actions as information updates automatically in the system.",
+                    "Complex API integration process which requires many resources of IT and developers from both companies."
+                ]
+            },
+            "balanceTransfer": {
+                "title": "Balance Transfer",
+                "items": [
+                    "Integration time: 1-2 weeks",
+                    "Player performs more actions while transferring his funds from one casino system to another.",
+                    "API is very quick and simple, does not require many resources from both companies."
+                ]
+            }
+        }
+    },
+    "whiteLabel": {
+        "titleLine1": "Functional.",
+        "titleLine2": "Transparent.",
+        "sectionTitle": {
+            "pre": "White label",
+            "highlight": "Solution"
+        },
+        "introParagraph1": "As with all of our business models, we provide our White Label Partners full technical support around the clock and allow you to maintain full, secure control of your valuable database. No other live casino system on the market can offer the type of instant services we are set up to provide White Label entrepreneurs. Contact us now for details on how you can quickly and easily start your own White Label Live Casino website.",
+        "introParagraph2": "Our flexible gaming system can be customized to meet each client’s specific needs in just about any language. Our multi-lingual system currently supports English, Italian, Spanish, French, Hungarian, Turkish, Greek, French, German, Portuguese, Russian, Chinese, Japanese, Thai, Malay, and Korean.",
+        "introParagraph3": "We can connect you to our Live video stream, develop a full website according to your specifications, provide translation services and connect you to our advanced back office.",
+        "standAlone": {
+            "title": "Stand alone website",
+            "paragraph": "Stand Alone Agent System is a meticulously designed turnkey solution for gaming halls and entrepreneurs working on cash market anywhere in the world. In essence, it is a readymade custom website with XPG Live casino system, complete selection of games, and a user-friendly, intuitive back office to manage players, finances, and statistics. With XPG’s Stand Alone Agent System, you will be able to start your fully operational online casino in 7–10 days with almost no effort on your part."
+        },
+        "downloadClient": {
+            "title": "Download Client",
+            "paragraph": "XPG also offers Download Client for operators, working in regions with bad internet connection. It is very popular in Asian countries. Players have to download a small installation file from the website of your casino to their devices, install our system and start playing. The process is downright simple and takes a few minutes. It will take us around 7–10 working days maximum, or even faster, to prepare the DC for you, so you will be ready to start operation."
+        },
+        "navigation": {
+            "previous": "← Previous",
+            "next": "Next →"
+        }
+    },
+    "html5Mobile": {
+        "titleLine1": "Cross-",
+        "titleLine2": "Platform",
+        "sectionTitle": {
+            "pre": "Mobile",
+            "highlight": "Solution"
+        },
+        "intro": "XPG demonstrates an evolutionary approach to mobile development by creating an HTML5 Mobile solution. Many of its features have been adapted with the consideration of running on low-powered devices, such as smartphones and tablets. Importantly, while running within a web browser, it is not tied to the underlying operating system. It is already supported in the latest web browsers and provides an unparalleled Live gaming experience. For those who still prefer to download the app, XPG has created a user-friendly and reliable mobile app for Android devices with a clear interface and intuitive navigation.",
+        "features": {
+            "play": "Play",
+            "playOn": "Play on",
+            "playIn": "Play in",
+            "anytime": "anytime",
+            "anywhere": "anywhere",
+            "at": "at",
+            "of": "of",
+            "anyDevice": "any device",
+            "anyBrowser": "any browser",
+            "anyGame": "any game",
+            "choice": "choice"
+        },
+        "sectionTitle2": {
+            "pre": "Cross-platform",
+            "highlight": "Solution"
+        },
+        "sectionIntro2": "XPG’s cross-platform is a single solution that can be tailored across multiple channels, enabling players to transition seamlessly between products. It links online, land-based and mobile operators. Therefore, players can use same login details and enjoy borderless gaming experience non-stop, moving constantly from one location to another."
+    },
+    "privateTables": {
+        "titleLine1": "Efficient",
+        "titleLine2": "Customize",
+        "sectionTitle": {
+            "pre": "Private",
+            "highlight": "tables"
+        },
+        "introParagraph": "If you want an ultimate private table solution, we offer a winning option. Our Live casino system has the widest selection of Live games on the market, and all of them can be available for your players on private tables. We also offer a line of table customization options of different scale to raise you brand awareness fundamentally. With XPG, everything is negotiable and ready to be tailored to your needs, including creating a new game from scratch for your private table exclusively. No matter what games and customization options you choose, it will be a winning combination that lands higher retention rates and more profit to your casino system.",
+        "customizationTitle": "Most common customization options:",
+        "customizationOptions": [
+            "Change table watermark in UI",
+            "Place logo on a game",
+            "Brand dealer outfit, cards, etc.",
+            "Choose particular dealer",
+            "Choose the language dealer speaks",
+            "Place advertising and Live promotions",
+            "And more!"
+        ],
+        "brandAwarenessTitle": "Brand Awareness",
+        "brandAwarenessDescription": "Our Private tables option provides startling possibilities to drastically heighten you brand awareness. With more than 10 different Live games and dozen virtual games from our partners on 40 tables of our 3-vast studios, more players will recognize – and remember – your online casino. We are also the only Live casino provider who offers a lot of different games for player-dense markets, like Asia, India and Turkey. With XPG, your brand awareness will both raise and diversify. Ultimately, this will also increase the flow on public tables, too."
+    },
+    "printingMaterials": {
+        "title": "Printing Materials",
+        "sectionTitle": {
+            "pre": "XPG",
+            "highlight": "brochure"
+        },
+        "description": "Here everyone may download the up-to-date information about XPG company, its technologies of game flow and games themselves. If you wish to print XPG Brochure A5 format, please write us the request via the contact form in the footer of this website and we will send you the .pdf file of print quality.",
+        "downloadButton": "Download Brochure"
+    },
+    "gameDetails": {
+        "notFound": {
+            "title": "Game Not Found",
+            "description": "The game you are looking for does not exist or may have been removed.",
+            "back": "Back to Games"
+        },
+        "multiGames": "Multigames",
+        "interestingFacts": "Interesting Facts",
+        "seeMore": "See More...",
+        "seeLess": "See Less"
+    },
+    "contactUs": {
+        "success": "Thank you! Your message has been sent. We will contact you asap!",
+        "failure": "Failed to send your message, please try again.",
+        "get": "Get",
+        "inTouch": "in touch",
+        "interested": "Interested in working together?",
+        "description": "Contact us by filling out the form below or emailing us in order to find the best solution for you and your business.",
+        "form": {
+            "name": "Name",
+            "phone": "Phone",
+            "email": "Email",
+            "subject": "Subject",
+            "message": "Message",
+            "send": "Send"
+        },
+        "container": {
+            "phoneLabel": "Phone",
+            "emailLabel": "Email",
+            "addressLabel": "Address"
+        }
+    },
+    "smartStudio": {
+        "heroTitleLine1": "Smart",
+        "heroTitleLine2": "Studio",
+        "title": "Smart Studio",
+        "subTitle": "Unleash the power of Smart Studio",
+        "description": "Witch Smart Studio, operators can fully customize our Live Casino games-creating immersive, branded environments that bring their vision to life and captivative players.",
+        "aboutSmartStudio": {
+            "title": "Why XPG's Smart Studio?",
+            "description1": "In a crowded live casino market, standing out visually and emotionally is essential.",
+            "preTitle": "Smart Studio by XPG",
+            "description2": "empowers operators to express their brand identify without the need for custom-build studios.",
+            "description3": "With fully customizable environments, your brand becomes part of the gameplay-building stronger recognition and player loyalty with every spin, deal, and roll."
+        },
+        "keyBenefits": {
+            "title": "Key Benefits of Smart Studio",
+            "items": [
+                {
+                    "title": "Fully Customizable Branding",
+                    "description": "Design every aspect to reflect your brand identity — from dealer attire to table layouts and themed visuals."
+                },
+                {
+                    "title": "Cost-Efficient & Scalable",
+                    "description": "Eliminate the high cost of physical studio builds and scale efficiently as your business grows."
+                },
+                {
+                    "title": "Fast & Flexible Deployment",
+                    "description": "Launch branded live casino environments in days, not weeks — ideal for promotions, seasons, or campaigns."
+                },
+                {
+                    "title": "Multi-Brand Ready",
+                    "description": "Operate multiple brand identities from a single setup — all within a seamless and immersive live casino experience."
+                }
+            ]
+        },
+        "customBranding": {
+            "title": "Custom Branding Capabilities",
+            "description": "Smart Studio unlocks a powerful suite of customization features that let you design a live-casino environment as unique as your brand. Every detail can be tailored to elevate player engagement and brand recognition, from visual elements to voice interactions:",
+            "items": [
+                {
+                    "title": "Background ",
+                    "description": "apply bespoke artwork to fully brand your backdrop."
+                },
+                {
+                    "title": "Teller Podium",
+                    "description": "add your logo and choose custom colors or textures."
+                },
+                {
+                    "title": "Promotional Content",
+                    "description": "display banners, videos (except Auto Mega Roulette), and animated logos."
+                },
+                {
+                    "title": "Voice-Overs",
+                    "description": "use pre-recorded announcements in your players’ preferred languages for a personalized touch."
+                }
+            ]
+        },
+        "smartStudioCompatibility": {
+            "title": "Smart Studio Compatibility",
+            "description": "Smart Studio is designed to seamlessly integrate with XPG's existing live casino games, ensuring a consistent and high-quality player experience. It supports all major game types, including:",
+            "note": "Note: Some customization features may vary by game."
+        },
+        "standOut": {
+            "title": "Looking to stand out at the tables?",
+            "description1": "Smart Studio lets your brand do the talking.",
+            "description2": "We’re always open to new ideas and opportunities. If you’re ready to elevate your live casino, let’s talk about how XPG can bring your vision to life.",
+            "button": "Let’s Talk"
+        }
+    }
+}

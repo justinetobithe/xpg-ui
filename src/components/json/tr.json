@@ -1,0 +1,572 @@
+{
+    "navbar": {
+        "navItems": {
+            "company": {
+                "name": "Şirket",
+                "contents": {
+                    "getToKnowXPG": "XPG'yi Tanıyın",
+                    "ourLiveStudios": "Canlı Stüdyolarımız",
+                    "ourPartners": "İş Ortaklarımız",
+                    "fairGaming": "Adil Oyun"
+                }
+            },
+            "solutions": {
+                "name": "Çözümler",
+                "contents": {
+                    "smartStudio": "Akıllı Stüdyo",
+                    "apiIntegration": "API Entegrasyonu",
+                    "whiteLabel": "Beyaz Etiket (White Label)",
+                    "html5Mobile": "HTML5 Mobil",
+                    "privateTables": "Özel Masalar",
+                    "printingMaterials": "Basılı Materyaller"
+                }
+            },
+            "liveGames": {
+                "name": "Canlı Oyunlar"
+            },
+            "news": {
+                "name": "Haberler"
+            },
+            "liveDemo": {
+                "name": "Canlı Demo"
+            }
+        },
+        "buttons": {
+            "clientArea": "Müşteri Alanı",
+            "contactUs": "Bize Ulaşın"
+        },
+        "badge": {
+            "new": "Yeni"
+        }
+    },
+    "featureSection": {
+        "games": {
+            "title": "Oyunlar",
+            "description": "Tek bir API'de en geniş canlı krupiye oyunları ve sanal oyun portföyü."
+        },
+        "euStudios": {
+            "title": "AB Stüdyoları",
+            "description": "Avrupa'nın kalbinde yeni yenilenmiş son teknoloji stüdyolar."
+        },
+        "html5": {
+            "title": "HTML5",
+            "description": "Herhangi bir cihazda ve her yerde kesintisiz oyun için platformlar arası çözüm."
+        },
+        "whiteLabel": {
+            "title": "White Label",
+            "description": "Operasyon bölgesine göre operatörler için özelleştirilmiş ürün paketi."
+        }
+    },
+    "followUs": "Bizi Takip Edin",
+    "footer": {
+        "content": "XPG Live logosu ve grafik materyalleri, XPG Live'ın münhasır fikri mülkiyetidir ve XPG Live'ın önceden yazılı izni olmaksızın kopyalanamaz, çoğaltılamaz, dağıtılamaz veya gösterilemez. XPG Live, birden fazla yargı bölgesindeki oyun düzenlemelerine tam uyum içinde faaliyet göstermektedir. Gizliliğinizi korumaya kararlıyız.",
+        "copyright": "Telif Hakkı © 2008 - {YEAR} XPG. Tüm Hakları Saklıdır."
+    },
+    "aboutSection": {
+        "title": {
+            "xpg": "XPG",
+            "concept": "Konsept"
+        },
+        "intro": "XPG, online casino operatörleri için son teknoloji canlı krupiye oyunları ve kapsamlı iGaming çözümleri sunan lider bir B2B Canlı Casino yazılım sağlayıcısıdır. Hızlı ve kolay kurulum için sağlam bir API entegrasyonu aracılığıyla operatörlerin canlı casino paketimizi kendi markaları altında sorunsuz bir şekilde entegre etmelerini sağlayan esnek bir Beyaz Etiket (White Label) platformu sunuyoruz.",
+        "main": {
+            "ourDiverse": "Çeşitli portföyümüz, aşağıdakiler gibi popüler canlı krupiye oyunlarını içerir:",
+            "andMore": "ve daha fazlası",
+            "everyGame": "Her oyun profesyonel krupiyeler tarafından sunulur ve son teknoloji stüdyolarımızdan canlı HD yayın akışı ile iletilir. Sektördeki 12 yılı aşkın deneyimi ve yeniliğe olan bağlılığı ile XPG, operatörleri otantik ve sürükleyici bir oyun deneyimiyle oyuncuları cezbetmeye güçlendirir.",
+            "manyOperators": "Canlı casino tekliflerini yükseltmek için XPG'ye güvenen birçok operatöre katılın",
+            "connectWithUs": " – bizimle iletişime geçin ",
+            "today": "bugün, çözümlerimizin iGaming işinize nasıl fayda sağlayabileceği hakkında daha fazla bilgi edinin."
+        }
+    },
+    "liveGames": {
+        "live": "Canlı",
+        "games": "Oyunlar",
+        "learnMore": "Daha fazla bilgi"
+    },
+    "workTogether": {
+        "12": "12",
+        "taglineLine1": "2008'den Beri B2B Oyun Çözümleri",
+        "taglineLine2": "Dünya Çapındaki Operatörler Tarafından Güvenilen",
+        "workTogether": "Birlikte Çalışmak"
+    },
+    "news": {
+        "title": "Haberler",
+        "recent": "Son",
+        "recentNews": "Son Haberler",
+        "readMore": "Daha Fazlasını Oku",
+        "notFound": "İlgili haber bulunamadı"
+    },
+    "newsLetter": {
+        "title": "Bültenimize Abone Olun",
+        "description": "Güncel kalın! En son haberleri ve özel promosyonları doğrudan gelen kutunuza alın.",
+        "stayUpdated": "Güncel Kalın",
+        "form": {
+            "fullName": "Tam Adı",
+            "contactNumber": "İletişim Numarası",
+            "email": "E-posta Adresi",
+            "subscribe": "Abone Ol",
+            "submitting": "Gönderiliyor...",
+            "agreement": "Abone olarak",
+            "privacyPolicy": "Gizlilik Politikamızı",
+            "privacyComingSoon": "Gizlilik Politikası (Yakında)"
+        },
+        "successMessage": "Abonelik başarıyla tamamlandı!",
+        "errorMessage": "Abonelik başarısız oldu. Lütfen tekrar deneyin."
+    },
+    "ourCompany": {
+        "our": "Bizim",
+        "company": "Şirketimiz",
+        "contents": {
+            "getToKnowXPG": {
+                "title": "XPG'yi Tanıyın"
+            },
+            "ourLiveStudios": {
+                "title": "Canlı Stüdyolarımızı görün"
+            },
+            "ourPartners": {
+                "title": "İş ortaklarımızla tanışın"
+            },
+            "fairGaming": {
+                "title": "Adil Oyun"
+            }
+        }
+    },
+    "xpgSolutions": {
+        "xpg": "XPG",
+        "solutions": "Çözümler",
+        "contents": {
+            "apiIntegration": {
+                "title": "API Entegrasyonu"
+            },
+            "whiteLabel": {
+                "title": "Beyaz Etiket"
+            },
+            "html5Mobile": {
+                "title": "HTML5 Mobil"
+            },
+            "privateTables": {
+                "title": "Özel Masalar"
+            },
+            "printingMaterials": {
+                "title": "Basılı Materyaller"
+            }
+        }
+    },
+    "getToKnowXPG": {
+        "heading": {
+            "leading": "Lider.",
+            "trustWorthy": "Güvenilir.",
+            "getToKnowXPG": "XPG'yi",
+            "xpg": "Tanıyın"
+        },
+        "intro": "XPG, on yılı aşkın süredir var olan eşsiz bir Canlı Krupiye Casino yazılım sağlayıcısıdır; canlı casino endüstrisini bugünkü haline getiren bir grup şirkete aittir – gerçek bir fiziksel casinoda kumar oynamanın modern ve kesin bir yerine geçmesidir.",
+        "vision": {
+            "title": "Vizyonumuz",
+            "description": "Canlı casino sektöründe bir numaralı sağlayıcı olmak. Yeni hizmetler ve ürünler geliştirerek ve uygulayarak her zaman önde kalmak."
+        },
+        "mission": {
+            "title": "Misyonumuz",
+            "description": "Operatörlerin oyuncu tutma oranlarını, karını ve marka bilinirliğini artırmak; oyuncularına yönelik piyasadaki en geniş kaliteli oyun yelpazesiyle sofistike ve esnek çözümler ve modern bir canlı casino sistemi sunmak."
+        },
+        "coreValues": {
+            "core": "Temel",
+            "values": "Değerler",
+            "items": [
+                {
+                    "title": "Esneklik ve basitlik",
+                    "description": "müşteri memnuniyetini en üst düzeyde sağlayan"
+                },
+                {
+                    "title": "Gelişim ve yenilik",
+                    "description": "rakiplere karşı sürekli avantaj sağlayan"
+                },
+                {
+                    "title": "Profesyonellik",
+                    "description": "uzun vadeli ticari başarıyı garantileyen"
+                },
+                {
+                    "title": "Şeffaflık",
+                    "description": "gerçek güven ve işbirliği inşa eden"
+                }
+            ]
+        },
+        "benefits": {
+            "title": "Faydalar",
+            "forOperators": {
+                "title": "Operatörler İçin",
+                "items": [
+                    "Tüm ihtiyaçlarınıza göre uyarlanmış esnek ve uygun maliyetli çözüm",
+                    "Piyasadaki en geniş canlı oyun yelpazesi, sürekli güncellenir",
+                    "Bireysel yaklaşım",
+                    "Marka bilinirliğini artırmak için çeşitli kişiselleştirme seçenekleri",
+                    "Yüksek tutma oranları",
+                    "7/24 canlı oyun yayını ve desteği"
+                ]
+            },
+            "forPlayers": {
+                "title": "Oyuncular İçin",
+                "items": [
+                    "Bulgaristan ve Romanya'daki geniş ve iyi donanımlı stüdyolarımızda oluşturulan tamamen canlı bir oyun deneyimi",
+                    "İlgi çekici ve konuşkan krupiyelerle iletişim ve arkadaşlık",
+                    "Benzersiz özelliklere ve yan bahislere sahip en geniş oyun yelpazesi",
+                    "Etkileyici ortak slotları ve diğer sanal oyunlar",
+                    "Kullanıcı dostu arayüz",
+                    "Çoklu platform sistemi – PC, akıllı telefon, tablet için aynı giriş bilgileriyle"
+                ]
+            }
+        }
+    },
+    "previous": "Önceki",
+    "next": "Sonraki",
+    "liveStudios": {
+        "heroTitleLine1": "Avrupalı.",
+        "heroTitleLine2": "Sofistike.",
+        "sectionTitle": "Canlı",
+        "sectionTitleBold": "Stüdyolarımızı Görün",
+        "description": "Son teknoloji stüdyolarımızdan yayın yapan XPG, oyuncularına interaktif ve deneyimli krupiyelerin gerçek zamanlı olarak kart dağıtmasını ve rulet çarkını çevirmesini izleme şansı sunar. Avrupa'nın kalbinde – Bulgaristan ve Moldova'da – bulunan stüdyolarımız, endüstri lideri Cammegh'ten en gelişmiş ses ve video kayıt ekipmanları da dahil olmak üzere son teknoloji casino ekipmanları ile donatılmıştır. Bu, oyun içi daldırmanın en üst düzeyini elde etmemizi sağlar ve XPG'nin bilindiği saf canlı casino deneyimini yaratmaya yardımcı olur.",
+        "facilityTitle": "Stüdyo",
+        "facilityTitleBold": "Tesisi",
+        "features": {
+            "equipment": "Endüstri lideri Cammegh'ten son teknoloji ekipmanlar",
+            "design": "Çekici ve tanıdık klasik gerçek casino tasarımı",
+            "technology": "Gelişmiş ses ve video kayıt teknolojisi",
+            "dealers": "Profesyonel, deneyimli ve hoş krupiyeler",
+            "atmosphere": "Rahat ve samimi atmosfer",
+            "streaming": "7/24 HD yayın"
+        },
+        "section1": {
+            "paragraph1": "Stüdyolarımız, profesyonel masa şefleri, yetkin casino yöneticileri ve deneyimli krupiyeler tarafından yönetilir ve işletilir; onların birleşik bilgi ve becerileri, oyuncularımızın güvenliğine ve genel deneyimine katkıda bulunur. Oyun deneyiminin kalitesinin 7/24 korunmasını ve günlük zorlukların tutarlı bir şekilde ele alınmasını sağlamalıyız.",
+            "paragraph2": "Mümkün olan en iyi canlı deneyimi sağlamak için stüdyoların herkes için konforlu olması gerekir: oyuncular, krupiyeler, yöneticiler ve tüm stüdyo personeli, bu nedenle stüdyolarımızı yönettiğimiz bir konsept vardır – evrensellik.",
+            "features": {
+                "renovatedStudios": "Yeni yenilenmiş stüdyolar",
+                "cuttingEdgeTech": "Son teknoloji",
+                "hdStreaming": "7/24 HD yayın",
+                "femaleDealers": "Profesyonel kadın krupiyeler"
+            }
+        },
+        "section2": {
+            "chromaKey": {
+                "title": "Kroma Anahtarı ile Dinamik Markalama",
+                "description": "XPG'nin Sanal Stüdyosu, operatörlere tamamen özelleştirilebilir canlı krupiye ortamları sağlamak için gelişmiş kroma anahtarı teknolojisini kullanır. Bu çözüm, tek bir masanın birden fazla markayı temsil etmesine olanak tanır, belirli logoları, temaları veya tanıtım içeriğini sunmak için arka planları dinamik olarak değiştirir. Noel gibi şenlikli bir durum veya Dünya Kupası gibi büyük bir spor etkinliği olsun, operatörler oyuncu etkileşimini artırmak için görsel ortamı kolayca güncelleyebilirler. Bu esneklik, ek fiziksel masalara veya stüdyo alanına olan ihtiyacı ortadan kaldırarak kişiselleştirilmiş oyun deneyimleri sunmanın uygun maliyetli bir yolunu sunar."
+            },
+            "tailoredStudios": {
+                "title": "Özelleştirilmiş Canlı Casino Stüdyoları",
+                "descriptionPrefix": "XPG, her operatörün benzersiz kimliğini yansıtmak üzere tasarlanmış özel canlı casino ortamları sunar. Masaları fiziksel casinonuzda veya XPG'nin küresel stüdyo ağında barındırma seçenekleriyle, operatörler çeşitli masa oyunlarından seçim yapabilir, bunlar arasında ",
+                "andMore": "ve daha fazlası",
+                "descriptionSuffix": " bulunur. Her kurulum, markanızın estetiğiyle uyumlu olacak şekilde özelleştirilebilir, oyuncuya tutarlı ve sürükleyici bir deneyim sağlar. Özel teknik destek ekibimiz, sorunsuz oyun ve yüksek kaliteli yayın sağlamak için her türlü operasyonel ihtiyaca yardımcı olmak üzere 7/24 hizmetinizdedir."
+            },
+            "finalNote": "XPG'nin Sanal Stüdyosu ve Özel Ortamlarını platformunuza entegre ederek, oyunculara rekabetçi iGaming pazarında öne çıkan benzersiz ve ilgi çekici bir canlı casino deneyimi sunabilirsiniz."
+        }
+    },
+    "ourPartners": {
+        "pageTitle": "Ortaklar",
+        "heroHeading": "Ortaklar",
+        "sectionHeading": {
+            "pre": "Online casinonuzu",
+            "highlight": "XPG'nin dünya standartlarında canlı krupiyeleriyle güçlendirin"
+        },
+        "sectionDescription": {
+            "intro": "Birinci sınıf ve sürükleyici bir oyun deneyimi sunan XPG'nin profesyonelce eğitilmiş krupiyeleri, yüksek kaliteli stüdyo kurulumu ve HD yayın akışı, oyuncuları büyüleyen otantik bir casino atmosferi yaratır. Çok dilli desteği ve aşağıdaki gibi çeşitli oyun seçenekleriyle",
+            "andMore": "ve daha fazlası",
+            "conclusion": ", XPG küresel bir kitle için kesintisiz katılımı garanti eder."
+        },
+        "partnersHeading": {
+            "pre": "İş",
+            "highlight": "Ortaklarımız"
+        },
+        "partnersSubheading": "Sektörün en iyileriyle birlikte çalışmak"
+    },
+    "fairGaming": {
+        "heroTitle1": "Güvenli.",
+        "heroTitle2": "Şeffaf.",
+        "title": {
+            "pre": "Adil",
+            "highlight": "Oyun"
+        },
+        "intro": "Sektördeki mükemmel itibarıyla tanınan XPG, yazılımının şeffaflığını ve tarafsızlığını garanti eder, sürekli olarak izlenen, geliştirilen ve güncellenen Adil Oyun prensiplerini sürdürür ve yönetir. Canlı krupiyeli casino sistemleri ve oyunlarının bir B2B sağlayıcısı olarak XPG'nin oyuncularla doğrudan bir ilişkisi yoktur, ancak kusursuz bir itibar ve yüksek güvenilirlik, işimizde güvenilir, gerçekten adil, şeffaf ve güvenli bir oyun ortamı yaratmak ve sürdürmek için ana faktörler olmaya devam etmektedir. Bu nedenle, Adil Oyun prensipleri konseptini geliştirmek ve tanıtmak, adil oyun ruhu üzerine kurulu oyun ortamımızın oluşturulmasında önemli bir rol oynamaktadır.",
+        "certificationTitle": "Sertifikasyon ve Düzenleme",
+        "certificationDescription": "Düzenlenmiş oyun pazarındaki sorumluluğumuzu anlayan XPG, en yüksek standartları sağlamak için sistemimizdeki oyunları izleyen ve denetleyen bağımsız kuruluşlar tarafından belirlenen katı kural ve düzenlemelere uymaktadır. Sertifikasyon sürecinin bir parçası olarak, XPG'nin canlı krupiyeli casino sistemi, 12 yılı aşkın deneyime ve dünya çapında müşterilere sahip en saygın bağımsız sertifikasyon kuruluşlarından biri olan iTech Labs tarafından resmi olarak sertifikalandırılmıştır. Bu nedenle, tüm XPG oyunları bağımsız üçüncü taraflarca titiz bağımsız testlere tabi tutulmaktadır.",
+        "toolsTitle": "Sorumlu Oyun Araçları",
+        "toolsDescription": "Canlı sistem yazılımımızın ayrılmaz bir parçası olarak, XPG'nin sorumlu oyun araçları arasında kendi kendini dışlama seçeneği, zorlayıcı oyuncular için arayüz, yaş doğrulama seçeneği ve bir zaman aşımı sistemi bulunur. Operatörlerimize özen göstererek, müşterilerimizin sorumlu oyun araçlarını kullanırken sorun yaşamamasını sağlamak için profesyonel destek hizmeti sunuyoruz.",
+        "items": [
+            {
+                "title": "Kara Para Aklamayı Önleme ve Dolandırıcılıkla Mücadele Politikası",
+                "description": "XPG'nin temel değerlerinden biri, ortaklarımıza, operatörlerimize ve oyuncularına karşı yüksek ahlaki duruşumuzdur. Dolandırıcılık faaliyetlerine tolerans göstermeyen sorumlu bir yazılım sağlayıcısı olarak XPG, dolandırıcılığı ve kara para aklamayı tespit etmek ve bunlara karşı korunmak için özel olarak karmaşık ve son derece güçlü bir izleme mekanizması tasarlamıştır. Kapsamlı işlem izleme ve oyun davranışı kontrolünü kullanarak, XPG yüksek düzeyde güvenlik ve dolandırıcılığa karşı tam koruma sağlar."
+            },
+            {
+                "title": "Zorlayıcı Kumarı Önleme",
+                "description": "Operatörlerimizi ve oyuncularını düşünerek, XPG canlı krupiyeli casino sistemiyle insanların her zaman deneyimlerinden keyif almasını sağlamak istiyoruz. Aynı zamanda, çoğu insanın eğlence için oynadığını kabul etmekle birlikte, bazıları için bu durum kontrolden çıkabilir. Bu nedenle, müşterilerimize sorumlu oyun kaynakları sunarak, kumar riskleri ve güvenli bir şekilde nasıl oynanacağı hakkında gerekli tüm bilgileri içeren bağlantılar sağlıyoruz, bunlara öz değerlendirme anketleri de dahildir. Operatörlerimiz, oyuncu etkinliğini kontrol edebilir ve potansiyel bir riski belirlemeye yardımcı olabilecek davranış kalıplarını analiz edebilir."
+            },
+            {
+                "title": "Reşit Olmayanların Kumar Oynaması",
+                "description": "XPG, sistemimizin ve yazılımımızı kullanan web sitelerinin kendi yargı bölgelerindeki reşit olmayan kişileri çekmediğini doğrulamak için adımlar atmıştır. Üçüncü taraf bir yaş doğrulama sistemi kullanarak, canlı krupiyeli casino sistemimiz oyuncu kimlik bilgilerinin titiz bir şekilde incelenmesini gerektirir."
+            },
+            {
+                "title": "Limitler",
+                "description": "XPG, oyuncu tarafından kontrol edilebilen oyun limitleri belirleme işlevi sunar. Bu limitler, oturum başına, gün, hafta, ay, oturum süresi, belirli bir oyun için bahis limitleri ve oyun başına maksimum tek bahis limitlerini içerir. XPG ayrıca limitlere ulaşıldığında ve limitlerin ne olduğu hakkında oyun içi mesajlar sağlama yeteneği de sunar."
+            },
+            {
+                "title": "Kendi Kendini Dışlama Araçları",
+                "description": "Talep üzerine XPG, bir müşterinin hesabını bir günden 12 aya kadar değişebilen belirli bir süre için kapatır ve bu süre zarfında hesap hiçbir nedenle yeniden açılamaz. Bu kendi kendini dışlama dönemi boyunca oyuncu herhangi bir tanıtım e-postası almayacak ve yeni hesapların açılmasını önlemek için her şeyi yapacağız."
+            }
+        ],
+        "studioSafetyNote": "Canlı oyunlar, sıkı denetim altında olan stüdyolarda gerçekleşir ve tamamen kaydedilir ve izlenir. Sonuç olarak, sunulan ürünlerin tarafsızlığı ve rastgele doğası, en son yöntemler ve gelişmiş teknoloji ile denetlenir ve güncellenir. Operatörlere en eğlenceli oyun sistemini sağlamak sadece misyonumuz değil, aynı zamanda zorlayıcı kullanımı ve reşit olmayanların oyun ürünlerimize erişimini engellemek de görevimizdir."
+    },
+    "apiIntegration": {
+        "heroTitleLine1": "Basit.",
+        "heroTitleLine2": "Esnek.",
+        "sectionTitle": {
+            "pre": "API",
+            "highlight": "Entegrasyonu"
+        },
+        "introText": "Mevcut casino platformunuza canlı casino oyunları eklemek, daha yüksek gelir ve daha iyi oyuncu tutma oranları elde etmenin en hızlı yoludur...",
+        "subSectionTitle": {
+            "pre": "XPG Canlı Krupiye",
+            "highlight": "Casino Sistemi"
+        },
+        "integrationBox": {
+            "label": "entegrasyon"
+        },
+        "apiBox": {
+            "label": "API"
+        },
+        "gamesBox": {
+            "label": "oyunlar",
+            "noGames": "Oyun bulunamadı"
+        },
+        "partnersBox": {
+            "label": "iş ortakları"
+        },
+        "statsBox": {
+            "virtualGamesLabel": "sanal oyunlar",
+            "gamesDescription": "Klasik Slotlar, Video Slotlar, Mini Slotlar, Keno, Kazı Kazan, Masa Oyunları, Video Poker, Sanal Sporlar"
+        },
+        "xpgLiveDealerCasinoSystem": {
+            "apiIntegration": {
+                "title": "1 API Entegrasyonu",
+                "description": "Çevrimiçi casino platformunuzu sorunsuzca bağlayın ve geliştirin."
+            },
+            "games": {
+                "title": "OYUN",
+                "description": ""
+            },
+            "partners": {
+                "title": "100+ İŞ ORTAĞI",
+                "description": ""
+            },
+            "virtualGames": {
+                "title": "500+ SANAL OYUN",
+                "description": "Klasik slotlar, video slotlar, mini slotlar, keno, kazı kazan, masa oyunları, video poker ve sanal sporlar."
+            }
+        },
+        "integrationProcess": {
+            "title": {
+                "pre": "Entegrasyon",
+                "highlight": "Süreci:"
+            },
+            "steps": [
+                "PP sunucularımızda XPG API çağrılarının programlanması ve anlaşılması (PP – Ön Üretim)",
+                "Ön ucunuzun destek personelimiz tarafından incelenmesi",
+                "XPG tarafında Canlı ortamın açılması",
+                "Canlı ortamı etkinleştirmek için kendi tarafınızdaki entegrasyon değişiklikleri"
+            ]
+        },
+        "walletOptions": {
+            "seamlessWallet": {
+                "title": "Sorunsuz Cüzdan (Seamless Wallet)",
+                "items": [
+                    "Entegrasyon süresi: 2-3 ay",
+                    "Bilgiler sistemde otomatik olarak güncellendiğinden oyuncu daha az eylem gerçekleştirir.",
+                    "Her iki şirketten de çok fazla BT ve geliştirici kaynağı gerektiren karmaşık API entegrasyon süreci."
+                ]
+            },
+            "balanceTransfer": {
+                "title": "Bakiye Transferi",
+                "items": [
+                    "Entegrasyon süresi: 1-2 hafta",
+                    "Oyuncu, fonlarını bir casino sisteminden diğerine aktarırken daha fazla eylem gerçekleştirir.",
+                    "API çok hızlı ve basittir, her iki şirketten de fazla kaynak gerektirmez."
+                ]
+            }
+        }
+    },
+    "whiteLabel": {
+        "titleLine1": "İşlevsel.",
+        "titleLine2": "Şeffaf.",
+        "sectionTitle": {
+            "pre": "Beyaz Etiket",
+            "highlight": "Çözümü"
+        },
+        "introParagraph1": "Diğer tüm iş modellerimizde olduğu gibi, Beyaz Etiket İş Ortaklarımıza 7/24 tam teknik destek sunuyor ve değerli veri tabanınızın tam ve güvenli kontrolünü elinizde tutmanızı sağlıyoruz. Piyasadaki hiçbir canlı casino sistemi, Beyaz Etiket girişimcilerine sunmaya hazır olduğumuz anlık hizmetleri sunamaz. Kendi Beyaz Etiket Canlı Casino web sitenizi hızlı ve kolay bir şekilde nasıl başlatabileceğiniz hakkında ayrıntılar için şimdi bize ulaşın.",
+        "introParagraph2": "Esnek oyun sistemimiz, her müşterinin belirli ihtiyaçlarını neredeyse her dilde karşılayacak şekilde özelleştirilebilir. Çok dilli sistemimiz şu anda İngilizce, İtalyanca, İspanyolca, Fransızca, Macarca, Türkçe, Yunanca, Almanca, Portekizce, Rusça, Çince, Japonca, Tayca, Malayca ve Korece dillerini desteklemektedir.",
+        "introParagraph3": "Sizi canlı video akışımıza bağlayabilir, spesifikasyonlarınıza uygun eksiksiz bir web sitesi geliştirebilir, çeviri hizmetleri sunabilir ve sizi gelişmiş arka ofisimize bağlayabiliriz.",
+        "standAlone": {
+            "title": "Bağımsız Web Sitesi",
+            "paragraph": "Bağımsız Ajan Sistemi, dünyanın herhangi bir yerindeki oyun salonları ve nakit piyasasında çalışan girişimciler için titizlikle tasarlanmış anahtar teslimi bir çözümdür. Esasen, XPG canlı casino sistemi, eksiksiz oyun seçimi ve oyuncuları, finansı ve istatistikleri yönetmek için sezgisel ve kullanıcı dostu bir arka ofis ile kullanıma hazır, özel bir web sitesidir. XPG'nin Bağımsız Ajan Sistemi ile, kendi tam işlevli online casinonuzu 7-10 gün içinde neredeyse hiç çaba sarf etmeden başlatabileceksiniz."
+        },
+        "downloadClient": {
+            "title": "İndirilebilir Müşteri",
+            "paragraph": "XPG, kötü internet bağlantısı olan bölgelerde çalışan operatörler için de İndirilebilir Müşteri sunmaktadır. Asya ülkelerinde çok popülerdir. Oyuncuların casinonuzun web sitesinden cihazlarına küçük bir kurulum dosyası indirmesi, sistemimizi kurması ve oynamaya başlaması gerekir. Süreç çok basit ve birkaç dakika sürer. DC'yi sizin için hazırlamak için en fazla 7-10 iş günü, hatta daha hızlı sürecektir, böylece faaliyete başlamaya hazır olacaksınız."
+        },
+        "navigation": {
+            "previous": "← Önceki",
+            "next": "Sonraki →"
+        }
+    },
+    "html5Mobile": {
+        "titleLine1": "Çoklu",
+        "titleLine2": "Platform",
+        "sectionTitle": {
+            "pre": "Mobil",
+            "highlight": "Çözüm"
+        },
+        "intro": "XPG, bir HTML5 Mobil çözümü oluşturarak mobil geliştirmeye evrimsel bir yaklaşım sergilemektedir. Birçok özelliği, akıllı telefonlar ve tabletler gibi düşük güçlü cihazlarda çalışacak şekilde uyarlanmıştır. Daha da önemlisi, bir web tarayıcısında çalışmasına rağmen, temel işletim sistemine bağlı değildir. En son web tarayıcılarında zaten desteklenmektedir ve eşsiz bir canlı oyun deneyimi sunmaktadır. Uygulamayı hala indirmeyi tercih edenler için XPG, net bir arayüze ve sezgisel gezinmeye sahip Android cihazlar için kullanıcı dostu ve güvenilir bir mobil uygulama oluşturmuştur.",
+        "features": {
+            "play": "Oyna",
+            "playOn": "Şurada Oyna",
+            "playIn": "Şurada Oyna",
+            "anytime": "her zaman",
+            "anywhere": "her yerde",
+            "at": "şu adresde",
+            "of": "nın",
+            "anyDevice": "herhangi bir cihaz",
+            "anyBrowser": "herhangi bir tarayıcı",
+            "anyGame": "herhangi bir oyun",
+            "choice": "seçim"
+        },
+        "sectionTitle2": {
+            "pre": "Çoklu",
+            "highlight": "Platform Çözümü"
+        },
+        "sectionIntro2": "XPG'nin çapraz platformu, oyuncuların ürünler arasında sorunsuz bir şekilde geçiş yapmasına olanak tanıyan birden fazla kanalda uyarlanabilen benzersiz bir çözümdür. Online, kara tabanlı ve mobil operatörleri birbirine bağlar. Bu nedenle, oyuncular aynı giriş bilgilerini kullanabilir ve bir yerden başka bir yere sürekli hareket ederek kesintisiz bir oyun deneyiminin tadını çıkarabilirler."
+    },
+    "privateTables": {
+        "titleLine1": "Verimli.",
+        "titleLine2": "Kişiselleştir.",
+        "sectionTitle": {
+            "pre": "Özel",
+            "highlight": "Masalar"
+        },
+        "introParagraph": "Kesin bir özel masa çözümü istiyorsanız, size kazanan bir seçenek sunuyoruz. Canlı casino sistemimiz piyasadaki en geniş canlı oyun yelpazesine sahiptir ve hepsi özel masalarda oyuncularınız için mevcut olabilir. Ayrıca marka bilinirliğinizi temelden artırmak için farklı ölçeklerde masa özelleştirme seçenekleri sunuyoruz. XPG ile her şey pazarlık edilebilir ve özel masanız için sıfırdan yeni bir oyun oluşturmak da dahil olmak üzere ihtiyaçlarınıza göre uyarlanmaya hazırdır. Hangi oyunları ve özelleştirme seçeneklerini seçerseniz seçin, daha yüksek tutma oranları ve casino sisteminiz için daha fazla kar ile sonuçlanacak kazanan bir kombinasyon olacaktır.",
+        "customizationTitle": "En yaygın kişiselleştirme seçenekleri:",
+        "customizationOptions": [
+            "UI'daki masa filigranını değiştirin",
+            "Bir oyuna logo yerleştirin",
+            "Krupiye üniformasını, kartları vb. kişiselleştirin",
+            "Belirli bir krupiye seçin",
+            "Krupiyenin konuştuğu dili seçin",
+            "Canlı reklam ve promosyonlar yerleştirin",
+            "Ve daha fazlası!"
+        ],
+        "brandAwarenessTitle": "Marka Bilinirliği",
+        "brandAwarenessDescription": "Özel Masa seçeneğimiz, markanızın bilinirliğini önemli ölçüde artırmak için şaşırtıcı olanaklar sunar. 3 geniş stüdyomuzdaki 40 masadaki 10'dan fazla farklı canlı oyun ve onlarca sanal oyun sayesinde, daha fazla oyuncu online casinonuzu tanıyacak ve hatırlayacaktır. Ayrıca Asya, Hindistan ve Türkiye gibi yüksek oyuncu yoğunluğuna sahip pazarlar için birçok farklı oyun sunan tek canlı casino sağlayıcısıyız. XPG ile markanızın bilinirliği hem artacak hem de çeşitlenecektir. Sonuç olarak, bu aynı zamanda halka açık masalardaki trafiği de artıracaktır."
+    },
+    "printingMaterials": {
+        "title": "Basılı Materyaller",
+        "sectionTitle": {
+            "pre": "XPG",
+            "highlight": "Broşürü"
+        },
+        "description": "Burada herkes XPG şirketi, oyun akışı teknolojileri ve oyunların kendisi hakkında güncel bilgileri indirebilir. XPG A5 Broşürünü yazdırmak isterseniz, lütfen bu web sitesinin altındaki iletişim formu aracılığıyla bize bir talep gönderin, size baskı kalitesinde .pdf dosyasını göndereceğiz.",
+        "downloadButton": "Broşürü İndir"
+    },
+    "gameDetails": {
+        "notFound": {
+            "title": "Oyun Bulunamadı",
+            "description": "Aradığınız oyun mevcut değil veya kaldırılmış olabilir.",
+            "back": "Oyunlara Geri Dön"
+        },
+        "multiGames": "Çoklu Oyunlar",
+        "interestingFacts": "İlginç Gerçekler",
+        "seeMore": "Daha fazla göster...",
+        "seeLess": "Daha az göster"
+    },
+    "contactUs": {
+        "success": "Teşekkür ederiz! Mesajınız gönderildi. En kısa sürede sizinle iletişime geçeceğiz!",
+        "failure": "Mesajınız gönderilemedi, lütfen tekrar deneyin.",
+        "get": "İletişim",
+        "inTouch": "kurun",
+        "interested": "Birlikte çalışmaya mı ilgi duyuyorsunuz?",
+        "description": "Sizin ve işiniz için en iyi çözümü bulmak amacıyla aşağıdaki formu doldurarak veya bize e-posta göndererek bizimle iletişime geçin.",
+        "form": {
+            "name": "Adı",
+            "phone": "Telefon",
+            "email": "E-posta",
+            "subject": "Konu",
+            "message": "Mesaj",
+            "send": "Gönder"
+        },
+        "container": {
+            "phoneLabel": "Telefon",
+            "emailLabel": "E-posta",
+            "addressLabel": "Adres"
+        }
+    },
+    "smartStudio": {
+        "heroTitleLine1": "Smart",
+        "heroTitleLine2": "Studio",
+        "title": "Smart Studio",
+        "subTitle": "Smart Studio'nun gücünü açığa çıkarın",
+        "description": "Smart Studio ile operatörler, Canlı Casino oyunlarımızı tamamen özelleştirerek vizyonlarını hayata geçiren ve oyuncuları büyüleyen sürükleyici, markalı ortamlar yaratabilirler.",
+        "aboutSmartStudio": {
+            "title": "Neden XPG'nin Smart Studio'su?",
+            "description1": "Kalabalık bir canlı casino pazarında görsel ve duygusal olarak öne çıkmak çok önemlidir.",
+            "preTitle": "XPG tarafından Smart Studio",
+            "description2": "operatörlere özel stüdyo kurmaya gerek kalmadan marka kimliklerini ifade etme yetkisi verir.",
+            "description3": "Tamamen özelleştirilebilir ortamlarla markanız oyunun bir parçası haline gelir – her spin, dağıtım ve atışta daha güçlü tanınma ve oyuncu sadakati oluşturur."
+        },
+        "keyBenefits": {
+            "title": "Smart Studio'nun Temel Faydaları",
+            "items": [
+                {
+                    "title": "Tamamen Özelleştirilebilir Markalama",
+                    "description": "Her yönü, krupiye kıyafetlerinden masa düzenlerine ve temalı görsellere kadar marka kimliğinizi yansıtacak şekilde tasarlayın."
+                },
+                {
+                    "title": "Uygun Maliyetli ve Ölçeklenebilir",
+                    "description": "Fiziksel stüdyo yapımının yüksek maliyetini ortadan kaldırın ve işletmeniz büyüdükçe verimli bir şekilde ölçeklendirin."
+                },
+                {
+                    "title": "Hızlı ve Esnek Dağıtım",
+                    "description": "Markalı canlı casino ortamlarını haftalar değil, günler içinde başlatın — promosyonlar, sezonlar veya kampanyalar için idealdir."
+                },
+                {
+                    "title": "Çoklu Marka Uyumlu",
+                    "description": "Tek bir kurulumdan birden fazla marka kimliğini çalıştırın — hepsi sorunsuz ve sürükleyici bir canlı casino deneyimi içinde."
+                }
+            ]
+        },
+        "customBranding": {
+            "title": "Özel Markalama Yetenekleri",
+            "description": "Smart Studio, markanız kadar benzersiz bir canlı casino ortamı tasarlamanıza olanak tanıyan güçlü bir özelleştirme özellikleri paketinin kilidini açar. Görsel öğelerden ses etkileşimlerine kadar her ayrıntı, oyuncu katılımını ve marka tanınırlığını artırmak için uyarlanabilir:",
+            "items": [
+                {
+                    "title": "Arka Plan",
+                    "description": "arka planınızı tamamen markalamak için özel sanat eserleri uygulayın."
+                },
+                {
+                    "title": "Krupiye Kürsüsü",
+                    "description": " logonuzu ekleyin ve özel renkler veya dokular seçin."
+                },
+                {
+                    "title": "Promosyon İçeriği",
+                    "description": "afişler, videolar (Auto Mega Roulette hariç) ve animasyonlu logolar görüntüleyin."
+                },
+                {
+                    "title": "Seslendirmeler",
+                    "description": "kişiselleştirilmiş bir dokunuş için oyuncularınızın tercih ettiği dillerde önceden kaydedilmiş duyuruları kullanın."
+                }
+            ]
+        },
+        "smartStudioCompatibility": {
+            "title": "Smart Studio Uyumluluğu",
+            "description": "Smart Studio, XPG'nin mevcut canlı casino oyunlarıyla sorunsuz bir şekilde entegre olacak şekilde tasarlanmıştır ve tutarlı ve yüksek kaliteli bir oyuncu deneyimi sağlar. Aşağıdakiler dahil tüm ana oyun türlerini destekler:",
+            "note": "Not: Bazı özelleştirme özellikleri oyuna göre değişebilir."
+        },
+        "standOut": {
+            "title": "Masalarda öne çıkmak mı istiyorsunuz?",
+            "description1": "Smart Studio markanızın konuşmasını sağlar.",
+            "description2": "Her zaman yeni fikirlere ve fırsatlara açığız. Canlı casinonuzu yükseltmeye hazırsanız, XPG'nin vizyonunuzu nasıl hayata geçirebileceği hakkında konuşalım.",
+            "button": "Konuşalım"
+        }
+    }
+}
