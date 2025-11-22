@@ -87,7 +87,7 @@ function Solutions() {
                     <div className="w-[120px] h-px bg-orange-500 mx-auto mt-4" />
                 </div>
 
-                <div className="mt-[70px] grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8 justify-items-center">
+                <div className="mt-12 md:mt-[70px] grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-8 justify-items-center">
                     {contents.map((item, i) => (
                         <Card
                             key={item.title}
@@ -113,16 +113,16 @@ function Card({ item, index, isHovered, setIsHovered, navigate }) {
             onMouseEnter={() => setIsHovered(item.title)}
             onMouseLeave={() => setIsHovered(null)}
             onClick={() => navigate("/solution" + item.link)}
-            className="w-full max-w-[320px] md:max-w-[280px] lg:max-w-[320px] aspect-square flex flex-col items-center justify-start focus:outline-none"
+            className="w-full max-w-[200px] sm:max-w-[240px] md:max-w-[280px] lg:max-w-[320px] flex flex-col items-center justify-start focus:outline-none"
         >
             <div
-                className="w-full h-full rounded-[28px] flex flex-col items-center justify-center p-6 transition-all ease-in-out duration-300"
+                className="w-full aspect-square rounded-[24px] sm:rounded-[28px] flex flex-col items-center justify-center p-4 sm:p-5 md:p-6 transition-all ease-in-out duration-300"
                 style={{
                     backgroundColor: item.color,
                     border: hovered ? "3px solid #d2691e" : "3px solid transparent",
                 }}
             >
-                <div className="relative w-[72%] aspect-square">
+                <div className="relative w-[70%] sm:w-[72%] aspect-square">
                     <div className="absolute inset-0 rounded-full bg-neutral-200" />
                     <img
                         src={item.image}
@@ -132,17 +132,27 @@ function Card({ item, index, isHovered, setIsHovered, navigate }) {
                         decoding="async"
                         fetchpriority={index < 3 ? "high" : "auto"}
                         loading={index < 3 ? "eager" : "lazy"}
-                        className="relative z-10 rounded-full object-cover w-full h-full shadow-[0_0_25px_rgba(255,127,80,0.45)]"
+                        className="relative z-10 rounded-full object-cover w-full h-full shadow-[0_0_22px_rgba(255,127,80,0.45)]"
                     />
                 </div>
 
-                <p className="text-primary uppercase font-extrabold text-center text-sm tracking-[0.01em] mt-4 max-w-[180px]">
+                <p
+                    className="
+                        mt-3 sm:mt-4
+                        text-primary uppercase font-extrabold text-center
+                        text-[11px] sm:text-xs md:text-sm
+                        leading-snug tracking-[0.01em]
+                        px-2 w-full
+                        line-clamp-2 break-words hyphens-auto
+                        min-h-[30px] sm:min-h-[34px]
+                    "
+                >
                     {item.title}
                 </p>
             </div>
 
             <svg
-                className="w-[110px] h-[54px] transition-all ease-in-out duration-300"
+                className="w-[95px] sm:w-[110px] h-[48px] sm:h-[54px] transition-all ease-in-out duration-300 -mt-[1px]"
                 style={{ fill: hovered ? "#d2691e" : "#F0F3F2" }}
                 viewBox="0 0 100 50"
             >
