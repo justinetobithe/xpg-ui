@@ -110,19 +110,21 @@ function LatestNews() {
     const settings = useMemo(
         () => ({
             dots: false,
-            infinite: filteredNews.length > 3,
+            mobileFirst: true,
+            infinite: filteredNews.length > 1,
             speed: 500,
-            slidesToShow: 3,
+            slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,
             autoplaySpeed: 3200,
             nextArrow: <CustomNextArrow />,
             prevArrow: <CustomPrevArrow />,
             lazyLoad: "ondemand",
+            adaptiveHeight: true,
             responsive: [
-                { breakpoint: 1200, settings: { slidesToShow: 3 } },
-                { breakpoint: 900, settings: { slidesToShow: 2 } },
                 { breakpoint: 600, settings: { slidesToShow: 1 } },
+                { breakpoint: 900, settings: { slidesToShow: 2 } },
+                { breakpoint: 1200, settings: { slidesToShow: 3 } },
             ],
         }),
         [filteredNews.length]

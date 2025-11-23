@@ -43,21 +43,28 @@ function GamesGrid() {
 
     const sliderSettings = useMemo(
         () => ({
+            mobileFirst: true,
             dots: true,
-            dotsClass: "slick-dots",
+            dotsClass: "xpg-slick-dots",
             appendDots: (dots) => (
-                <ul className="!static !mt-5 flex justify-center gap-2">{dots}</ul>
+                <div className="mt-5 w-full overflow-x-auto no-scrollbar">
+                    <ul className="flex w-max mx-auto items-center gap-2 px-2">{dots}</ul>
+                </div>
             ),
             customPaging: () => (
-                <div className="w-2.5 h-2.5 rounded-full bg-gray-400/70 hover:bg-primary transition" />
+                <div className="w-2 h-2 rounded-full bg-gray-400/70 hover:bg-primary transition" />
             ),
-            infinite: games.length > 2,
+            infinite: games.length > 1,
             speed: 450,
-            slidesToShow: 2,
+            slidesToShow: 1,
             slidesToScroll: 1,
             arrows: false,
+            adaptiveHeight: true,
             responsive: [
-                { breakpoint: 600, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+                {
+                    breakpoint: 640,
+                    settings: { slidesToShow: 2, slidesToScroll: 1 },
+                },
             ],
         }),
         [games.length]
@@ -113,6 +120,14 @@ function GamesGrid() {
 
     return (
         <section className="relative bg-[#E5E7EB] py-10">
+            <style>
+                {`
+          .xpg-slick-dots li button:before{display:none !important;}
+          .xpg-slick-dots li{width:auto !important; height:auto !important;}
+          .xpg-slick-dots li.slick-active div{background: var(--tw-primary, #ff8a00) !important;}
+        `}
+            </style>
+
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 140 70"
