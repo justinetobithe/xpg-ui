@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
@@ -28,7 +30,21 @@ function LatestNews() {
     const [filteredNews, setFilteredNews] = useState([]);
     const [years, setYears] = useState([]);
     const [selectedYear, setSelectedYear] = useState(t("news.recent") || "Recent");
+    const [display, setDisplay] = useState("lg");
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const checkScreenSize = () => {
+            const width = window.innerWidth;
+            if (width > 1024) setDisplay("xl");
+            else if (width > 768) setDisplay("lg");
+            else if (width > 425) setDisplay("md");
+            else setDisplay("sm");
+        };
+        checkScreenSize();
+        window.addEventListener("resize", checkScreenSize);
+        return () => window.removeEventListener("resize", checkScreenSize);
+    }, []);
 
     const getDateObject = (dateString) => {
         if (!dateString) return null;
@@ -107,12 +123,15 @@ function LatestNews() {
         </button>
     );
 
+    const slidesToShow = display === "xl" || display === "lg" ? 3 : display === "md" ? 2 : 1;
+
     const settings = useMemo(
         () => ({
             dots: false,
-            infinite: filteredNews.length > 3,
+            mobileFirst: false,
+            infinite: filteredNews.length > slidesToShow,
             speed: 500,
-            slidesToShow: 3,
+            slidesToShow,
             slidesToScroll: 1,
             autoplay: true,
             autoplaySpeed: 3200,
@@ -126,7 +145,7 @@ function LatestNews() {
                 { breakpoint: 600, settings: { slidesToShow: 1 } },
             ],
         }),
-        [filteredNews.length]
+        [filteredNews.length, slidesToShow]
     );
 
     return (
@@ -161,7 +180,7 @@ function LatestNews() {
 
                 <div className="relative group -mx-2">
                     {filteredNews.length > 0 ? (
-                        <Slider {...settings}>
+                        <Slider key={display} {...settings}>
                             {filteredNews.map((news) => {
                                 const newsTitle =
                                     news?.translation?.[i18n.language]?.title ||
