@@ -63,7 +63,7 @@ function PrintingMaterials() {
     const heroBg = display === "sm" ? heroMobile : heroDesktop;
 
     return (
-        <section className="w-full h-full flex flex-col text-text pb-12 overflow-hidden font-sans">
+        <section className="w-full flex flex-col text-text pb-12 font-sans">
             <SEO
                 title="Printing Materials – Branded Brochures & Marketing Assets"
                 description="Download XPG’s official brochures and printing materials to support your casino operations and marketing."
@@ -87,8 +87,8 @@ function PrintingMaterials() {
                     <h1
                         style={{ textShadow: "1px 1px 0 #7e7e7e, 2px 2px 0 #514f4f" }}
                         className={`text-white text-2xl md:text-4xl lg:text-6xl font-bold md:pt-[calc(15%-50px)] pt-[calc(40%-50px)] uppercase z-10 mx-10 block ${display === "sm"
-                                ? "w-full text-center"
-                                : "w-[350px] text-justify"
+                            ? "w-full text-center"
+                            : "w-[350px] text-justify"
                             }`}
                     >
                         {t("printingMaterials.title")}
