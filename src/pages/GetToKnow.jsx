@@ -22,7 +22,6 @@ function GetToKnow() {
     useEffect(() => {
         function checkScreenSize() {
             const width = window.innerWidth;
-
             if (width > 1024) setDisplay("xl");
             else if (width > 768 && width <= 1024) setDisplay("lg");
             else if (width > 425 && width <= 768) setDisplay("md");
@@ -38,21 +37,6 @@ function GetToKnow() {
         window.scrollTo(0, 0);
     }, [location.pathname]);
 
-    const coreValues =
-        t("getToKnowXPG.coreValues.items", { returnObjects: true }) || [];
-
-    const benefitsOperators =
-        t("getToKnowXPG.benefits.forOperators.items", { returnObjects: true }) ||
-        [];
-
-    const benefitsPlayers =
-        t("getToKnowXPG.benefits.forPlayers.items", { returnObjects: true }) || [];
-
-    const heroBackground =
-        display === "sm" || display === "md" ? heroMobile : heroDesktop;
-
-    const coreIcons = [handArrow, lightBulb, handShake, shieldCheck];
-
     return (
         <section className="w-full flex flex-col text-text pb-12 font-sans">
             <SEO
@@ -66,7 +50,8 @@ function GetToKnow() {
             <main
                 className="relative w-full bg-no-repeat bg-top bg-cover md:h-[70vh] h-[100vh] bg-center flex items-center"
                 style={{
-                    backgroundImage: `url(${heroBackground})`,
+                    backgroundImage: `url(${display === "sm" || display === "md" ? heroMobile : heroDesktop
+                        })`,
                 }}
             >
                 <div
@@ -81,7 +66,9 @@ function GetToKnow() {
                         style={{
                             textShadow: "1px 1px 0 #7e7e7e, 2px 2px 0 #514f4f",
                         }}
-                        className={`text-white text-2xl md:text-4xl lg:text-6xl font-bold md:pt-[calc(15%-50px)] pt-[calc(40%-50px)] uppercase z-10 mx-10 block ${display === "sm" ? "w-full text-center" : "w-[350px] text-justify"
+                        className={`text-white text-2xl md:text-4xl lg:text-6xl font-bold md:pt-[calc(15%-50px)] pt-[calc(40%-50px)] uppercase z-10 mx-10 block ${display === "sm"
+                                ? "w-full text-center"
+                                : "w-[350px] text-justify"
                             }`}
                     >
                         {t("getToKnowXPG.heading.leading")}
@@ -168,14 +155,16 @@ function GetToKnow() {
                 </h1>
 
                 <div className="mx-auto w-full max-w-[1280px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8 justify-items-center mt-4 pb-10 px-4 md:px-8">
-                    {Array.isArray(coreValues) &&
-                        coreValues.map((item, idx) => (
+                    {(t("getToKnowXPG.coreValues.items", { returnObjects: true }) || []).map(
+                        (item, idx) => (
                             <div
                                 key={item?.title || idx}
                                 className="w-full max-w-[300px] min-h-[250px] h-full flex flex-col items-center text-center p-4"
                             >
                                 <img
-                                    src={coreIcons[idx % coreIcons.length]}
+                                    src={[handArrow, lightBulb, handShake, shieldCheck][
+                                        idx % 4
+                                    ]}
                                     alt={item.title}
                                     className="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] object-contain"
                                     loading="lazy"
@@ -189,7 +178,8 @@ function GetToKnow() {
                                     {item.description}
                                 </p>
                             </div>
-                        ))}
+                        )
+                    )}
                 </div>
             </section>
 
@@ -206,21 +196,20 @@ function GetToKnow() {
                                     {t("getToKnowXPG.benefits.forOperators.title")}
                                 </h2>
                                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6">
-                                    {Array.isArray(benefitsOperators) &&
-                                        benefitsOperators.map((item, i) => (
-                                            <li key={i} className="flex items-start">
-                                                <CheckSquare className="w-4 h-4 mr-2 mt-1 text-[#ff7f50] flex-shrink-0" />
-                                                <span>{item}</span>
-                                            </li>
-                                        ))}
+                                    {(t("getToKnowXPG.benefits.forOperators.items", {
+                                        returnObjects: true,
+                                    }) || []).map((item, i) => (
+                                        <li key={i} className="flex items-start">
+                                            <CheckSquare className="w-4 h-4 mr-2 mt-1 text-[#ff7f50] flex-shrink-0" />
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
 
                             <div
                                 className="lg:w-1/2 w-full rounded-xl shadow-xl bg-cover bg-center h-[280px] md:h-[340px] lg:h-[420px] border-4 border-primary"
-                                style={{
-                                    backgroundImage: `url(${leftImage})`,
-                                }}
+                                style={{ backgroundImage: `url(${leftImage})` }}
                             />
                         </div>
 
@@ -230,33 +219,29 @@ function GetToKnow() {
                                     {t("getToKnowXPG.benefits.forPlayers.title")}
                                 </h2>
                                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6">
-                                    {Array.isArray(benefitsPlayers) &&
-                                        benefitsPlayers.map((item, i) => (
-                                            <li key={i} className="flex items-start">
-                                                <CheckSquare className="w-4 h-4 mr-2 mt-1 text-[#ff7f50] flex-shrink-0" />
-                                                <span>{item}</span>
-                                            </li>
-                                        ))}
+                                    {(t("getToKnowXPG.benefits.forPlayers.items", {
+                                        returnObjects: true,
+                                    }) || []).map((item, i) => (
+                                        <li key={i} className="flex items-start">
+                                            <CheckSquare className="w-4 h-4 mr-2 mt-1 text-[#ff7f50] flex-shrink-0" />
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
                                 </ul>
                             </div>
 
                             <div
                                 className="lg:w-1/2 w-full rounded-xl shadow-xl bg-cover bg-center h-[280px] md:h-[340px] lg:h-[420px] border-4 border-primary"
-                                style={{
-                                    backgroundImage: `url(${rightImage})`,
-                                }}
+                                style={{ backgroundImage: `url(${rightImage})` }}
                             />
                         </div>
                     </div>
                 </div>
             </section>
 
-            <PrevNextNav
-                prevTo="/company/fair-gaming"
-                nextTo="/company/live-studios"
-            />
+            <PrevNextNav prevTo="/company/fair-gaming" nextTo="/company/live-studios" />
         </section>
     );
 }
 
-export default GetToKnow; 
+export default GetToKnow;
