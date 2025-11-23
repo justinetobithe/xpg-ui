@@ -147,8 +147,8 @@ function LatestNews() {
                                     key={y}
                                     onClick={() => handleYearFilter(y)}
                                     className={`px-3 py-1 rounded-full border text-sm ${selectedYear === y
-                                            ? "bg-primary text-white border-primary"
-                                            : "border-gray-300 text-gray-700 hover:border-primary"
+                                        ? "bg-primary text-white border-primary"
+                                        : "border-gray-300 text-gray-700 hover:border-primary"
                                         }`}
                                 >
                                     {y}
@@ -175,7 +175,7 @@ function LatestNews() {
                                     : "";
 
                                 return (
-                                    <div key={news.id} className="px-2 md:px-4">
+                                    <div key={news.id} className="px-2 md:px-4 mb-2">
                                         <div className="bg-white rounded-lg shadow-md overflow-hidden h-full flex flex-col">
                                             {news.imageURL && (
                                                 <img
