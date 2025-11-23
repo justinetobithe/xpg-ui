@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../firebase";
 import Loader from "./Loader";
@@ -6,7 +6,6 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import ReactFlagsSelect from "react-flags-select";
-import { Disclosure, Transition } from "@headlessui/react";
 
 import logoBlack from "@/assets/images/xpg-logo.png";
 import logoWhite from "@/assets/images/XPG_logo_white.png";
@@ -20,6 +19,7 @@ function Navbar() {
     const [isHovered, setIsHovered] = useState(null);
     const [games, setGames] = useState([]);
     const [isLoading, setLoading] = useState(true);
+    const [mobileOpenKey, setMobileOpenKey] = useState(null);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -49,63 +49,102 @@ function Navbar() {
                 setGames(gamesData);
                 setLoading(false);
             },
-            (error) => {
-                console.error("Error fetching liveGames:", error);
-                setLoading(false);
-            }
+            () => setLoading(false)
         );
         return () => unsubscribe();
     }, []);
 
-    const navItems = useMemo(() => {
-        return [
+    const gamesContents = useMemo(
+        () =>
+            games.map((game) => ({
+                name: game?.translation?.[i18n.language]?.name || game.name,
+                id: game.id,
+            })),
+        [games, i18n.language]
+    );
+
+    const navItems = useMemo(
+        () => [
             {
+                key: "company",
                 name: t("navbar.navItems.company.name"),
                 link: "/company",
                 contents: [
-                    { name: t("navbar.navItems.company.contents.getToKnowXPG"), id: "get-to-know" },
-                    { name: t("navbar.navItems.company.contents.ourLiveStudios"), id: "live-studios" },
-                    { name: t("navbar.navItems.company.contents.ourPartners"), id: "partners" },
-                    { name: t("navbar.navItems.company.contents.fairGaming"), id: "fair-gaming" },
+                    {
+                        name: t("navbar.navItems.company.contents.getToKnowXPG"),
+                        id: "get-to-know",
+                    },
+                    {
+                        name: t("navbar.navItems.company.contents.ourLiveStudios"),
+                        id: "live-studios",
+                    },
+                    {
+                        name: t("navbar.navItems.company.contents.ourPartners"),
+                        id: "partners",
+                    },
+                    {
+                        name: t("navbar.navItems.company.contents.fairGaming"),
+                        id: "fair-gaming",
+                    },
                 ],
                 isLink: false,
             },
             {
+                key: "solutions",
                 name: t("navbar.navItems.solutions.name"),
                 link: "/solution",
                 contents: [
-                    { name: t("navbar.navItems.solutions.contents.smartStudio"), id: "smart-studio" },
-                    { name: t("navbar.navItems.solutions.contents.apiIntegration"), id: "api-integration" },
-                    { name: t("navbar.navItems.solutions.contents.whiteLabel"), id: "white-label" },
-                    { name: t("navbar.navItems.solutions.contents.html5Mobile"), id: "html5-mobile" },
-                    { name: t("navbar.navItems.solutions.contents.privateTables"), id: "private-tables" },
-                    { name: t("navbar.navItems.solutions.contents.printingMaterials"), id: "printing-materials" },
+                    {
+                        name: t("navbar.navItems.solutions.contents.smartStudio"),
+                        id: "smart-studio",
+                    },
+                    {
+                        name: t("navbar.navItems.solutions.contents.apiIntegration"),
+                        id: "api-integration",
+                    },
+                    {
+                        name: t("navbar.navItems.solutions.contents.whiteLabel"),
+                        id: "white-label",
+                    },
+                    {
+                        name: t("navbar.navItems.solutions.contents.html5Mobile"),
+                        id: "html5-mobile",
+                    },
+                    {
+                        name: t("navbar.navItems.solutions.contents.privateTables"),
+                        id: "private-tables",
+                    },
+                    {
+                        name: t("navbar.navItems.solutions.contents.printingMaterials"),
+                        id: "printing-materials",
+                    },
                 ],
                 isLink: false,
             },
             {
+                key: "liveGames",
                 name: t("navbar.navItems.liveGames.name"),
                 link: "/live-games",
-                contents: games.map((game) => ({
-                    name: game?.translation?.[i18n.language]?.name || game.name,
-                    id: game.id,
-                })),
+                contents: gamesContents,
                 isLink: false,
             },
             {
+                key: "news",
                 name: t("navbar.navItems.news.name"),
                 link: "/news",
                 contents: [],
                 isLink: false,
             },
             {
+                key: "liveDemo",
                 name: t("navbar.navItems.liveDemo.name"),
                 link: "/demo",
                 contents: [],
                 isLink: true,
             },
-        ];
-    }, [t, i18n.language, games]);
+        ],
+        [t, gamesContents]
+    );
 
     const exemptLocation = useMemo(
         () => ["/company", "/solution", "/news", "/live-games"],
@@ -123,17 +162,24 @@ function Navbar() {
         [languages]
     );
 
-    const handleFlagSelect = (countryCode) => {
-        const lang = languages.find((l) => l.countryCode === countryCode);
-        if (!lang) return;
-        setLanguage(lang);
-        localStorage.setItem("selectedLanguage", lang.code);
-    };
+    const handleFlagSelect = useCallback(
+        (countryCode) => {
+            const lang = languages.find((l) => l.countryCode === countryCode);
+            if (!lang) return;
+            setLanguage(lang);
+            localStorage.setItem("selectedLanguage", lang.code);
+        },
+        [languages, setLanguage]
+    );
 
     const isDarkLogo =
         toggle ||
         (!toggle && exemptLocation.includes(location.pathname)) ||
         /^\/news\/[A-Za-z0-9]+$/.test(location.pathname);
+
+    const toggleMobileSection = (key) => {
+        setMobileOpenKey((prev) => (prev === key ? null : key));
+    };
 
     return (
         <>
@@ -158,10 +204,12 @@ function Navbar() {
                 </button>
                 <button
                     type="button"
-                    className={`${toggle ? "text-[#5f5f5f]" : "lg:text-[#5f5f5f] text-black"} text-3xl p-1 z-10 cursor-pointer select-none block sticky lg:hidden bg-[#fff6] rounded`}
+                    className={`${toggle ? "text-[#5f5f5f]" : "lg:text-[#5f5f5f] text-black"
+                        } text-3xl p-1 z-10 cursor-pointer select-none block sticky lg:hidden bg-[#fff6] rounded`}
                     onClick={() => {
                         setToggle((prev) => !prev);
                         setIsHovered(null);
+                        setMobileOpenKey(null);
                     }}
                 >
                     {toggle ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
@@ -169,7 +217,8 @@ function Navbar() {
             </div>
 
             <nav
-                className={`${toggle ? "bg-white h-screen fixed" : "bg-transparent absolute"} w-full lg:bg-white drop-shadow-md lg:fixed font-sans text-text z-[1000]`}
+                className={`${toggle ? "bg-white h-screen fixed" : "bg-transparent absolute"
+                    } w-full lg:bg-white drop-shadow-md lg:fixed font-sans text-text z-[1000]`}
             >
                 <div className="flex flex-row w-full h-20 items-center justify-between md:px-0 px-4">
                     <div className="flex flex-row h-full items-center w-full md:pl-2">
@@ -190,7 +239,7 @@ function Navbar() {
                             {navItems.map((item, index) => (
                                 <li
                                     className="relative xl:px-6 px-3 border-r border-r-primary cursor-pointer"
-                                    key={item.name}
+                                    key={item.key}
                                 >
                                     {item.isLink ? (
                                         <a
@@ -225,12 +274,13 @@ function Navbar() {
                                         <div
                                             style={{
                                                 display:
-                                                    item.contents.length > 0 && isHovered === item.name
+                                                    item.contents.length > 0 &&
+                                                        isHovered === item.name
                                                         ? "block"
                                                         : "none",
                                             }}
                                             onMouseLeave={() => setIsHovered(null)}
-                                            className="absolute left-[calc(50%-100px)] mt-[10%] min-w-[220px] bg-[#f0f3f2] drop-shadow-sm border border-[#e4e4e4] z-[1000] transition-all ease-in-out duration-500"
+                                            className="absolute left-[calc(50%-100px)] mt-[10%] min-w-[220px] bg-[#f0f3f2] drop-shadow-sm border border-[#e4e4e4] z-[1000]"
                                         >
                                             {item.contents.map((i) => (
                                                 <button
@@ -258,12 +308,13 @@ function Navbar() {
                                         <div
                                             style={{
                                                 display:
-                                                    item.contents.length > 0 && isHovered === item.name
+                                                    item.contents.length > 0 &&
+                                                        isHovered === item.name
                                                         ? "block"
                                                         : "none",
                                             }}
                                             onMouseLeave={() => setIsHovered(null)}
-                                            className="absolute left-[calc(50%-100px)] mt-[10%] bg-[#f0f3f2] drop-shadow-sm border border-[#e4e4e4] z-[1000] transition-all ease-in-out duration-500"
+                                            className="absolute left-[calc(50%-100px)] mt-[10%] bg-[#f0f3f2] drop-shadow-sm border border-[#e4e4e4] z-[1000]"
                                         >
                                             <div className="max-h-[280px] w-[440px] flex flex-row flex-wrap overflow-auto">
                                                 {games.map((i) => (
@@ -306,7 +357,7 @@ function Navbar() {
 
                 {toggle && (
                     <div className="h-full w-full bg-white drop-shadow-md fixed lg:hidden">
-                        <div className="w-full flex flex-col items-center px-8 mb-4 pt-4 pb-8 absolute">
+                        <div className="w-full flex flex-col items-center px-6 pb-8 pt-4 absolute overflow-y-auto h-[calc(100vh-80px)]">
                             {isLoading ? (
                                 <div className="w-full flex justify-center py-8">
                                     <Loader />
@@ -314,78 +365,96 @@ function Navbar() {
                             ) : (
                                 navItems.map((item) => {
                                     const hasChildren = item.contents.length > 0;
+                                    const open = mobileOpenKey === item.key;
 
                                     return (
-                                        <Disclosure key={item.name} as="div" className="w-full max-w-[390px]">
-                                            {({ open }) => (
-                                                <>
-                                                    <Disclosure.Button
-                                                        className={`px-4 text-[#5f5f5f] w-full flex items-center justify-between h-12 border-b border-b-[#0000001a] transition ${open ? "bg-[#eee]" : "bg-white"}`}
+                                        <div key={item.key} className="w-full max-w-[390px]">
+                                            <div
+                                                className={`px-4 w-full flex items-center justify-between h-12 border-b border-b-[#0000001a] ${open ? "bg-[#eee]" : "bg-white"
+                                                    }`}
+                                            >
+                                                {item.isLink ? (
+                                                    <a
+                                                        href="https://www.xpgdemo.com/"
+                                                        target="_blank"
+                                                        rel="noreferrer"
                                                         onClick={(e) => {
-                                                            if (!hasChildren) {
-                                                                e.preventDefault();
-                                                                if (item.isLink) {
-                                                                    window.open("https://www.xpgdemo.com/", "_blank");
-                                                                } else {
-                                                                    navigate(item.link);
-                                                                }
-                                                                setToggle(false);
-                                                            }
+                                                            e.stopPropagation();
+                                                            setToggle(false);
+                                                            setMobileOpenKey(null);
                                                         }}
+                                                        className="text-primary text-lg uppercase font-semibold"
                                                     >
-                                                        <span className={`${item.isLink ? "text-primary" : ""} text-lg uppercase font-semibold`}>
-                                                            {item.name}
-                                                        </span>
+                                                        {item.name}
+                                                    </a>
+                                                ) : (
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => {
+                                                            navigate(item.link);
+                                                            setToggle(false);
+                                                            setMobileOpenKey(null);
+                                                        }}
+                                                        className="text-lg uppercase font-semibold text-[#5f5f5f]"
+                                                    >
+                                                        {item.name}
+                                                    </button>
+                                                )}
 
-                                                        {hasChildren && (
-                                                            <span className={`ml-3 h-8 w-8 flex items-center justify-center rounded border border-primary ${open ? "bg-primary/10 text-primary" : "text-primary"}`}>
-                                                                {open ? (
-                                                                    <ChevronUp className="w-5 h-5" />
-                                                                ) : (
-                                                                    <ChevronDown className="w-5 h-5" />
-                                                                )}
-                                                            </span>
+                                                {hasChildren && (
+                                                    <button
+                                                        type="button"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            toggleMobileSection(item.key);
+                                                        }}
+                                                        className={`ml-3 h-8 w-8 flex items-center justify-center rounded border border-primary ${open
+                                                                ? "bg-primary/10 text-primary"
+                                                                : "text-primary"
+                                                            }`}
+                                                        aria-label={`${item.name} menu toggle`}
+                                                    >
+                                                        {open ? (
+                                                            <ChevronUp className="w-5 h-5" />
+                                                        ) : (
+                                                            <ChevronDown className="w-5 h-5" />
                                                         )}
-                                                    </Disclosure.Button>
+                                                    </button>
+                                                )}
+                                            </div>
 
-                                                    {hasChildren && (
-                                                        <Transition
-                                                            show={open}
-                                                            enter="transition duration-200 ease-out"
-                                                            enterFrom="transform scale-y-95 opacity-0"
-                                                            enterTo="transform scale-y-100 opacity-100"
-                                                            leave="transition duration-150 ease-in"
-                                                            leaveFrom="transform scale-y-100 opacity-100"
-                                                            leaveTo="transform scale-y-95 opacity-0"
+                                            {hasChildren && open && (
+                                                <div
+                                                    className={`bg-[#eee] border-b border-b-[#0000001a] border-l-[3px] border-l-primary py-1 ${item.key === "liveGames"
+                                                            ? "max-h-[320px] overflow-y-auto"
+                                                            : ""
+                                                        }`}
+                                                >
+                                                    {item.contents.map((i) => (
+                                                        <button
+                                                            key={i.id}
+                                                            type="button"
+                                                            onClick={() => {
+                                                                navigate(`${item.link}/${i.id}`);
+                                                                setToggle(false);
+                                                                setMobileOpenKey(null);
+                                                            }}
+                                                            className="w-full text-left px-6 py-2 border-b border-b-[#0000001a] last:border-b-0"
                                                         >
-                                                            <Disclosure.Panel static className="bg-[#eee] border-b border-b-[#0000001a] border-l-[3px] border-l-primary py-1 origin-top">
-                                                                {item.contents.map((i) => (
-                                                                    <button
-                                                                        key={i.id}
-                                                                        type="button"
-                                                                        onClick={() => {
-                                                                            navigate(`${item.link}/${i.id}`);
-                                                                            setToggle(false);
-                                                                        }}
-                                                                        className="w-full text-left px-6 py-2 border-b border-b-[#0000001a] last:border-b-0"
-                                                                    >
-                                                                        <span className="text-sm uppercase font-semibold text-[#5f5f5f]">
-                                                                            {i.name}
-                                                                            {item.link === "/solution" &&
-                                                                                i.id === "smart-studio" && (
-                                                                                    <span className="ml-2 text-[10px] font-bold text-white bg-red-500 px-2 py-[2px] rounded-full">
-                                                                                        {t("navbar.badge.new")}
-                                                                                    </span>
-                                                                                )}
+                                                            <span className="text-sm uppercase font-semibold text-[#5f5f5f]">
+                                                                {i.name}
+                                                                {item.link === "/solution" &&
+                                                                    i.id === "smart-studio" && (
+                                                                        <span className="ml-2 text-[10px] font-bold text-white bg-red-500 px-2 py-[2px] rounded-full">
+                                                                            {t("navbar.badge.new")}
                                                                         </span>
-                                                                    </button>
-                                                                ))}
-                                                            </Disclosure.Panel>
-                                                        </Transition>
-                                                    )}
-                                                </>
+                                                                    )}
+                                                            </span>
+                                                        </button>
+                                                    ))}
+                                                </div>
                                             )}
-                                        </Disclosure>
+                                        </div>
                                     );
                                 })
                             )}
@@ -419,6 +488,7 @@ function Navbar() {
                                     e.stopPropagation();
                                     navigate("/contact");
                                     setToggle(false);
+                                    setMobileOpenKey(null);
                                 }}
                                 className="h-10 py-2 w-full max-w-[375px] bg-text uppercase rounded-md text-white"
                             >
