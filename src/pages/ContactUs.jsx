@@ -2,15 +2,17 @@ import React, { useEffect, useRef, useState, useMemo } from "react";
 import emailjs from "@emailjs/browser";
 import ReCAPTCHA from "react-google-recaptcha";
 import { db } from "@/firebase";
-import { addDoc, collection, doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
-import { useTranslation } from "react-i18next";
 import {
-    Phone,
-    Mail,
-    MapPin,
-    SendHorizonal,
-} from "lucide-react";
-
+    addDoc,
+    collection,
+    doc,
+    getDoc,
+    setDoc,
+    serverTimestamp,
+} from "firebase/firestore";
+import { useTranslation } from "react-i18next";
+import { Phone, Mail, MapPin, SendHorizonal } from "lucide-react";
+import SEO from "@/components/SEO";
 import heroBg from "@/assets/images/cta-0083.jpg";
 
 function ContactUs() {
@@ -20,7 +22,7 @@ function ContactUs() {
     const recaptchaRef = useRef(null);
     const timeoutRef = useRef(null);
 
-    const [sent, setSent] = useState(null);  
+    const [sent, setSent] = useState(null);
     const [isSending, setSending] = useState(false);
     const [reCapToken, setReCapToken] = useState(null);
 
@@ -81,7 +83,10 @@ function ContactUs() {
             };
 
             const newDocRef = await addDoc(collection(db, "contactUs"), payload);
-            await setDoc(doc(db, "contactUs", newDocRef.id), { ...payload, id: newDocRef.id });
+            await setDoc(doc(db, "contactUs", newDocRef.id), {
+                ...payload,
+                id: newDocRef.id,
+            });
 
             setSent("success");
             formRef.current.reset();
@@ -101,6 +106,14 @@ function ContactUs() {
             className="relative w-full min-h-screen bg-no-repeat bg-top bg-cover bg-center font-sans text-text pt-16"
             style={{ backgroundImage: `url(${heroBg})` }}
         >
+            <SEO
+                title="Contact Us – XPG Live Casino Software Provider"
+                description="Get in touch with XPG for live casino solutions, API integration, and partnership opportunities."
+                url="/contact"
+                image={heroBg}
+                keywords="XPG contact, contact XPG, live casino provider contact, XPG support"
+            />
+
             <div
                 className="absolute inset-0"
                 style={{
@@ -114,10 +127,14 @@ function ContactUs() {
                     <div className="px-6 md:px-10 pt-8">
                         {sent && (
                             <p
-                                className={`text-sm text-center mb-3 ${sent === "success" ? "text-green-600" : "text-red-600"
+                                className={`text-sm text-center mb-3 ${sent === "success"
+                                    ? "text-green-600"
+                                    : "text-red-600"
                                     }`}
                             >
-                                {sent === "success" ? t("contactUs.success") : t("contactUs.failure")}
+                                {sent === "success"
+                                    ? t("contactUs.success")
+                                    : t("contactUs.failure")}
                             </p>
                         )}
 
@@ -125,7 +142,9 @@ function ContactUs() {
                             <div className="border-t border-t-[#ff7f50] w-32 py-1" />
                             <h1 className="text-2xl md:text-3xl uppercase text-center">
                                 {t("contactUs.get")}{" "}
-                                <b className="font-extrabold">{t("contactUs.inTouch")}</b>
+                                <b className="font-extrabold">
+                                    {t("contactUs.inTouch")}
+                                </b>
                             </h1>
                             <div className="border-b border-b-[#ffa500] w-32 py-1" />
                         </div>
@@ -135,7 +154,9 @@ function ContactUs() {
                         <div className="lg:col-span-2 px-6 md:px-10 pb-8">
                             <div className="lg:hidden text-sm mb-4">
                                 <p className="mt-2">{t("contactUs.interested")}</p>
-                                <p className="text-justify mt-2">{t("contactUs.description")}</p>
+                                <p className="text-justify mt-2">
+                                    {t("contactUs.description")}
+                                </p>
                             </div>
 
                             <form
@@ -144,15 +165,37 @@ function ContactUs() {
                                 className="grid grid-cols-1 md:grid-cols-2 gap-4"
                             >
                                 {[
-                                    { name: "from_name", label: "name", required: true },
-                                    { name: "contact_number", label: "phone", required: false },
-                                    { name: "user_email", label: "email", type: "email", required: true },
-                                    { name: "subject", label: "subject", required: true },
+                                    {
+                                        name: "from_name",
+                                        label: "name",
+                                        required: true,
+                                    },
+                                    {
+                                        name: "contact_number",
+                                        label: "phone",
+                                        required: false,
+                                    },
+                                    {
+                                        name: "user_email",
+                                        label: "email",
+                                        type: "email",
+                                        required: true,
+                                    },
+                                    {
+                                        name: "subject",
+                                        label: "subject",
+                                        required: true,
+                                    },
                                 ].map((f) => (
-                                    <label key={f.name} className="flex flex-col gap-1">
+                                    <label
+                                        key={f.name}
+                                        className="flex flex-col gap-1"
+                                    >
                                         <span className="uppercase text-sm">
                                             {t(`contactUs.form.${f.label}`)}
-                                            {f.required && <span className="text-red-600">*</span>}
+                                            {f.required && (
+                                                <span className="text-red-600">*</span>
+                                            )}
                                         </span>
                                         <input
                                             name={f.name}
@@ -181,7 +224,9 @@ function ContactUs() {
                                         <ReCAPTCHA
                                             ref={recaptchaRef}
                                             sitekey={config.recaptcha_site_key}
-                                            onChange={(token) => setReCapToken(token)}
+                                            onChange={(token) =>
+                                                setReCapToken(token)
+                                            }
                                         />
                                     </div>
                                 )}
@@ -190,10 +235,11 @@ function ContactUs() {
                                     <button
                                         type="submit"
                                         disabled={!canSubmit}
-                                        className="inline-flex items-center gap-2 px-6 py-2 rounded-full border-2 border-primary text-sm uppercase font-semibold
-                               disabled:opacity-60 disabled:cursor-not-allowed hover:bg-primary hover:text-white transition"
+                                        className="inline-flex items-center gap-2 px-6 py-2 rounded-full border-2 border-primary text-sm uppercase font-semibold disabled:opacity-60 disabled:cursor-not-allowed hover:bg-primary hover:text-white transition"
                                     >
-                                        {isSending ? t("contactUs.form.sending") : t("contactUs.form.send")}
+                                        {isSending
+                                            ? t("contactUs.form.sending")
+                                            : t("contactUs.form.send")}
                                         <SendHorizonal size={16} />
                                     </button>
                                 </div>
@@ -201,8 +247,12 @@ function ContactUs() {
                         </div>
 
                         <aside className="hidden lg:flex flex-col bg-[#fafafa] border-l px-8 py-8 text-sm">
-                            <p className="text-justify">{t("contactUs.interested")}</p>
-                            <p className="text-justify mt-3 mb-6">{t("contactUs.description")}</p>
+                            <p className="text-justify">
+                                {t("contactUs.interested")}
+                            </p>
+                            <p className="text-justify mt-3 mb-6">
+                                {t("contactUs.description")}
+                            </p>
 
                             <div className="flex items-center gap-2 mt-2">
                                 <Phone className="text-[coral]" size={18} />
@@ -210,7 +260,9 @@ function ContactUs() {
                                     {t("contactUs.container.phoneLabel")}
                                 </p>
                             </div>
-                            <p className="ml-6 font-medium mt-1">+421 911 628 998</p>
+                            <p className="ml-6 font-medium mt-1">
+                                +421 911 628 998
+                            </p>
 
                             <div className="flex items-center gap-2 mt-5">
                                 <Mail className="text-[coral]" size={18} />
@@ -218,7 +270,9 @@ function ContactUs() {
                                     {t("contactUs.container.emailLabel")}
                                 </p>
                             </div>
-                            <p className="ml-6 font-medium mt-1">info@xprogaming.com</p>
+                            <p className="ml-6 font-medium mt-1">
+                                info@xprogaming.com
+                            </p>
 
                             <div className="flex items-center gap-2 mt-5">
                                 <MapPin className="text-[coral]" size={18} />
@@ -226,7 +280,9 @@ function ContactUs() {
                                     {t("contactUs.container.addressLabel")}
                                 </p>
                             </div>
-                            <p className="ml-6 font-medium mt-1">Bratislava, Slovakia</p>
+                            <p className="ml-6 font-medium mt-1">
+                                Bratislava, Slovakia
+                            </p>
                         </aside>
                     </div>
                 </div>

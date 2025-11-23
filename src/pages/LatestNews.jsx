@@ -144,7 +144,7 @@ function LatestNews() {
                 <SEO
                     title="Latest News – XPG"
                     description="Read the latest updates, releases, and announcements from XPG Live Dealer Casino."
-                    url="https://xprogaming.com/news"
+                    url="/news"
                     image={seoImage}
                     keywords="XPG news, live casino updates, live dealer announcements, XProGaming latest news"
                 />

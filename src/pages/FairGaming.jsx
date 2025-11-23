@@ -47,7 +47,7 @@ function FairGaming() {
             <SEO
                 title="Fair Gaming – Certified, Secure & Transparent Live Casino"
                 description="Learn how XPG ensures fair gaming with certified RNGs, rigorous auditing, and comprehensive monitoring tools that protect both operators and players."
-                url="https://xprogaming.com/company/fair-gaming"
+                url="/company/fair-gaming"
                 image={heroDesktop}
                 keywords="fair gaming, certified RNG, live casino fairness, XPG security, game audits, responsible gaming"
             />

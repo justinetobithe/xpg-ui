@@ -46,7 +46,7 @@ function PrivateTables() {
             <SEO
                 title="Private Tables – Custom VIP Live Dealer Rooms"
                 description="Offer premium branded VIP experiences with XPG Private Tables. Fully customizable live dealer tables for exclusive audiences."
-                url="https://xprogaming.com/solution/private-tables"
+                url="/solution/private-tables"
                 image={heroDesktop}
                 keywords="Private Tables, VIP live dealer, custom live casino tables, branded live casino, XPG private tables"
             />

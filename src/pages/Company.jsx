@@ -58,7 +58,7 @@ function Company() {
             <SEO
                 title="Our Company – XPG Live Casino Software Provider"
                 description="Discover XPG’s company overview, including who we are, our live studios, partners, and commitment to fair gaming as a leading live casino software provider."
-                url="https://xprogaming.com/company"
+                url="/company"
                 image={know}
                 keywords="XPG company, XPG live casino, XProGaming company, our company, live casino provider, XPG partners, XPG fair gaming, XPG live studios"
             />

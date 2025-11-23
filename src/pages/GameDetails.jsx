@@ -138,7 +138,7 @@ function GameDetails() {
                 <SEO
                     title="Game Not Found – XPG Live Games"
                     description="The game you are looking for could not be found."
-                    url={`https://xprogaming.com/live-games/${gameId}`}
+                    url={`/live-games/${gameId}`}
                     image={games?.[0]?.cover}
                     keywords="XPG live games, live dealer games, casino games"
                 />
@@ -179,8 +179,8 @@ function GameDetails() {
                 }
                 url={
                     selectedGame === "multi-games"
-                        ? "https://xprogaming.com/live-games/multi-games"
-                        : `https://xprogaming.com/live-games/${selectedGame}`
+                        ? "/live-games/multi-games"
+                        : `/live-games/${selectedGame}`
                 }
                 image={
                     selectedGame === "multi-games" ? games?.[0]?.cover : gameData?.cover

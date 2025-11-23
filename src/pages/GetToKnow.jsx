@@ -58,7 +58,7 @@ function GetToKnow() {
             <SEO
                 title="Get to Know XPG – Leading & Trustworthy Live Casino Provider"
                 description="Learn more about XPG’s vision, mission, and core values as a trusted B2B live casino software provider offering premium live dealer solutions to operators worldwide."
-                url="https://xprogaming.com/company/get-to-know"
+                url="/company/get-to-know"
                 image={heroDesktop}
                 keywords="XPG company, XPG mission, XPG vision, live casino provider, XProGaming, iGaming software, B2B casino solutions"
             />

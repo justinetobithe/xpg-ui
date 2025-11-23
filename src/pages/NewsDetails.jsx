@@ -125,7 +125,7 @@ function NewsDetails() {
             <SEO
                 title={`${title} – XPG News`}
                 description={descriptionPlain}
-                url={`https://xprogaming.com/news/${selectedNews}`}
+                url={`/news/${selectedNews}`}
                 image={newsData.imageURL}
                 keywords="XPG news, live casino news, XPG updates"
             />

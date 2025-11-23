@@ -46,7 +46,7 @@ function WhiteLabel() {
             <SEO
                 title="White Label – Fully Branded Live Casino Platform"
                 description="Launch your own branded live casino with XPG White Label solutions. Fast setup, flexible deployment, and full operator control."
-                url="https://xprogaming.com/solution/white-label"
+                url="/solution/white-label"
                 image={heroDesktop}
                 keywords="XPG white label, live casino white label, branded live dealer, casino turnkey solution"
             />

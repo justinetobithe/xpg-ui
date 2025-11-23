@@ -92,7 +92,7 @@ function LiveStudios() {
             <SEO
                 title="Our Live Studios – European Sophisticated Live Casino Environment"
                 description="Explore XPG’s state-of-the-art live studios with European sophisticated design, professional dealers, HD streaming, and tailored live casino environments for operators."
-                url="https://xprogaming.com/company/live-studios"
+                url="/company/live-studios"
                 image={heroDesktop}
                 keywords="XPG live studios, live casino studios, European studio, live dealer studio, XProGaming studios, live casino streaming, professional dealers"
             />

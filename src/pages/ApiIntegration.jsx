@@ -49,47 +49,33 @@ function ApiIntegration() {
         window.scrollTo(0, 0);
     }, []);
 
-    const heroBg = display === "sm" ? heroMobile : heroDesktop;
-
-    const apiTitle = t("apiIntegration.xpgLiveDealerCasinoSystem.apiIntegration.title");
-    const apiNumber = (apiTitle.match(/^(\d+\+?)/) || ["", ""])[1];
-    const apiLabel = apiTitle.replace(/^(\d+\+?)/, "").trim().toUpperCase();
-
-    const partnersTitle = t("apiIntegration.xpgLiveDealerCasinoSystem.partners.title");
-    const partnersNumber = (partnersTitle.match(/^(\d+\+?)/) || ["", ""])[1];
-    const partnersLabel = partnersTitle.replace(/^(\d+\+?)/, "").trim().toUpperCase();
-
-    const virtualTitle = t("apiIntegration.xpgLiveDealerCasinoSystem.virtualGames.title");
-    const virtualNumber = (virtualTitle.match(/^(\d+\+?)/) || ["", ""])[1];
-    const virtualLabel = virtualTitle.replace(/^(\d+\+?)/, "").trim().toUpperCase();
-
     return (
         <section className="w-full flex flex-col text-text pb-12 font-sans">
             <SEO
                 title="API Integration – Simple & Flexible Live Casino Integration"
                 description="Integrate XPG Live Dealer Casino System with a simple and flexible API. Seamless wallet or balance transfer supported with fast onboarding."
-                url="https://xprogaming.com/solution/api-integration"
+                url="/solution/api-integration"
                 image={heroDesktop}
                 keywords="XPG API integration, live casino API, seamless wallet, balance transfer, live dealer integration"
             />
 
             <main
                 className="relative w-full bg-no-repeat bg-top bg-cover md:h-[70vh] h-[100vh] bg-center flex items-center"
-                style={{ backgroundImage: `url(${heroBg})` }}
+                style={{
+                    backgroundImage: `url(${display === "sm" ? heroMobile : heroDesktop})`,
+                }}
             >
                 <div
                     className="w-full h-full absolute"
                     style={{
                         background:
-                            "linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 34%, rgba(0, 0, 0, 0) 100%)",
+                            "linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 34%, rgba(0,  0, 0, 0) 100%)",
                     }}
                 />
                 <div className="container w-full h-full flex md:justify-normal justify-center relative mt-16">
                     <h1
                         style={{ textShadow: "1px 1px 0 #7e7e7e, 2px 2px 0 #514f4f" }}
-                        className={`text-white text-2xl md:text-4xl lg:text-6xl font-bold md:pt-[calc(15%-50px)] pt-[calc(40%-50px)] uppercase z-10 mx-6 md:mx-10 block ${display === "sm"
-                                ? "w-full text-center"
-                                : "w-[350px] text-justify"
+                        className={`text-white text-2xl md:text-4xl lg:text-6xl font-bold md:pt-[calc(15%-50px)] pt-[calc(40%-50px)] uppercase z-10 mx-6 md:mx-10 block ${display === "sm" ? "w-full text-center" : "w-[350px] text-justify"
                             }`}
                     >
                         {t("apiIntegration.heroTitleLine1")}
@@ -97,17 +83,19 @@ function ApiIntegration() {
                         {t("apiIntegration.heroTitleLine2")}
                     </h1>
 
-                    <div className="flex items-center justify-start md:hidden h-full absolute top-1/2 left-1/2 z-10">
-                        <button
-                            type="button"
-                            onClick={() =>
-                                itemRef.current?.scrollIntoView({ behavior: "smooth" })
-                            }
-                            className="absolute w-[24px] h-[24px] left-[48%] flex items-center justify-center top-0 animate-bounce"
-                        >
-                            <div className="h-full w-[24px] rotate-[-45deg] border-l border-b-white border-l-white border-b" />
-                        </button>
-                    </div>
+                    {isMobile && (
+                        <div className="flex items-center justify-start md:hidden h-full absolute top-1/2 left-1/2 z-10">
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    itemRef.current?.scrollIntoView({ behavior: "smooth" })
+                                }
+                                className="absolute w-[24px] h-[24px] left-[48%] flex items-center justify-center top-0 animate-bounce"
+                            >
+                                <div className="h-full w-[24px] rotate-[-45deg] border-l border-b-white border-l-white border-b" />
+                            </button>
+                        </div>
+                    )}
                 </div>
             </main>
 
@@ -142,10 +130,15 @@ function ApiIntegration() {
                                     <div className="bg-[#f5f5f5] px-4 py-6 text-center flex items-center justify-center min-h-[140px]">
                                         <div>
                                             <div className="text-primary font-extrabold text-4xl leading-none">
-                                                {apiNumber}
+                                                {(t("apiIntegration.xpgLiveDealerCasinoSystem.apiIntegration.title").match(
+                                                    /^(\d+\+?)/
+                                                ) || ["", ""])[1]}
                                             </div>
                                             <div className="mt-2 text-xs font-semibold tracking-wide text-gray-900">
-                                                {apiLabel}
+                                                {t("apiIntegration.xpgLiveDealerCasinoSystem.apiIntegration.title")
+                                                    .replace(/^(\d+\+?)/, "")
+                                                    .trim()
+                                                    .toUpperCase()}
                                             </div>
                                         </div>
                                     </div>
@@ -164,10 +157,15 @@ function ApiIntegration() {
                                     <div className="bg-[#e9efed] px-4 py-6 text-center flex items-center justify-center min-h-[140px]">
                                         <div>
                                             <div className="text-primary font-extrabold text-4xl leading-none">
-                                                {partnersNumber}
+                                                {(t("apiIntegration.xpgLiveDealerCasinoSystem.partners.title").match(
+                                                    /^(\d+\+?)/
+                                                ) || ["", ""])[1]}
                                             </div>
                                             <div className="mt-2 text-xs font-semibold tracking-wide text-gray-900">
-                                                {partnersLabel}
+                                                {t("apiIntegration.xpgLiveDealerCasinoSystem.partners.title")
+                                                    .replace(/^(\d+\+?)/, "")
+                                                    .trim()
+                                                    .toUpperCase()}
                                             </div>
                                         </div>
                                     </div>
@@ -175,10 +173,15 @@ function ApiIntegration() {
                                     <div className="bg-[#f3f7f5] px-4 py-6 text-center flex items-center justify-center min-h-[140px]">
                                         <div>
                                             <div className="text-primary font-extrabold text-4xl leading-none">
-                                                {virtualNumber}
+                                                {(t("apiIntegration.xpgLiveDealerCasinoSystem.virtualGames.title").match(
+                                                    /^(\d+\+?)/
+                                                ) || ["", ""])[1]}
                                             </div>
                                             <div className="mt-2 text-xs font-semibold tracking-wide text-gray-900">
-                                                {virtualLabel}
+                                                {t("apiIntegration.xpgLiveDealerCasinoSystem.virtualGames.title")
+                                                    .replace(/^(\d+\+?)/, "")
+                                                    .trim()
+                                                    .toUpperCase()}
                                             </div>
                                         </div>
                                     </div>
@@ -188,14 +191,10 @@ function ApiIntegration() {
                             <div className="hidden md:grid grid-cols-2 gap-0 overflow-hidden rounded-md">
                                 <div className="bg-[#f5f5f5] p-8 md:p-12 text-center flex flex-col items-center justify-center md:min-h-[220px]">
                                     <div className="text-primary font-extrabold uppercase text-xl">
-                                        {t(
-                                            "apiIntegration.xpgLiveDealerCasinoSystem.apiIntegration.title"
-                                        )}
+                                        {t("apiIntegration.xpgLiveDealerCasinoSystem.apiIntegration.title")}
                                     </div>
                                     <p className="mt-4 text-base text-gray-800 max-w-[520px]">
-                                        {t(
-                                            "apiIntegration.xpgLiveDealerCasinoSystem.apiIntegration.description"
-                                        )}
+                                        {t("apiIntegration.xpgLiveDealerCasinoSystem.apiIntegration.description")}
                                     </p>
                                 </div>
 
@@ -218,16 +217,11 @@ function ApiIntegration() {
 
                                 <div className="bg-[#e9efed] p-8 md:p-12 text-center flex flex-col items-center justify-center md:min-h-[220px]">
                                     <div className="text-primary font-extrabold text-xl">
-                                        {t(
-                                            "apiIntegration.xpgLiveDealerCasinoSystem.partners.title"
-                                        )}
+                                        {t("apiIntegration.xpgLiveDealerCasinoSystem.partners.title")}
                                     </div>
                                     <p className="mt-4 text-base text-gray-800 max-w-[620px]">
                                         BetSoft, 1xBet, EveryMatrix, Pronet Gaming, and{" "}
-                                        <Link
-                                            to="/company/partners"
-                                            className="underline font-semibold"
-                                        >
+                                        <Link to="/company/partners" className="underline font-semibold">
                                             others
                                         </Link>
                                         .
@@ -236,14 +230,10 @@ function ApiIntegration() {
 
                                 <div className="bg-[#f3f7f5] p-8 md:p-12 text-center flex flex-col items-center justify-center md:min-h-[220px]">
                                     <div className="text-primary font-extrabold text-xl">
-                                        {t(
-                                            "apiIntegration.xpgLiveDealerCasinoSystem.virtualGames.title"
-                                        )}
+                                        {t("apiIntegration.xpgLiveDealerCasinoSystem.virtualGames.title")}
                                     </div>
                                     <p className="mt-4 text-base text-gray-800 max-w-[620px]">
-                                        {t(
-                                            "apiIntegration.xpgLiveDealerCasinoSystem.virtualGames.description"
-                                        )}
+                                        {t("apiIntegration.xpgLiveDealerCasinoSystem.virtualGames.description")}
                                     </p>
                                 </div>
                             </div>
@@ -289,15 +279,7 @@ function ApiIntegration() {
                                 <div className="absolute right-4 -top-6">
                                     <div className="w-[86px] h-[54px] bg-[#FF9000] rounded-2xl flex items-center justify-center shadow-[0_10px_25px_rgba(255,144,0,.28)] ring-1 ring-white/70">
                                         <svg width="42" height="22" viewBox="0 0 42 22">
-                                            <rect
-                                                x="1"
-                                                y="1"
-                                                width="40"
-                                                height="20"
-                                                rx="10"
-                                                fill="white"
-                                                opacity="0.95"
-                                            />
+                                            <rect x="1" y="1" width="40" height="20" rx="10" fill="white" opacity="0.95" />
                                             <circle cx="14" cy="11" r="7" fill="#FF9000" />
                                             <circle cx="14" cy="11" r="3" fill="#3b3b3b" />
                                         </svg>
@@ -326,13 +308,7 @@ function ApiIntegration() {
                                 <div className="absolute right-4 -top-6">
                                     <div className="w-[86px] h-[54px] bg-white rounded-2xl flex items-center justify-center shadow-[0_10px_25px_rgba(16,24,40,.12)] ring-1 ring-white/70">
                                         <svg width="40" height="40" viewBox="0 0 48 48">
-                                            <g
-                                                fill="none"
-                                                stroke="#FF9000"
-                                                strokeWidth="2.8"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            >
+                                            <g fill="none" stroke="#FF9000" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
                                                 <path d="M6 18h36" />
                                                 <path d="M10 18V36m8-18V36m8-18V36m8-18V36" />
                                                 <path d="M6 36h36" />

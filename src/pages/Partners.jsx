@@ -69,7 +69,7 @@ function Partners() {
             <SEO
                 title="Our Partners – Trusted Live Casino & iGaming Collaborations"
                 description="Discover XPG’s strategic partners in the iGaming industry, including leading casino platforms and providers that integrate our live casino solutions."
-                url="https://xprogaming.com/company/partners"
+                url="/company/partners"
                 image={partnersHero}
                 keywords="XPG partners, Betsoft, 1xBet, EveryMatrix, Pronet Gaming, live casino partners, iGaming integrations"
             />

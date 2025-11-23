@@ -65,7 +65,7 @@ function HTML5Mobile() {
             <SEO
                 title="HTML5 Mobile – Cross-Platform Live Casino"
                 description="Deliver live casino games anywhere with XPG HTML5 Mobile. Fully responsive, browser-ready, and optimized for all devices."
-                url="https://xprogaming.com/solution/html5-mobile"
+                url="/solution/html5-mobile"
                 image={heroDesktop}
                 keywords="HTML5 mobile casino, XPG HTML5 mobile, cross platform live casino, responsive live dealer games"
             />

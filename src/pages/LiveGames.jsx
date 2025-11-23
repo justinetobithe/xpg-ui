@@ -147,7 +147,7 @@ function LiveGames() {
             <SEO
                 title="Live Games – XPG Live Dealer Casino"
                 description="Browse XPG’s full catalog of live dealer games including Blackjack, Baccarat, Roulette and more."
-                url="https://xprogaming.com/live-games"
+                url="/live-games"
                 image={games?.[0]?.imageURL}
                 keywords="XPG live games, live dealer casino, blackjack live, baccarat live, roulette live"
             />

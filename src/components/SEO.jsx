@@ -7,7 +7,7 @@ const CANONICAL_URL = "https://xprogaming.com";
 const MIRROR_URLS = [
     "https://xpg.live/",
     "https://www1.xpg.live/",
-    "https://xprogaming.com/"
+    "https://xprogaming.com/",
 ];
 
 function SEO({
@@ -21,13 +21,20 @@ function SEO({
 }) {
     const fullTitle = title ? `${title} | ${DEFAULT_SITE_NAME}` : DEFAULT_SITE_NAME;
 
-    const runtimeHref =
+    const runtimePath =
         typeof window !== "undefined" && window.location
-            ? window.location.href
-            : CANONICAL_URL;
+            ? window.location.pathname + window.location.search
+            : "/";
 
-    const effectiveUrl = url || runtimeHref;
-    const canonicalUrl = CANONICAL_URL;
+    const normalizeUrl = (u) => {
+        if (!u) return CANONICAL_URL + runtimePath;
+        if (u.startsWith("http://") || u.startsWith("https://")) return u;
+        if (u.startsWith("/")) return CANONICAL_URL + u;
+        return CANONICAL_URL + "/" + u;
+    };
+
+    const effectiveUrl = normalizeUrl(url);
+    const canonicalUrl = CANONICAL_URL + runtimePath;
 
     return (
         <Helmet>
@@ -53,9 +60,9 @@ function SEO({
                     "@context": "https://schema.org",
                     "@type": "Organization",
                     name: "XPG",
-                    url: canonicalUrl,
+                    url: CANONICAL_URL,
                     sameAs: MIRROR_URLS,
-                    logo: image || favicon || `${CANONICAL_URL}/default-logo.png`,
+                    logo: image || favicon || `${CANONICAL_URL}/icon.png`,
                     description,
                 })}
             </script>

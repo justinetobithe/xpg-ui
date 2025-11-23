@@ -50,7 +50,7 @@ function SmartStudio() {
             <SEO
                 title="Smart Studio – Custom Branded Live Casino Solution"
                 description="XPG Smart Studio delivers fully customizable live casino environments with chroma key, tailored branding, and multi-game compatibility."
-                url="https://xprogaming.com/solution/smart-studio"
+                url="/solution/smart-studio"
                 image={heroDesktop}
                 keywords="Smart Studio, XPG Smart Studio, live casino branding, chroma key studio, custom live dealer studio, white label live casino"
             />

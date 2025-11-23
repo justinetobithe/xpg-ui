@@ -72,7 +72,7 @@ function Solutions() {
             <SEO
                 title="XPG Solutions – Smart Studio, API, White Label & More"
                 description="Discover XPG’s full range of iGaming solutions including Smart Studio, API integration, white label platforms, HTML5 mobile, private tables, and branded printing materials."
-                url="https://xprogaming.com/solutions"
+                url="/solutions"
                 image={solution6}
                 keywords="XPG solutions, Smart Studio, API integration, white label casino, HTML5 mobile casino, private tables, casino marketing materials"
             />

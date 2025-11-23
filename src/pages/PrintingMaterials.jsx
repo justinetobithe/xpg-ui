@@ -67,7 +67,7 @@ function PrintingMaterials() {
             <SEO
                 title="Printing Materials – Branded Brochures & Marketing Assets"
                 description="Download XPG’s official brochures and printing materials to support your casino operations and marketing."
-                url="https://xprogaming.com/solution/printing-materials"
+                url="/solution/printing-materials"
                 image={heroDesktop}
                 keywords="Printing Materials, casino brochures, XPG brochures, live casino marketing kit, branded assets"
             />
