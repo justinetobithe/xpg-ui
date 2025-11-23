@@ -121,8 +121,9 @@ function LatestNews() {
             lazyLoad: "ondemand",
             adaptiveHeight: true,
             responsive: [
-                { breakpoint: 1024, settings: { slidesToShow: 2, slidesToScroll: 1 } },
-                { breakpoint: 640, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+                { breakpoint: 1200, settings: { slidesToShow: 3 } },
+                { breakpoint: 900, settings: { slidesToShow: 2 } },
+                { breakpoint: 600, settings: { slidesToShow: 1 } },
             ],
         }),
         [filteredNews.length]
@@ -147,8 +148,8 @@ function LatestNews() {
                                     key={y}
                                     onClick={() => handleYearFilter(y)}
                                     className={`px-3 py-1 rounded-full border text-sm ${selectedYear === y
-                                        ? "bg-primary text-white border-primary"
-                                        : "border-gray-300 text-gray-700 hover:border-primary"
+                                            ? "bg-primary text-white border-primary"
+                                            : "border-gray-300 text-gray-700 hover:border-primary"
                                         }`}
                                 >
                                     {y}
