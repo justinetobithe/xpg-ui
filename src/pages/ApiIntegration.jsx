@@ -35,7 +35,6 @@ function ApiIntegration() {
         if (width > 1024) newDisplay = "xl";
         else if (width > 768) newDisplay = "lg";
         else if (width > 425) newDisplay = "md";
-
         setDisplay(newDisplay);
         setIsMobile(newDisplay === "sm");
     }, []);
@@ -51,6 +50,18 @@ function ApiIntegration() {
     }, []);
 
     const heroBg = display === "sm" ? heroMobile : heroDesktop;
+
+    const apiTitle = t("apiIntegration.xpgLiveDealerCasinoSystem.apiIntegration.title");
+    const apiNumber = (apiTitle.match(/^(\d+\+?)/) || ["", ""])[1];
+    const apiLabel = apiTitle.replace(/^(\d+\+?)/, "").trim().toUpperCase();
+
+    const partnersTitle = t("apiIntegration.xpgLiveDealerCasinoSystem.partners.title");
+    const partnersNumber = (partnersTitle.match(/^(\d+\+?)/) || ["", ""])[1];
+    const partnersLabel = partnersTitle.replace(/^(\d+\+?)/, "").trim().toUpperCase();
+
+    const virtualTitle = t("apiIntegration.xpgLiveDealerCasinoSystem.virtualGames.title");
+    const virtualNumber = (virtualTitle.match(/^(\d+\+?)/) || ["", ""])[1];
+    const virtualLabel = virtualTitle.replace(/^(\d+\+?)/, "").trim().toUpperCase();
 
     return (
         <section className="w-full flex flex-col text-text pb-12 font-sans">
@@ -76,7 +87,7 @@ function ApiIntegration() {
                 <div className="container w-full h-full flex md:justify-normal justify-center relative mt-16">
                     <h1
                         style={{ textShadow: "1px 1px 0 #7e7e7e, 2px 2px 0 #514f4f" }}
-                        className={`text-white text-2xl md:text-4xl lg:text-6xl font-bold md:pt-[calc(15%-50px)] pt-[calc(40%-50px)] uppercase z-10 mx-10 block ${display === "sm"
+                        className={`text-white text-2xl md:text-4xl lg:text-6xl font-bold md:pt-[calc(15%-50px)] pt-[calc(40%-50px)] uppercase z-10 mx-6 md:mx-10 block ${display === "sm"
                                 ? "w-full text-center"
                                 : "w-[350px] text-justify"
                             }`}
@@ -113,81 +124,62 @@ function ApiIntegration() {
                         <div className="border-b border-b-[#ffa500] w-[8rem] py-1" />
                     </div>
 
-                    <div className="flex flex-col items-center pt-8 pb-6 w-full">
-                        <p className="text-justify md:text-base font-regular px-[1.8em] mb-[10px] tracking-tight">
+                    <div className="flex flex-col items-center pt-6 pb-6 w-full">
+                        <p className="text-justify md:text-base font-regular px-2 md:px-[1.8em] mb-3 tracking-tight w-full">
                             {t("apiIntegration.introText")}
                         </p>
 
-                        <div className="mx-auto w-full max-w-[1280px] px-4 md:px-8">
-                            <h2 className="lg:text-3xl md:text-2xl text-xl uppercase my-[1em] px-[15px] text-center">
+                        <div className="w-full">
+                            <h2 className="lg:text-3xl md:text-2xl text-xl uppercase my-6 text-center">
                                 {t("apiIntegration.subSectionTitle.pre")}{" "}
                                 <b className="font-extrabold text-primary">
                                     {t("apiIntegration.subSectionTitle.highlight")}
                                 </b>
                             </h2>
 
-                            <div className="md:hidden grid grid-cols-2 gap-0 overflow-hidden rounded-md">
-                                <div className="bg-[#f5f5f5] p-8 text-center flex items-center justify-center aspect-square">
-                                    <div>
-                                        <div className="text-primary font-extrabold text-5xl leading-none">
-                                            {(t("apiIntegration.xpgLiveDealerCasinoSystem.apiIntegration.title").match(
-                                                /^(\d+\+?)/
-                                            ) || ["", ""])[1]}
-                                        </div>
-                                        <div className="mt-3 font-semibold tracking-wide">
-                                            {t("apiIntegration.xpgLiveDealerCasinoSystem.apiIntegration.title")
-                                                .replace(/^(\d+\+?)/, "")
-                                                .trim()
-                                                .toUpperCase()}
+                            <div className="md:hidden w-full px-2">
+                                <div className="grid grid-cols-2 gap-0 overflow-hidden rounded-xl border border-gray-100">
+                                    <div className="bg-[#f5f5f5] px-4 py-6 text-center flex items-center justify-center min-h-[140px]">
+                                        <div>
+                                            <div className="text-primary font-extrabold text-4xl leading-none">
+                                                {apiNumber}
+                                            </div>
+                                            <div className="mt-2 text-xs font-semibold tracking-wide text-gray-900">
+                                                {apiLabel}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div className="bg-[#dfe7e4] p-8 text-center flex items-center justify-center aspect-square">
-                                    <div>
-                                        <div className="text-primary font-extrabold text-5xl leading-none">
-                                            {games?.length || 0}
-                                        </div>
-                                        <div className="mt-3 font-semibold tracking-wide">
-                                            {t(
-                                                "apiIntegration.xpgLiveDealerCasinoSystem.games.title"
-                                            ).toUpperCase()}
+                                    <div className="bg-[#dfe7e4] px-4 py-6 text-center flex items-center justify-center min-h-[140px]">
+                                        <div>
+                                            <div className="text-primary font-extrabold text-4xl leading-none">
+                                                {games?.length || 0}
+                                            </div>
+                                            <div className="mt-2 text-xs font-semibold tracking-wide text-gray-900">
+                                                {t("apiIntegration.xpgLiveDealerCasinoSystem.games.title").toUpperCase()}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div className="bg-[#e9efed] p-8 text-center flex items-center justify-center aspect-square">
-                                    <div>
-                                        <div className="text-primary font-extrabold text-5xl leading-none">
-                                            {(t(
-                                                "apiIntegration.xpgLiveDealerCasinoSystem.partners.title"
-                                            ).match(/^(\d+\+?)/) || ["", ""])[1]}
-                                        </div>
-                                        <div className="mt-3 font-semibold tracking-wide">
-                                            {t(
-                                                "apiIntegration.xpgLiveDealerCasinoSystem.partners.title"
-                                            )
-                                                .replace(/^(\d+\+?)/, "")
-                                                .trim()
-                                                .toUpperCase()}
+                                    <div className="bg-[#e9efed] px-4 py-6 text-center flex items-center justify-center min-h-[140px]">
+                                        <div>
+                                            <div className="text-primary font-extrabold text-4xl leading-none">
+                                                {partnersNumber}
+                                            </div>
+                                            <div className="mt-2 text-xs font-semibold tracking-wide text-gray-900">
+                                                {partnersLabel}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div className="bg-[#f3f7f5] p-8 text-center flex items-center justify-center aspect-square">
-                                    <div>
-                                        <div className="text-primary font-extrabold text-5xl leading-none">
-                                            {(t(
-                                                "apiIntegration.xpgLiveDealerCasinoSystem.virtualGames.title"
-                                            ).match(/^(\d+\+?)/) || ["", ""])[1]}
-                                        </div>
-                                        <div className="mt-3 font-semibold tracking-wide">
-                                            {t(
-                                                "apiIntegration.xpgLiveDealerCasinoSystem.virtualGames.title"
-                                            )
-                                                .replace(/^(\d+\+?)/, "")
-                                                .trim()
-                                                .toUpperCase()}
+                                    <div className="bg-[#f3f7f5] px-4 py-6 text-center flex items-center justify-center min-h-[140px]">
+                                        <div>
+                                            <div className="text-primary font-extrabold text-4xl leading-none">
+                                                {virtualNumber}
+                                            </div>
+                                            <div className="mt-2 text-xs font-semibold tracking-wide text-gray-900">
+                                                {virtualLabel}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -258,7 +250,7 @@ function ApiIntegration() {
                         </div>
 
                         <div
-                            className="w-full h-full bg-center bg-fixed mt-[2.5em]"
+                            className="w-full h-full bg-center bg-fixed mt-10 rounded-xl overflow-hidden"
                             style={{ backgroundImage: `url(${ctaBg})` }}
                         >
                             <div
@@ -266,17 +258,17 @@ function ApiIntegration() {
                                     background:
                                         "linear-gradient(to top, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 34%, rgba(255, 255, 255, 0.4) 100%)",
                                 }}
-                                className="flex flex-col w-full h-full justify-center items-center py-[1em] px-4"
+                                className="flex flex-col w-full h-full justify-center items-center py-6 px-4"
                             >
-                                <h1 className="lg:text-3xl md:text-2xl text-xl uppercase mt-[1em]">
+                                <h1 className="lg:text-3xl md:text-2xl text-xl uppercase mt-2 text-center">
                                     {t("apiIntegration.integrationProcess.title.pre")}{" "}
                                     <b className="font-extrabold">
                                         {t("apiIntegration.integrationProcess.title.highlight")}:
                                     </b>
                                 </h1>
 
-                                <div className="flex flex-col w-full h-full text-sm md:text-base lg:max-w-[780px] md:max-w-[614px] mt-[2.5em] mb-[2em]">
-                                    <ul className="space-y-1">
+                                <div className="flex flex-col w-full h-full text-sm md:text-base lg:max-w-[780px] md:max-w-[614px] mt-6 mb-4">
+                                    <ul className="space-y-2">
                                         {t("apiIntegration.integrationProcess.steps", {
                                             returnObjects: true,
                                         }).map((step, index) => (
@@ -292,8 +284,8 @@ function ApiIntegration() {
                             </div>
                         </div>
 
-                        <div className="w-full container h-full flex flex-row md:flex-nowrap flex-wrap md:gap-0 gap-4 mt-[2.5em] font-light tracking-[1.5]">
-                            <div className="relative lg:h-[250px] bg-[#F5FAFA] w-full mx-4 rounded-r-3xl rounded-bl-3xl flex flex-col p-[1.5em] pl-[2.5em] shadow-sm mb-5">
+                        <div className="w-full container h-full flex flex-row md:flex-nowrap flex-wrap md:gap-0 gap-4 mt-10 font-light tracking-[1.5]">
+                            <div className="relative lg:h-[250px] bg-[#F5FAFA] w-full mx-0 md:mx-4 rounded-r-3xl rounded-bl-3xl flex flex-col p-6 pl-8 shadow-sm mb-5">
                                 <div className="absolute right-4 -top-6">
                                     <div className="w-[86px] h-[54px] bg-[#FF9000] rounded-2xl flex items-center justify-center shadow-[0_10px_25px_rgba(255,144,0,.28)] ring-1 ring-white/70">
                                         <svg width="42" height="22" viewBox="0 0 42 22">
@@ -312,11 +304,11 @@ function ApiIntegration() {
                                     </div>
                                 </div>
 
-                                <span className="text-primary font-extrabold md:text-2xl text-xl my-[10px]">
+                                <span className="text-primary font-extrabold md:text-2xl text-xl my-2">
                                     {t("apiIntegration.walletOptions.seamlessWallet.title")}
                                 </span>
 
-                                <ul className="md:text-base text-sm space-y-1">
+                                <ul className="md:text-base text-sm space-y-2">
                                     {t("apiIntegration.walletOptions.seamlessWallet.items", {
                                         returnObjects: true,
                                     }).map((item, index) => (
@@ -330,7 +322,7 @@ function ApiIntegration() {
                                 </ul>
                             </div>
 
-                            <div className="relative lg:h-[250px] bg-[#F5FAFA] w-full mx-4 rounded-r-3xl rounded-bl-3xl flex flex-col p-[1.5em] pl-[2.5em] shadow-sm">
+                            <div className="relative lg:h-[250px] bg-[#F5FAFA] w-full mx-0 md:mx-4 rounded-r-3xl rounded-bl-3xl flex flex-col p-6 pl-8 shadow-sm">
                                 <div className="absolute right-4 -top-6">
                                     <div className="w-[86px] h-[54px] bg-white rounded-2xl flex items-center justify-center shadow-[0_10px_25px_rgba(16,24,40,.12)] ring-1 ring-white/70">
                                         <svg width="40" height="40" viewBox="0 0 48 48">
@@ -350,11 +342,11 @@ function ApiIntegration() {
                                     </div>
                                 </div>
 
-                                <span className="text-primary font-extrabold md:text-2xl text-xl my-[10px]">
+                                <span className="text-primary font-extrabold md:text-2xl text-xl my-2">
                                     {t("apiIntegration.walletOptions.balanceTransfer.title")}
                                 </span>
 
-                                <ul className="md:text-base text-sm space-y-1">
+                                <ul className="md:text-base text-sm space-y-2">
                                     {t("apiIntegration.walletOptions.balanceTransfer.items", {
                                         returnObjects: true,
                                     }).map((item, index) => (
