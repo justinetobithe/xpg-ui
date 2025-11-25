@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { CheckSquare } from "lucide-react";
 
 import SEO from "@/components/SEO";
 import PrevNextNav from "@/components/PrevNextNav";
+import FastImage from "@/components/FastImage";
+import LazyBackground from "@/components/LazyBackground";
 
 import { handArrow, shieldCheck, handShake, lightBulb } from "@/utils/images";
 
@@ -20,13 +22,13 @@ function GetToKnow() {
     const [display, setDisplay] = useState("lg");
 
     useEffect(() => {
-        function checkScreenSize() {
+        const checkScreenSize = () => {
             const width = window.innerWidth;
             if (width > 1024) setDisplay("xl");
             else if (width > 768 && width <= 1024) setDisplay("lg");
             else if (width > 425 && width <= 768) setDisplay("md");
             else setDisplay("sm");
-        }
+        };
 
         checkScreenSize();
         window.addEventListener("resize", checkScreenSize);
@@ -36,6 +38,33 @@ function GetToKnow() {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [location.pathname]);
+
+    useEffect(() => {
+        [heroDesktop, heroMobile, leftImage, rightImage].forEach((src) => {
+            const img = new Image();
+            img.src = src;
+        });
+    }, []);
+
+    const heroBg = useMemo(
+        () => (display === "sm" || display === "md" ? heroMobile : heroDesktop),
+        [display]
+    );
+
+    const coreItems =
+        t("getToKnowXPG.coreValues.items", { returnObjects: true }) || [];
+
+    const coreIcons = [handArrow, lightBulb, handShake, shieldCheck];
+
+    const operatorItems =
+        t("getToKnowXPG.benefits.forOperators.items", {
+            returnObjects: true,
+        }) || [];
+
+    const playerItems =
+        t("getToKnowXPG.benefits.forPlayers.items", {
+            returnObjects: true,
+        }) || [];
 
     return (
         <section className="w-full flex flex-col text-text pb-12 font-sans">
@@ -47,13 +76,11 @@ function GetToKnow() {
                 keywords="XPG company, XPG mission, XPG vision, live casino provider, XProGaming, iGaming software, B2B casino solutions"
             />
 
-            <main
-                className="relative w-full bg-no-repeat bg-top bg-cover md:h-[70vh] h-[100vh] bg-center flex items-center"
-                style={{
-                    backgroundImage: `url(${display === "sm" || display === "md" ? heroMobile : heroDesktop
-                        })`,
-                }}
-            >
+            <main className="relative w-full md:h-[70vh] h-[100vh] flex items-center overflow-hidden bg-black">
+                <LazyBackground
+                    imageUrl={heroBg}
+                    className="absolute inset-0 bg-no-repeat bg-top bg-cover bg-center w-full h-full"
+                />
                 <div
                     className="w-full h-full absolute"
                     style={{
@@ -80,7 +107,9 @@ function GetToKnow() {
                         <button
                             type="button"
                             onClick={() => {
-                                itemRef.current?.scrollIntoView({ behavior: "smooth" });
+                                itemRef.current?.scrollIntoView({
+                                    behavior: "smooth",
+                                });
                             }}
                             className="absolute w-[24px] h-[24px] left-[48%] flex items-center justify-center top-0 animate-bounce"
                         >
@@ -155,31 +184,27 @@ function GetToKnow() {
                 </h1>
 
                 <div className="mx-auto w-full max-w-[1280px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8 justify-items-center mt-4 pb-10 px-4 md:px-8">
-                    {(t("getToKnowXPG.coreValues.items", { returnObjects: true }) || []).map(
-                        (item, idx) => (
-                            <div
-                                key={item?.title || idx}
-                                className="w-full max-w-[300px] min-h-[250px] h-full flex flex-col items-center text-center p-4"
-                            >
-                                <img
-                                    src={[handArrow, lightBulb, handShake, shieldCheck][
-                                        idx % 4
-                                    ]}
-                                    alt={item.title}
-                                    className="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] object-contain"
-                                    loading="lazy"
-                                />
+                    {coreItems.map((item, idx) => (
+                        <div
+                            key={item?.title || idx}
+                            className="w-full max-w-[300px] min-h-[250px] h-full flex flex-col items-center text-center p-4"
+                        >
+                            <FastImage
+                                src={coreIcons[idx % coreIcons.length]}
+                                alt={item?.title || ""}
+                                className="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] object-contain"
+                                priority={idx < 2}
+                            />
 
-                                <h2 className="uppercase text-base sm:text-lg font-extrabold text-primary leading-tight text-center mt-3 mb-2 md:h-[48px] lg:h-[60px] md:flex md:items-center md:justify-center">
-                                    {item.title}
-                                </h2>
+                            <h2 className="uppercase text-base sm:text-lg font-extrabold text-primary leading-tight text-center mt-3 mb-2 md:h-[48px] lg:h-[60px] md:flex md:items-center md:justify-center">
+                                {item?.title}
+                            </h2>
 
-                                <p className="text-sm md:text-base leading-snug break-words [hyphens:auto]">
-                                    {item.description}
-                                </p>
-                            </div>
-                        )
-                    )}
+                            <p className="text-sm md:text-base leading-snug break-words [hyphens:auto]">
+                                {item?.description}
+                            </p>
+                        </div>
+                    ))}
                 </div>
             </section>
 
@@ -196,9 +221,7 @@ function GetToKnow() {
                                     {t("getToKnowXPG.benefits.forOperators.title")}
                                 </h2>
                                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6">
-                                    {(t("getToKnowXPG.benefits.forOperators.items", {
-                                        returnObjects: true,
-                                    }) || []).map((item, i) => (
+                                    {operatorItems.map((item, i) => (
                                         <li key={i} className="flex items-start">
                                             <CheckSquare className="w-4 h-4 mr-2 mt-1 text-[#ff7f50] flex-shrink-0" />
                                             <span>{item}</span>
@@ -207,10 +230,12 @@ function GetToKnow() {
                                 </ul>
                             </div>
 
-                            <div
-                                className="lg:w-1/2 w-full rounded-xl shadow-xl bg-cover bg-center h-[280px] md:h-[340px] lg:h-[420px] border-4 border-primary"
-                                style={{ backgroundImage: `url(${leftImage})` }}
-                            />
+                            <div className="lg:w-1/2 w-full rounded-xl shadow-xl border-4 border-primary overflow-hidden h-[280px] md:h-[340px] lg:h-[420px] bg-black">
+                                <LazyBackground
+                                    imageUrl={leftImage}
+                                    className="w-full h-full bg-cover bg-center"
+                                />
+                            </div>
                         </div>
 
                         <div className="flex flex-col lg:flex-row-reverse gap-8 items-stretch">
@@ -219,9 +244,7 @@ function GetToKnow() {
                                     {t("getToKnowXPG.benefits.forPlayers.title")}
                                 </h2>
                                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-6">
-                                    {(t("getToKnowXPG.benefits.forPlayers.items", {
-                                        returnObjects: true,
-                                    }) || []).map((item, i) => (
+                                    {playerItems.map((item, i) => (
                                         <li key={i} className="flex items-start">
                                             <CheckSquare className="w-4 h-4 mr-2 mt-1 text-[#ff7f50] flex-shrink-0" />
                                             <span>{item}</span>
@@ -230,10 +253,12 @@ function GetToKnow() {
                                 </ul>
                             </div>
 
-                            <div
-                                className="lg:w-1/2 w-full rounded-xl shadow-xl bg-cover bg-center h-[280px] md:h-[340px] lg:h-[420px] border-4 border-primary"
-                                style={{ backgroundImage: `url(${rightImage})` }}
-                            />
+                            <div className="lg:w-1/2 w-full rounded-xl shadow-xl border-4 border-primary overflow-hidden h-[280px] md:h-[340px] lg:h-[420px] bg-black">
+                                <LazyBackground
+                                    imageUrl={rightImage}
+                                    className="w-full h-full bg-cover bg-center"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>

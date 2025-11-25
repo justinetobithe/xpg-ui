@@ -9,8 +9,8 @@ import {
 } from "@/utils/images";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
 import SEO from "@/components/SEO";
+import FastImage from "@/components/FastImage";
 
 function Solutions() {
     const { t } = useTranslation();
@@ -124,28 +124,26 @@ function Card({ item, index, isHovered, setIsHovered, navigate }) {
             >
                 <div className="relative w-[70%] sm:w-[72%] aspect-square">
                     <div className="absolute inset-0 rounded-full bg-neutral-200" />
-                    <img
+                    <FastImage
                         src={item.image}
                         alt={item.title}
+                        className="relative z-10 rounded-full object-cover w-full h-full shadow-[0_0_22px_rgba(255,127,80,0.45)]"
+                        priority={index < 3}
                         width={256}
                         height={256}
-                        decoding="async"
-                        fetchpriority={index < 3 ? "high" : "auto"}
-                        loading={index < 3 ? "eager" : "lazy"}
-                        className="relative z-10 rounded-full object-cover w-full h-full shadow-[0_0_22px_rgba(255,127,80,0.45)]"
                     />
                 </div>
 
                 <p
                     className="
-                        mt-3 sm:mt-4
-                        text-primary uppercase font-extrabold text-center
-                        text-[11px] sm:text-xs md:text-sm
-                        leading-snug tracking-[0.01em]
-                        px-2 w-full
-                        line-clamp-2 break-words hyphens-auto
-                        min-h-[30px] sm:min-h-[34px]
-                    "
+            mt-3 sm:mt-4
+            text-primary uppercase font-extrabold text-center
+            text-[11px] sm:text-xs md:text-sm
+            leading-snug tracking-[0.01em]
+            px-2 w-full
+            line-clamp-2 break-words hyphens-auto
+            min-h-[30px] sm:min-h-[34px]
+          "
                 >
                     {item.title}
                 </p>

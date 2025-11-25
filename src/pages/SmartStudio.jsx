@@ -1,6 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
+
+import FastImage from "@/components/FastImage";
+import LazyBackground from "@/components/LazyBackground";
+import SEO from "@/components/SEO";
+import PrevNextNav from "@/components/PrevNextNav";
 
 import image1 from "@/assets/images/solutions/smart-studio/image-1.png";
 import image2 from "@/assets/images/solutions/smart-studio/image-2.png";
@@ -16,9 +21,6 @@ import heroDesktop from "@/assets/images/solutions/smart-studio.jpg";
 import smartStudioGif1 from "@/assets/images/solutions/smart-studio-1.gif";
 import smartStudioGif2 from "@/assets/images/solutions/smart-studio-2.gif";
 
-import SEO from "@/components/SEO";
-import PrevNextNav from "@/components/PrevNextNav";
-
 function SmartStudio() {
     const { t } = useTranslation();
     const location = useLocation();
@@ -33,7 +35,6 @@ function SmartStudio() {
             else if (width > 425) setDisplay("md");
             else setDisplay("sm");
         };
-
         checkScreenSize();
         window.addEventListener("resize", checkScreenSize);
         return () => window.removeEventListener("resize", checkScreenSize);
@@ -43,7 +44,86 @@ function SmartStudio() {
         window.scrollTo(0, 0);
     }, [location.pathname]);
 
-    const heroBg = display === "sm" ? heroMobile : heroDesktop;
+    useEffect(() => {
+        const preload = [
+            heroDesktop,
+            heroMobile,
+            image1,
+            image2,
+            Icon1,
+            Icon2,
+        ];
+        preload.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+        });
+    }, []);
+
+    const heroBg = useMemo(
+        () => (display === "sm" || display === "md" ? heroMobile : heroDesktop),
+        [display]
+    );
+
+    const exampleImages = useMemo(
+        () => [
+            {
+                src: image1,
+                alt: "Smart Studio example 1",
+                wrapBorder: "border-[#ff8a3d] shadow-[0_0_0_2px_rgba(255,138,61,.2)]",
+                imgH: "h-[220px] md:h-[260px]",
+                col: "col-span-2 md:col-span-1",
+            },
+            {
+                src: image2,
+                alt: "Smart Studio example 2",
+                wrapBorder: "border-[#ffa24b] shadow-[0_0_0_2px_rgba(255,162,75,.2)]",
+                imgH: "h-[160px] md:h-[260px]",
+                col: "",
+            },
+            {
+                src: image3,
+                alt: "Smart Studio example 3",
+                wrapBorder: "border-[#ff8a3d] shadow-[0_0_0_2px_rgba(255,138,61,.2)]",
+                imgH: "h-[160px] md:h-[260px]",
+                col: "",
+            },
+        ],
+        []
+    );
+
+    const benefitIcons = useMemo(() => [Icon1, Icon2, Icon3, Icon4], []);
+
+    const brandingItems =
+        t("smartStudio.customBranding.items", { returnObjects: true }) || [];
+
+    const compatibilityList = useMemo(
+        () => [
+            "Roulette",
+            "Auto Roulette",
+            "Fast Roulette",
+            "Galaxy Auto Roulette",
+            "Speed Roulette",
+            "Thunder Roulette",
+            "Baccarat",
+            "Turbo Baccarat",
+            "Exquisite Speed Baccarat",
+            "VIP Speed Baccarat",
+            "Super Speed Baccarat",
+            "Speed Baccarat",
+            "Sic Bo",
+            "Blackjack",
+            "High Blackjack",
+            "Unlimited Blackjack",
+            "VIP Blackjack",
+            "Lucky 7",
+            "Dragon Tiger",
+            "Fast Gold Dragon Tiger",
+            "Andar Bahar",
+            "Teen Patti 20",
+            "20 Cards",
+        ],
+        []
+    );
 
     return (
         <section className="w-full flex flex-col text-text pb-12 font-sans">
@@ -55,10 +135,11 @@ function SmartStudio() {
                 keywords="Smart Studio, XPG Smart Studio, live casino branding, chroma key studio, custom live dealer studio, white label live casino"
             />
 
-            <main
-                className="relative w-full bg-no-repeat bg-top bg-cover md:h-[70vh] h-[100vh] bg-center flex items-center"
-                style={{ backgroundImage: `url(${heroBg})` }}
-            >
+            <main className="relative w-full md:h-[70vh] h-[100vh] flex items-center overflow-hidden bg-black">
+                <LazyBackground
+                    imageUrl={heroBg}
+                    className="absolute inset-0 bg-no-repeat bg-top bg-cover bg-center w-full h-full"
+                />
                 <div
                     className="w-full h-full absolute"
                     style={{
@@ -69,9 +150,7 @@ function SmartStudio() {
                 <div className="container w-full h-full flex md:justify-normal justify-center relative mt-16">
                     <h1
                         style={{ textShadow: "1px 1px 0 #7e7e7e, 2px 2px 0 #514f4f" }}
-                        className={`text-white text-2xl md:text-4xl lg:text-6xl font-bold md:pt-[calc(15%-50px)] pt-[calc(40%-50px)] uppercase z-10 mx-10 block ${display === "sm"
-                            ? "w-full text-center"
-                            : "w-[350px] text-justify"
+                        className={`text-white text-2xl md:text-4xl lg:text-6xl font-bold md:pt-[calc(15%-50px)] pt-[calc(40%-50px)] uppercase z-10 mx-10 block ${display === "sm" ? "w-full text-center" : "w-[350px] text-justify"
                             }`}
                     >
                         {t("smartStudio.heroTitleLine1")}
@@ -106,39 +185,25 @@ function SmartStudio() {
                     </p>
                 </div>
 
-                <div className="mx-auto w-full max-w-[1280px] px-4 md:px-8 grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 my-6">
-                    <figure className="col-span-2 md:col-span-1 flex justify-center">
-                        <div className="w-full rounded-[18px] p-[2px] border-[3px] border-[#ff8a3d] shadow-[0_0_0_2px_rgba(255,138,61,.2)]">
-                            <img
-                                src={image1}
-                                alt="Smart Studio example 1"
-                                className="w-full h-[220px] md:w-[420px] md:h-[260px] object-cover rounded-[12px]"
-                                loading="lazy"
-                            />
-                        </div>
-                    </figure>
-
-                    <figure className="flex justify-center">
-                        <div className="w-full rounded-[18px] p-[2px] border-[3px] border-[#ffa24b] shadow-[0_0_0_2px_rgba(255,162,75,.2)]">
-                            <img
-                                src={image2}
-                                alt="Smart Studio example 2"
-                                className="w-full h-[160px] md:w-[420px] md:h-[260px] object-cover rounded-[12px]"
-                                loading="lazy"
-                            />
-                        </div>
-                    </figure>
-
-                    <figure className="flex justify-center">
-                        <div className="w-full rounded-[18px] p-[2px] border-[3px] border-[#ff8a3d] shadow-[0_0_0_2px_rgba(255,138,61,.2)]">
-                            <img
-                                src={image3}
-                                alt="Smart Studio example 3"
-                                className="w-full h-[160px] md:w-[420px] md:h-[260px] object-cover rounded-[12px]"
-                                loading="lazy"
-                            />
-                        </div>
-                    </figure>
+                <div className="mx-auto w-full max-w-[1280px] px-4 md:px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 my-6 items-stretch">
+                    {exampleImages.map((img, idx) => (
+                        <figure
+                            key={img.src}
+                            className={`${img.col || ""} w-full flex`}
+                        >
+                            <div
+                                className={`w-full rounded-[18px] p-[2px] border-[3px] ${img.wrapBorder} flex`}
+                            >
+                                <FastImage
+                                    src={img.src}
+                                    alt={img.alt}
+                                    priority={idx === 0}
+                                    className="w-full aspect-video rounded-[12px] overflow-hidden"
+                                    style={{ objectFit: "cover" }}
+                                />
+                            </div>
+                        </figure>
+                    ))}
                 </div>
 
                 <section className="w-full bg-white py-10">
@@ -168,16 +233,16 @@ function SmartStudio() {
                         </h2>
 
                         <div className="mx-auto w-full max-w-[1280px] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8 justify-items-center mt-4 pb-10">
-                            {[Icon1, Icon2, Icon3, Icon4].map((icon, index) => (
+                            {benefitIcons.map((icon, index) => (
                                 <div
-                                    key={index}
+                                    key={icon}
                                     className="w-full max-w-[300px] min-h-[250px] h-full flex flex-col items-center text-center p-4"
                                 >
-                                    <img
+                                    <FastImage
                                         src={icon}
                                         alt={t(`smartStudio.keyBenefits.items.${index}.title`)}
                                         className="w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] object-contain"
-                                        loading="lazy"
+                                        priority={index < 2}
                                     />
 
                                     <h2 className="uppercase text-base sm:text-lg font-extrabold text-primary leading-tight text-center mt-3 mb-2 md:h-[48px] lg:h-[60px] md:flex md:items-center md:justify-center">
@@ -205,9 +270,7 @@ function SmartStudio() {
                                 {t("smartStudio.customBranding.description")}
                             </p>
                             <ul className="list-disc pl-5 space-y-2 text-sm">
-                                {t("smartStudio.customBranding.items", {
-                                    returnObjects: true,
-                                }).map((item, idx) => (
+                                {brandingItems.map((item, idx) => (
                                     <li key={idx}>
                                         <strong>{item.title} — </strong>
                                         {item.description}
@@ -216,23 +279,23 @@ function SmartStudio() {
                             </ul>
                         </div>
 
-                        <div
-                            className="lg:w-1/2 min-h-[350px] bg-center bg-cover rounded-md border-4 border-primary"
-                            style={{ backgroundImage: `url(${smartStudioGif1})` }}
-                            role="img"
-                            aria-label="Smart Studio branding demo"
-                        />
+                        <div className="lg:w-1/2 min-h-[350px] rounded-md border-4 border-primary overflow-hidden">
+                            <LazyBackground
+                                imageUrl={smartStudioGif1}
+                                className="w-full h-full bg-center bg-cover"
+                            />
+                        </div>
                     </div>
                 </section>
 
                 <section className="w-full bg-[#f0f0f0] py-12">
                     <div className="mx-auto w-full max-w-[1280px] px-4 md:px-8 flex flex-col lg:flex-row gap-8">
-                        <div
-                            className="lg:w-1/2 min-h-[350px] bg-center bg-cover rounded-md border-4 border-primary"
-                            style={{ backgroundImage: `url(${smartStudioGif2})` }}
-                            role="img"
-                            aria-label="Smart Studio compatibility demo"
-                        />
+                        <div className="lg:w-1/2 min-h-[350px] rounded-md border-4 border-primary overflow-hidden">
+                            <LazyBackground
+                                imageUrl={smartStudioGif2}
+                                className="w-full h-full bg-center bg-cover"
+                            />
+                        </div>
 
                         <div className="lg:w-1/2">
                             <h2 className="text-xl font-semibold mb-4">
@@ -243,31 +306,7 @@ function SmartStudio() {
                             </p>
 
                             <ul className="list-disc pl-5 columns-2 text-sm">
-                                {[
-                                    "Roulette",
-                                    "Auto Roulette",
-                                    "Fast Roulette",
-                                    "Galaxy Auto Roulette",
-                                    "Speed Roulette",
-                                    "Thunder Roulette",
-                                    "Baccarat",
-                                    "Turbo Baccarat",
-                                    "Exquisite Speed Baccarat",
-                                    "VIP Speed Baccarat",
-                                    "Super Speed Baccarat",
-                                    "Speed Baccarat",
-                                    "Sic Bo",
-                                    "Blackjack",
-                                    "High Blackjack",
-                                    "Unlimited Blackjack",
-                                    "VIP Blackjack",
-                                    "Lucky 7",
-                                    "Dragon Tiger",
-                                    "Fast Gold Dragon Tiger",
-                                    "Andar Bahar",
-                                    "Teen Patti 20",
-                                    "20 Cards",
-                                ].map((game, idx) => (
+                                {compatibilityList.map((game, idx) => (
                                     <li key={idx}>{game}</li>
                                 ))}
                             </ul>

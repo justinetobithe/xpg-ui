@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
+import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import { db } from "@/firebase";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -11,6 +11,8 @@ import headlightImg from "@/assets/images/solutions/headlight.png";
 
 import SEO from "@/components/SEO";
 import PrevNextNav from "@/components/PrevNextNav";
+import LazyBackground from "@/components/LazyBackground";
+import FastImage from "@/components/FastImage";
 
 function PrintingMaterials() {
     const { t } = useTranslation();
@@ -18,6 +20,7 @@ function PrintingMaterials() {
     const itemRef = useRef(null);
 
     const [brochure, setBrochure] = useState(null);
+    const [loadingBrochure, setLoadingBrochure] = useState(true);
     const [display, setDisplay] = useState("lg");
 
     const checkScreenSize = useCallback(() => {
@@ -40,27 +43,52 @@ function PrintingMaterials() {
     }, [location.pathname]);
 
     useEffect(() => {
-        const unsub = onSnapshot(
-            query(collection(db, "files"), where("type", "==", "Brochure")),
-            (snapshot) => {
-                const brochures = snapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }));
-                setBrochure(brochures.length ? brochures[0] : null);
-            }
-        );
-
-        return () => unsub();
+        [heroDesktop, heroMobile, headlightImg].forEach((src) => {
+            const im = new Image();
+            im.src = src;
+        });
     }, []);
 
-    const downloadFile = () => {
+    useEffect(() => {
+        let alive = true;
+        setLoadingBrochure(true);
+
+        const run = async () => {
+            try {
+                const q = query(
+                    collection(db, "files"),
+                    where("type", "==", "Brochure"),
+                    limit(1)
+                );
+                const snap = await getDocs(q);
+                const first = snap.docs[0];
+                const data = first ? { id: first.id, ...first.data() } : null;
+                if (!alive) return;
+                setBrochure(data);
+                setLoadingBrochure(false);
+            } catch {
+                if (!alive) return;
+                setBrochure(null);
+                setLoadingBrochure(false);
+            }
+        };
+
+        run();
+        return () => {
+            alive = false;
+        };
+    }, []);
+
+    const downloadFile = useCallback(() => {
         if (brochure?.fileUrl) {
             window.open(brochure.fileUrl, "_blank", "noopener,noreferrer");
         }
-    };
+    }, [brochure]);
 
-    const heroBg = display === "sm" ? heroMobile : heroDesktop;
+    const heroBg = useMemo(
+        () => (display === "sm" || display === "md" ? heroMobile : heroDesktop),
+        [display]
+    );
 
     return (
         <section className="w-full flex flex-col text-text pb-12 font-sans">
@@ -72,10 +100,11 @@ function PrintingMaterials() {
                 keywords="Printing Materials, casino brochures, XPG brochures, live casino marketing kit, branded assets"
             />
 
-            <main
-                className="relative w-full bg-no-repeat bg-top bg-cover md:h-[70vh] h-[100vh] bg-center flex items-center"
-                style={{ backgroundImage: `url(${heroBg})` }}
-            >
+            <main className="relative w-full md:h-[70vh] h-[100vh] flex items-center overflow-hidden bg-black">
+                <LazyBackground
+                    imageUrl={heroBg}
+                    className="absolute inset-0 bg-no-repeat bg-top bg-cover bg-center w-full h-full"
+                />
                 <div
                     className="w-full h-full absolute"
                     style={{
@@ -86,9 +115,7 @@ function PrintingMaterials() {
                 <div className="container w-full h-full flex md:justify-normal justify-center relative mt-16">
                     <h1
                         style={{ textShadow: "1px 1px 0 #7e7e7e, 2px 2px 0 #514f4f" }}
-                        className={`text-white text-2xl md:text-4xl lg:text-6xl font-bold md:pt-[calc(15%-50px)] pt-[calc(40%-50px)] uppercase z-10 mx-10 block ${display === "sm"
-                            ? "w-full text-center"
-                            : "w-[350px] text-justify"
+                        className={`text-white text-2xl md:text-4xl lg:text-6xl font-bold md:pt-[calc(15%-50px)] pt-[calc(40%-50px)] uppercase z-10 mx-10 block ${display === "sm" ? "w-full text-center" : "w-[350px] text-justify"
                             }`}
                     >
                         {t("printingMaterials.title")}
@@ -122,19 +149,23 @@ function PrintingMaterials() {
                     </div>
 
                     <div className="w-full flex flex-col md:flex-row items-center gap-8 mt-8">
-                        <div
-                            className="flex-1 w-full rounded-lg shadow-sm bg-center bg-cover border-4 border-primary min-h-[166px] h-[180px] md:h-[220px]"
-                            style={{ backgroundImage: `url(${headlightImg})` }}
-                            role="img"
-                            aria-label="Printing materials preview"
-                        />
+                        <div className="flex-1 w-full rounded-lg shadow-sm border-4 border-primary min-h-[166px] h-[180px] md:h-[220px] overflow-hidden bg-black">
+                            <LazyBackground
+                                imageUrl={headlightImg}
+                                className="w-full h-full bg-center bg-cover"
+                            />
+                        </div>
 
                         <div className="flex-1 w-full flex flex-col justify-center items-start">
                             <p className="text-justify text-sm md:text-base tracking-tight">
                                 {t("printingMaterials.description")}
                             </p>
 
-                            {brochure?.fileUrl && (
+                            {loadingBrochure && (
+                                <div className="mt-4 h-5 w-44 bg-gray-200 animate-pulse rounded" />
+                            )}
+
+                            {!loadingBrochure && brochure?.fileUrl && (
                                 <button
                                     type="button"
                                     onClick={downloadFile}
@@ -149,10 +180,7 @@ function PrintingMaterials() {
                 </div>
             </section>
 
-            <PrevNextNav
-                prevTo="/solution/private-tables"
-                nextTo="/solution/smart-studio"
-            />
+            <PrevNextNav prevTo="/solution/private-tables" nextTo="/solution/smart-studio" />
         </section>
     );
 }

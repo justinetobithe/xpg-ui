@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
+import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import img1 from "@/assets/images/solutions/casino-0766.png";
@@ -9,6 +9,8 @@ import heroDesktop from "@/assets/images/solutions/functional-transparent.jpg";
 
 import SEO from "@/components/SEO";
 import PrevNextNav from "@/components/PrevNextNav";
+import FastImage from "@/components/FastImage";
+import LazyBackground from "@/components/LazyBackground";
 
 function WhiteLabel() {
     const { t } = useTranslation();
@@ -16,7 +18,6 @@ function WhiteLabel() {
     const itemRef = useRef(null);
 
     const [display, setDisplay] = useState("lg");
-    const [isMobile, setIsMobile] = useState(false);
 
     const checkScreenSize = useCallback(() => {
         const w = window.innerWidth;
@@ -24,9 +25,7 @@ function WhiteLabel() {
         if (w > 1024) next = "xl";
         else if (w > 768) next = "lg";
         else if (w > 425) next = "md";
-
         setDisplay(next);
-        setIsMobile(next === "sm");
     }, []);
 
     useEffect(() => {
@@ -39,7 +38,17 @@ function WhiteLabel() {
         window.scrollTo(0, 0);
     }, [location.pathname]);
 
-    const heroBg = display === "sm" ? heroMobile : heroDesktop;
+    useEffect(() => {
+        [heroDesktop, heroMobile, img1, img2].forEach((src) => {
+            const img = new Image();
+            img.src = src;
+        });
+    }, []);
+
+    const heroBg = useMemo(
+        () => (display === "sm" || display === "md" ? heroMobile : heroDesktop),
+        [display]
+    );
 
     return (
         <section className="w-full flex flex-col text-text pb-12 font-sans">
@@ -51,10 +60,11 @@ function WhiteLabel() {
                 keywords="XPG white label, live casino white label, branded live dealer, casino turnkey solution"
             />
 
-            <main
-                className="relative w-full bg-no-repeat bg-top bg-cover md:h-[70vh] h-[100vh] bg-center flex items-center"
-                style={{ backgroundImage: `url(${heroBg})` }}
-            >
+            <main className="relative w-full md:h-[70vh] h-[100vh] flex items-center overflow-hidden bg-black">
+                <LazyBackground
+                    imageUrl={heroBg}
+                    className="absolute inset-0 bg-no-repeat bg-top bg-cover bg-center w-full h-full"
+                />
                 <div
                     className="w-full h-full absolute"
                     style={{
@@ -65,9 +75,7 @@ function WhiteLabel() {
                 <div className="container w-full h-full flex md:justify-normal justify-center relative mt-16">
                     <h1
                         style={{ textShadow: "1px 1px 0 #7e7e7e, 2px 2px 0 #514f4f" }}
-                        className={`text-white text-2xl md:text-4xl lg:text-6xl font-bold md:pt-[calc(15%-50px)] pt-[calc(40%-50px)] uppercase z-10 mx-10 block ${display === "sm"
-                                ? "w-full text-center"
-                                : "w-[350px] text-justify"
+                        className={`text-white text-2xl md:text-4xl lg:text-6xl font-bold md:pt-[calc(15%-50px)] pt-[calc(40%-50px)] uppercase z-10 mx-10 block ${display === "sm" ? "w-full text-center" : "w-[350px] text-justify"
                             }`}
                     >
                         {t("whiteLabel.titleLine1")}
@@ -133,11 +141,11 @@ function WhiteLabel() {
                             <p className="text-justify md:text-base text-sm tracking-tight">
                                 {t("whiteLabel.standAlone.paragraph")}
                             </p>
-                            <img
+                            <FastImage
                                 src={img1}
                                 alt={t("whiteLabel.standAlone.title")}
-                                className="mt-auto"
-                                loading="lazy"
+                                className="mt-auto w-full h-auto object-contain"
+                                priority
                             />
                         </div>
                     </div>
@@ -156,11 +164,10 @@ function WhiteLabel() {
                             <p className="text-justify md:text-base text-sm tracking-tight">
                                 {t("whiteLabel.downloadClient.paragraph")}
                             </p>
-                            <img
+                            <FastImage
                                 src={img2}
                                 alt={t("whiteLabel.downloadClient.title")}
-                                className="mt-auto"
-                                loading="lazy"
+                                className="mt-auto w-full h-auto object-contain"
                             />
                         </div>
                     </div>

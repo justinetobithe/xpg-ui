@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ChevronDown, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
-import { db } from "@/firebase";
 import SEO from "@/components/SEO";
 import PrevNextNav from "@/components/PrevNextNav";
+import FastImage from "@/components/FastImage";
+import LazyBackground from "@/components/LazyBackground";
 
 import partner1 from "@/assets/images/betsoft.png";
 import partner2 from "@/assets/images/1xbet.png";
@@ -14,12 +14,16 @@ import partner3 from "@/assets/images/every-matrix.png";
 import partner4 from "@/assets/images/pronet-gaming.png";
 import partnersHero from "@/assets/images/company/partners.jpg";
 
+import { fetchLiveGames } from "@/api/liveGames";
+
 function Partners() {
     const { t } = useTranslation();
     const navigate = useNavigate();
-    const [display, setDisplay] = useState("lg");
     const itemRef = useRef(null);
+
+    const [display, setDisplay] = useState("lg");
     const [games, setGames] = useState([]);
+    const [loadingGames, setLoadingGames] = useState(true);
 
     useEffect(() => {
         const handleResize = () => {
@@ -35,34 +39,46 @@ function Partners() {
     }, []);
 
     useEffect(() => {
-        const q = query(collection(db, "liveGames"), orderBy("priority", "asc"));
-        const unsubscribe = onSnapshot(q, (snapshot) => {
-            const gamesData = snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            setGames(gamesData);
-        });
-        return () => unsubscribe();
+        let alive = true;
+        setLoadingGames(true);
+        fetchLiveGames()
+            .then((data) => {
+                if (!alive) return;
+                setGames(data || []);
+                setLoadingGames(false);
+            })
+            .catch(() => {
+                if (!alive) return;
+                setGames([]);
+                setLoadingGames(false);
+            });
+        return () => {
+            alive = false;
+        };
     }, []);
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    const partners = [
-        { logo: partner1, name: "Betsoft", link: "https://www.betsoft.com" },
-        { logo: partner2, name: "1xBet", link: "https://1xbet.com" },
-        { logo: partner3, name: "EveryMatrix", link: "https://everymatrix.com" },
-        { logo: partner4, name: "Pronet Gaming", link: "https://pronetgaming.com" },
-    ];
-
-    const popularGames = ["Blackjack", "Roulette", "Baccarat"];
-    const matchedGames = games.filter((game) =>
-        popularGames.some((name) =>
-            game.name?.toLowerCase().includes(name.toLowerCase())
-        )
+    const partners = useMemo(
+        () => [
+            { logo: partner1, name: "Betsoft", link: "https://www.betsoft.com" },
+            { logo: partner2, name: "1xBet", link: "https://1xbet.com" },
+            { logo: partner3, name: "EveryMatrix", link: "https://everymatrix.com" },
+            { logo: partner4, name: "Pronet Gaming", link: "https://pronetgaming.com" },
+        ],
+        []
     );
+
+    const matchedGames = useMemo(() => {
+        const popularGames = ["Blackjack", "Roulette", "Baccarat"];
+        return (games || []).filter((game) =>
+            popularGames.some((name) =>
+                (game.name || "").toLowerCase().includes(name.toLowerCase())
+            )
+        );
+    }, [games]);
 
     return (
         <section className="w-full flex flex-col text-text pb-12 font-sans">
@@ -74,11 +90,11 @@ function Partners() {
                 keywords="XPG partners, Betsoft, 1xBet, EveryMatrix, Pronet Gaming, live casino partners, iGaming integrations"
             />
 
-
-            <main
-                className="relative w-full bg-no-repeat bg-top bg-cover md:h-[70vh] h-[100vh] bg-center flex items-center"
-                style={{ backgroundImage: `url(${partnersHero})` }}
-            >
+            <main className="relative w-full md:h-[70vh] h-[100vh] flex items-center overflow-hidden bg-black">
+                <LazyBackground
+                    imageUrl={partnersHero}
+                    className="absolute inset-0 bg-no-repeat bg-top bg-cover bg-center w-full h-full"
+                />
                 <div
                     className="w-full h-full absolute"
                     style={{
@@ -88,9 +104,7 @@ function Partners() {
                 />
                 <div className="container w-full h-full flex md:justify-normal justify-center relative mt-16">
                     <h1
-                        style={{
-                            textShadow: "1px 1px 0 #7e7e7e, 2px 2px 0 #514f4f",
-                        }}
+                        style={{ textShadow: "1px 1px 0 #7e7e7e, 2px 2px 0 #514f4f" }}
                         className={`text-white text-2xl md:text-4xl lg:text-6xl font-bold md:pt-[calc(15%-50px)] pt-[calc(40%-50px)] uppercase z-10 mx-10 block ${display === "sm" ? "w-full text-center" : "w-[350px] text-justify"
                             }`}
                     >
@@ -100,16 +114,14 @@ function Partners() {
                     <div className="flex items-center justify-start md:hidden h-full absolute top-1/2 left-1/2 z-10">
                         <button
                             type="button"
-                            onClick={() => {
-                                itemRef.current?.scrollIntoView({ behavior: "smooth" });
-                            }}
+                            onClick={() => itemRef.current?.scrollIntoView({ behavior: "smooth" })}
                             className="absolute w-[24px] h-[24px] left-[48%] flex items-center justify-center top-0 animate-bounce"
                         >
                             <div className="h-full w-[24px] rotate-[-45deg] border-l border-b border-white" />
                         </button>
                     </div>
                 </div>
-            </main> 
+            </main>
 
             <section
                 ref={itemRef}
@@ -125,17 +137,18 @@ function Partners() {
 
                     <p className="text-sm md:text-base text-gray-600 leading-relaxed max-w-4xl mb-12">
                         {t("ourPartners.sectionDescription.intro")}{" "}
-                        {matchedGames.map((game, index) => (
-                            <button
-                                key={game.id}
-                                type="button"
-                                onClick={() => navigate(`/live-games/${game.id}`)}
-                                className="text-primary font-semibold hover:text-primary-dark inline"
-                            >
-                                {game.name}
-                                {index < matchedGames.length - 1 && <span>,&nbsp;</span>}
-                            </button>
-                        ))}
+                        {!loadingGames &&
+                            matchedGames.map((game, index) => (
+                                <button
+                                    key={game.id}
+                                    type="button"
+                                    onClick={() => navigate(`/live-games/${game.id}`)}
+                                    className="text-primary font-semibold hover:text-primary-dark inline"
+                                >
+                                    {game.name}
+                                    {index < matchedGames.length - 1 && <span>,&nbsp;</span>}
+                                </button>
+                            ))}
                         <Link to="/live-games" className="text-primary font-semibold ml-1">
                             {t("ourPartners.sectionDescription.andMore")}
                         </Link>
@@ -155,19 +168,21 @@ function Partners() {
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 w-full">
-                        {partners.map((partner) => (
+                        {partners.map((partner, idx) => (
                             <a
                                 key={partner.name}
                                 href={partner.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="bg-white border-2 border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 p-6 flex flex-col items-center rounded-lg"
+                                className="group bg-white border-2 border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 p-5 flex flex-col items-center rounded-xl"
                             >
-                                <img
+                                <FastImage
                                     src={partner.logo}
                                     alt={partner.name}
-                                    className="w-40 h-24 object-contain transition-transform duration-300 hover:scale-105"
-                                    loading="lazy"
+                                    fit="contain"
+                                    className="w-full h-[88px] md:h-[96px] flex items-center justify-center"
+                                    imgClassName="transition-transform duration-300 group-hover:scale-105"
+                                    priority={idx < 2}
                                 />
                                 <p className="text-gray-700 mt-4 font-semibold flex items-center gap-1">
                                     {partner.name}
@@ -179,10 +194,7 @@ function Partners() {
                 </div>
             </section>
 
-            <PrevNextNav
-                prevTo="/company/live-studios"
-                nextTo="/company/fair-gaming"
-            />
+            <PrevNextNav prevTo="/company/live-studios" nextTo="/company/fair-gaming" />
         </section>
     );
 }

@@ -1,47 +1,34 @@
-import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import React, { useEffect, useMemo, useRef, useCallback } from "react";
 import Slider from "react-slick";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { db } from "@/firebase";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
-import SEO from "@/components/SEO";
+import { useQuery } from "@tanstack/react-query";
+import { fetchLiveGames } from "../api/liveGames";
+import { useUiStore } from "../stores/useUiStore";
+import FastImage from "../components/FastImage";
+import SEO from "../components/SEO";
 
 function LiveGames() {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const touchStartPos = useRef({ x: 0, y: 0 });
+    const { isMobile640, setMobile640 } = useUiStore();
 
-    const [games, setGames] = useState([]);
-    const [isMobile, setIsMobile] = useState(false);
-    const [isLoading, setLoading] = useState(true);
+    const { data: games = [], isLoading } = useQuery({
+        queryKey: ["liveGames"],
+        queryFn: fetchLiveGames,
+    });
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
     useEffect(() => {
-        const unsub = onSnapshot(
-            query(collection(db, "liveGames"), orderBy("priority", "asc")),
-            (snapshot) => {
-                const data = snapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }));
-                setGames(data);
-                setLoading(false);
-            }
-        );
-
-        return () => unsub();
-    }, []);
-
-    useEffect(() => {
-        const check = () => setIsMobile(window.innerWidth < 640);
+        const check = () => setMobile640(window.innerWidth < 640);
         check();
         window.addEventListener("resize", check);
         return () => window.removeEventListener("resize", check);
-    }, []);
+    }, [setMobile640]);
 
     const handleTouchStart = useCallback((e) => {
         touchStartPos.current = {
@@ -83,6 +70,7 @@ function LiveGames() {
             const name = game?.translation?.[i18n.language]?.name || game?.name;
             const subtitle =
                 game?.translation?.[i18n.language]?.subtitle || game?.subtitle;
+            const img = game.imageThumbURL || game.imageURL;
 
             return (
                 <div
@@ -115,11 +103,11 @@ function LiveGames() {
                                 borderTopRightRadius: "2px",
                             }}
                         >
-                            <img
-                                src={game.imageURL}
+                            <FastImage
+                                src={img}
                                 alt={name || "Game"}
                                 className="w-full h-full object-cover object-top"
-                                loading="lazy"
+                                priority={index < 2}
                             />
                         </div>
 
@@ -164,11 +152,13 @@ function LiveGames() {
                     <div className="after:block after:w-[120px] after:h-[1px] after:bg-orange-500 after:mx-auto after:mt-4" />
                 </div>
 
-                {isMobile ? (
+                {isMobile640 ? (
                     <div className="pt-4 pb-4">
                         <Slider {...sliderSettings}>
                             {games.map((game, index) => (
-                                <div key={game.id || index}>{renderGameCard(game, index)}</div>
+                                <div key={game.id || index}>
+                                    {renderGameCard(game, index)}
+                                </div>
                             ))}
                         </Slider>
                     </div>

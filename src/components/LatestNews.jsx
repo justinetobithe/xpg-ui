@@ -2,36 +2,31 @@ import React, { useEffect, useMemo, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import { format, parseISO, isValid } from "date-fns";
+import { format } from "date-fns";
 import { useTranslation } from "react-i18next";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
-const stripHtml = (html) => {
-    if (!html) return "";
-    if (typeof window !== "undefined") {
-        const div = document.createElement("div");
-        div.innerHTML = html;
-        return (div.textContent || div.innerText || "").trim();
-    }
-    return html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-};
-
-const previewText = (html, max = 150) => {
-    const text = stripHtml(html);
-    return text.length > max ? text.slice(0, max) + "..." : text;
-};
+import { useQuery } from "@tanstack/react-query";
+import { fetchNews } from "@/api/news";
+import FastImage from "@/components/FastImage";
+import { previewText } from "@/utils/text";
 
 function LatestNews() {
     const { t, i18n } = useTranslation();
-    const [newsData, setNewsData] = useState([]);
+    const navigate = useNavigate();
+
+    const { data: newsData = [] } = useQuery({
+        queryKey: ["news"],
+        queryFn: fetchNews,
+        staleTime: 1000 * 60 * 5,
+    });
+
     const [filteredNews, setFilteredNews] = useState([]);
     const [years, setYears] = useState([]);
-    const [selectedYear, setSelectedYear] = useState(t("news.recent") || "Recent");
+    const [selectedYear, setSelectedYear] = useState(
+        t("news.recent") || "Recent"
+    );
     const [display, setDisplay] = useState("lg");
-    const navigate = useNavigate();
 
     useEffect(() => {
         const checkScreenSize = () => {
@@ -46,48 +41,18 @@ function LatestNews() {
         return () => window.removeEventListener("resize", checkScreenSize);
     }, []);
 
-    const getDateObject = (dateString) => {
-        if (!dateString) return null;
-        let date = parseISO(dateString);
-        if (isValid(date)) return date;
-        date = new Date(dateString);
-        return isValid(date) ? date : null;
-    };
-
     useEffect(() => {
-        const fetchNews = async () => {
-            try {
-                const snapshot = await getDocs(collection(db, "pages", "home", "news"));
-                const fetchedNews = snapshot.docs.map((docSnap) => ({
-                    id: docSnap.id,
-                    ...docSnap.data(),
-                }));
+        if (!newsData.length) return;
 
-                const uniqueNews = Array.from(
-                    new Map(fetchedNews.map((n) => [n.id, n])).values()
-                );
+        setFilteredNews(newsData);
 
-                const sortedNews = uniqueNews
-                    .filter((n) => n.date)
-                    .map((n) => ({ ...n, dateObject: getDateObject(n.date) }))
-                    .filter((n) => n.dateObject)
-                    .sort((a, b) => b.dateObject - a.dateObject);
+        const uniqueYears = [
+            ...new Set(newsData.map((n) => n.dateObject?.getFullYear())),
+        ].sort((a, b) => b - a);
 
-                setNewsData(sortedNews);
-                setFilteredNews(sortedNews);
-
-                const uniqueYears = [
-                    ...new Set(sortedNews.map((n) => n.dateObject?.getFullYear())),
-                ].sort((a, b) => b - a);
-
-                setYears([t("news.recent") || "Recent", ...uniqueYears]);
-            } catch (e) {
-                console.error("Error retrieving news:", e);
-            }
-        };
-
-        fetchNews();
-    }, [t]);
+        setYears([t("news.recent") || "Recent", ...uniqueYears]);
+        setSelectedYear(t("news.recent") || "Recent");
+    }, [newsData, t]);
 
     const handleYearFilter = (year) => {
         setSelectedYear(year);
@@ -95,7 +60,9 @@ function LatestNews() {
         setFilteredNews(
             year === recentLabel
                 ? newsData
-                : newsData.filter((n) => n.dateObject?.getFullYear() === Number(year))
+                : newsData.filter(
+                    (n) => n.dateObject?.getFullYear() === Number(year)
+                )
         );
     };
 
@@ -123,7 +90,8 @@ function LatestNews() {
         </button>
     );
 
-    const slidesToShow = display === "xl" || display === "lg" ? 3 : display === "md" ? 2 : 1;
+    const slidesToShow =
+        display === "xl" || display === "lg" ? 3 : display === "md" ? 2 : 1;
 
     const settings = useMemo(
         () => ({
@@ -167,8 +135,8 @@ function LatestNews() {
                                     key={y}
                                     onClick={() => handleYearFilter(y)}
                                     className={`px-3 py-1 rounded-full border text-sm ${selectedYear === y
-                                            ? "bg-primary text-white border-primary"
-                                            : "border-gray-300 text-gray-700 hover:border-primary"
+                                        ? "bg-primary text-white border-primary"
+                                        : "border-gray-300 text-gray-700 hover:border-primary"
                                         }`}
                                 >
                                     {y}
@@ -181,7 +149,7 @@ function LatestNews() {
                 <div className="relative group -mx-2">
                     {filteredNews.length > 0 ? (
                         <Slider key={display} {...settings}>
-                            {filteredNews.map((news) => {
+                            {filteredNews.map((news, idx) => {
                                 const newsTitle =
                                     news?.translation?.[i18n.language]?.title ||
                                     news?.title ||
@@ -198,11 +166,11 @@ function LatestNews() {
                                     <div key={news.id} className="px-2 md:px-4 mb-2">
                                         <div className="bg-white rounded-lg shadow-md overflow-hidden h-full flex flex-col">
                                             {news.imageURL && (
-                                                <img
-                                                    src={news.imageURL}
+                                                <FastImage
+                                                    src={news.imageThumbURL || news.imageURL}
                                                     alt={newsTitle || "news image"}
                                                     className="w-full h-48 object-cover"
-                                                    loading="lazy"
+                                                    priority={idx < 2}
                                                 />
                                             )}
                                             <div className="p-4 flex flex-col gap-2 flex-1 min-h-[280px]">

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import React, { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../firebase";
 import Loader from "./Loader";
@@ -206,6 +206,8 @@ function Navbar() {
 
     const [toggle, setToggle] = useState(false);
     const [isHovered, setIsHovered] = useState(null);
+    const hoverTimeoutRef = useRef(null);
+
     const [games, setGames] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const [mobileOpenKey, setMobileOpenKey] = useState(null);
@@ -324,6 +326,18 @@ function Navbar() {
         setMobileOpenKey((prev) => (prev === key ? null : key));
     }, []);
 
+    const handleEnter = (key) => {
+        if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+        setIsHovered(key);
+    };
+
+    const handleLeave = (key) => {
+        if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+        hoverTimeoutRef.current = setTimeout(() => {
+            setIsHovered((prev) => (prev === key ? null : prev));
+        }, 150);
+    };
+
     return (
         <>
             <div className="flex flex-row h-20 text-white text-sm items-center gap-4 font-medium transition-all ease-in-out duration-500 top-0 right-4 z-[1001] fixed">
@@ -349,8 +363,7 @@ function Navbar() {
 
                 <button
                     type="button"
-                    className={`${toggle ? "text-[#5f5f5f]" : "lg:text-[#5f5f5f] text-black"
-                        } text-3xl p-1 z-10 cursor-pointer select-none block sticky lg:hidden bg-[#fff6] rounded`}
+                    className={`${toggle ? "text-[#5f5f5f]" : "lg:text-[#5f5f5f] text-black"} text-3xl p-1 z-10 cursor-pointer select-none block sticky lg:hidden bg-[#fff6] rounded`}
                     onClick={() => {
                         setToggle((prev) => !prev);
                         setIsHovered(null);
@@ -362,8 +375,7 @@ function Navbar() {
             </div>
 
             <nav
-                className={`${toggle ? "bg-white h-screen fixed" : "bg-transparent absolute"
-                    } w-full lg:bg-white drop-shadow-md lg:fixed font-sans text-text z-[1000]`}
+                className={`${toggle ? "bg-white h-screen fixed" : "bg-transparent absolute"} w-full lg:bg-white drop-shadow-md lg:fixed font-sans text-text z-[1000]`}
             >
                 <div className="flex flex-row w-full h-20 items-center justify-between md:px-0 px-4">
                     <div className="flex flex-row h-full items-center w-full md:pl-2">
@@ -385,8 +397,8 @@ function Navbar() {
                                 <li
                                     className="relative xl:px-6 px-3 border-r border-r-primary cursor-pointer"
                                     key={item.key}
-                                    onMouseEnter={() => setIsHovered(item.key)}
-                                    onMouseLeave={() => setIsHovered(null)}
+                                    onMouseEnter={() => handleEnter(item.key)}
+                                    onMouseLeave={() => handleLeave(item.key)}
                                 >
                                     {item.isLink ? (
                                         <a
@@ -412,38 +424,46 @@ function Navbar() {
                                     )}
 
                                     {item.contents.length > 0 && isHovered === item.key && (
-                                        <div className="absolute left-[calc(50%-100px)] mt-[10%] min-w-[220px] bg-[#f0f3f2] drop-shadow-sm border border-[#e4e4e4] z-[1000] will-change-transform">
-                                            {item.key !== "liveGames" ? (
-                                                item.contents.map((i) => (
-                                                    <button
-                                                        key={i.id}
-                                                        type="button"
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            navigate(`${item.link}/${i.id}`);
-                                                        }}
-                                                        className="uppercase text-sm font-medium py-3 px-4 border-b border-[#e4e4e4] hover:bg-[#e4e4e4] w-full text-left"
-                                                    >
-                                                        {i.name}
-                                                    </button>
-                                                ))
-                                            ) : (
-                                                <div className="max-h-[280px] w-[440px] flex flex-row flex-wrap overflow-auto">
-                                                    {games.map((i) => (
+                                        <div
+                                            onMouseEnter={() => handleEnter(item.key)}
+                                            onMouseLeave={() => handleLeave(item.key)}
+                                            className="absolute left-1/2 -translate-x-1/2 top-full min-w-[220px] z-[1000]"
+                                        >
+                                            <div className="mt-0 bg-[#f0f3f2] drop-shadow-sm border border-[#e4e4e4]">
+                                                {item.key !== "liveGames" ? (
+                                                    item.contents.map((i) => (
                                                         <button
                                                             key={i.id}
                                                             type="button"
                                                             onClick={(e) => {
                                                                 e.stopPropagation();
-                                                                navigate(`${item.link}/${i.id}`, { relative: true });
+                                                                navigate(`${item.link}/${i.id}`);
+                                                                setIsHovered(null);
                                                             }}
-                                                            className="w-[220px] uppercase text-sm font-medium py-3 px-4 border-b border-l border-[#e4e4e4] hover:bg-[#e4e4e4] text-left"
+                                                            className="uppercase text-sm font-medium py-3 px-4 border-b border-[#e4e4e4] hover:bg-[#e4e4e4] w-full text-left"
                                                         >
-                                                            {i?.translation?.[i18n.language]?.name || i?.name}
+                                                            {i.name}
                                                         </button>
-                                                    ))}
-                                                </div>
-                                            )}
+                                                    ))
+                                                ) : (
+                                                    <div className="max-h-[280px] w-[440px] flex flex-row flex-wrap overflow-auto">
+                                                        {games.map((i) => (
+                                                            <button
+                                                                key={i.id}
+                                                                type="button"
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    navigate(`${item.link}/${i.id}`, { relative: true });
+                                                                    setIsHovered(null);
+                                                                }}
+                                                                className="w-[220px] uppercase text-sm font-medium py-3 px-4 border-b border-l border-[#e4e4e4] hover:bg-[#e4e4e4] text-left"
+                                                            >
+                                                                {i?.translation?.[i18n.language]?.name || i?.name}
+                                                            </button>
+                                                        ))}
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
                                     )}
                                 </li>

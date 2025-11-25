@@ -1,6 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { db } from "@/firebase";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { CheckSquare } from "lucide-react";
@@ -11,23 +9,16 @@ import ctaBg from "@/assets/images/solutions/cta.jpg";
 
 import SEO from "@/components/SEO";
 import PrevNextNav from "@/components/PrevNextNav";
+import LazyBackground from "@/components/LazyBackground";
+import { fetchLiveGames } from "@/api/liveGames";
 
 function ApiIntegration() {
     const { t } = useTranslation();
     const [games, setGames] = useState([]);
+    const [loadingGames, setLoadingGames] = useState(true);
     const [display, setDisplay] = useState("lg");
     const [isMobile, setIsMobile] = useState(false);
     const itemRef = useRef(null);
-
-    useEffect(() => {
-        const unsubscribe = onSnapshot(
-            query(collection(db, "liveGames"), orderBy("priority", "asc")),
-            (snapshot) => {
-                setGames(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-            }
-        );
-        return () => unsubscribe();
-    }, []);
 
     const checkScreenSize = useCallback(() => {
         const width = window.innerWidth;
@@ -46,8 +37,49 @@ function ApiIntegration() {
     }, [checkScreenSize]);
 
     useEffect(() => {
+        let alive = true;
+        setLoadingGames(true);
+        fetchLiveGames()
+            .then((data) => {
+                if (!alive) return;
+                setGames(data || []);
+                setLoadingGames(false);
+            })
+            .catch(() => {
+                if (!alive) return;
+                setGames([]);
+                setLoadingGames(false);
+            });
+        return () => {
+            alive = false;
+        };
+    }, []);
+
+    useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    useEffect(() => {
+        [heroDesktop, heroMobile, ctaBg].forEach((src) => {
+            const img = new Image();
+            img.src = src;
+        });
+    }, []);
+
+    const heroBg = useMemo(
+        () => (display === "sm" || display === "md" ? heroMobile : heroDesktop),
+        [display]
+    );
+
+    const xpgApiTitle = t("apiIntegration.xpgLiveDealerCasinoSystem.apiIntegration.title");
+    const partnersTitle = t("apiIntegration.xpgLiveDealerCasinoSystem.partners.title");
+    const virtualGamesTitle = t("apiIntegration.xpgLiveDealerCasinoSystem.virtualGames.title");
+
+    const parseLeadingNumber = (str) =>
+        (str.match(/^(\d+\+?)/) || ["", ""])[1];
+
+    const stripLeadingNumber = (str) =>
+        str.replace(/^(\d+\+?)/, "").trim().toUpperCase();
 
     return (
         <section className="w-full flex flex-col text-text pb-12 font-sans">
@@ -59,17 +91,16 @@ function ApiIntegration() {
                 keywords="XPG API integration, live casino API, seamless wallet, balance transfer, live dealer integration"
             />
 
-            <main
-                className="relative w-full bg-no-repeat bg-top bg-cover md:h-[70vh] h-[100vh] bg-center flex items-center"
-                style={{
-                    backgroundImage: `url(${display === "sm" ? heroMobile : heroDesktop})`,
-                }}
-            >
+            <main className="relative w-full md:h-[70vh] h-[100vh] flex items-center overflow-hidden bg-black">
+                <LazyBackground
+                    imageUrl={heroBg}
+                    className="absolute inset-0 bg-no-repeat bg-top bg-cover bg-center w-full h-full"
+                />
                 <div
                     className="w-full h-full absolute"
                     style={{
                         background:
-                            "linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 34%, rgba(0,  0, 0, 0) 100%)",
+                            "linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 34%, rgba(0, 0, 0, 0) 100%)",
                     }}
                 />
                 <div className="container w-full h-full flex md:justify-normal justify-center relative mt-16">
@@ -130,15 +161,10 @@ function ApiIntegration() {
                                     <div className="bg-[#f5f5f5] px-4 py-6 text-center flex items-center justify-center min-h-[140px]">
                                         <div>
                                             <div className="text-primary font-extrabold text-4xl leading-none">
-                                                {(t("apiIntegration.xpgLiveDealerCasinoSystem.apiIntegration.title").match(
-                                                    /^(\d+\+?)/
-                                                ) || ["", ""])[1]}
+                                                {parseLeadingNumber(xpgApiTitle)}
                                             </div>
                                             <div className="mt-2 text-xs font-semibold tracking-wide text-gray-900">
-                                                {t("apiIntegration.xpgLiveDealerCasinoSystem.apiIntegration.title")
-                                                    .replace(/^(\d+\+?)/, "")
-                                                    .trim()
-                                                    .toUpperCase()}
+                                                {stripLeadingNumber(xpgApiTitle)}
                                             </div>
                                         </div>
                                     </div>
@@ -146,7 +172,7 @@ function ApiIntegration() {
                                     <div className="bg-[#dfe7e4] px-4 py-6 text-center flex items-center justify-center min-h-[140px]">
                                         <div>
                                             <div className="text-primary font-extrabold text-4xl leading-none">
-                                                {games?.length || 0}
+                                                {loadingGames ? "…" : games.length}
                                             </div>
                                             <div className="mt-2 text-xs font-semibold tracking-wide text-gray-900">
                                                 {t("apiIntegration.xpgLiveDealerCasinoSystem.games.title").toUpperCase()}
@@ -157,15 +183,10 @@ function ApiIntegration() {
                                     <div className="bg-[#e9efed] px-4 py-6 text-center flex items-center justify-center min-h-[140px]">
                                         <div>
                                             <div className="text-primary font-extrabold text-4xl leading-none">
-                                                {(t("apiIntegration.xpgLiveDealerCasinoSystem.partners.title").match(
-                                                    /^(\d+\+?)/
-                                                ) || ["", ""])[1]}
+                                                {parseLeadingNumber(partnersTitle)}
                                             </div>
                                             <div className="mt-2 text-xs font-semibold tracking-wide text-gray-900">
-                                                {t("apiIntegration.xpgLiveDealerCasinoSystem.partners.title")
-                                                    .replace(/^(\d+\+?)/, "")
-                                                    .trim()
-                                                    .toUpperCase()}
+                                                {stripLeadingNumber(partnersTitle)}
                                             </div>
                                         </div>
                                     </div>
@@ -173,15 +194,10 @@ function ApiIntegration() {
                                     <div className="bg-[#f3f7f5] px-4 py-6 text-center flex items-center justify-center min-h-[140px]">
                                         <div>
                                             <div className="text-primary font-extrabold text-4xl leading-none">
-                                                {(t("apiIntegration.xpgLiveDealerCasinoSystem.virtualGames.title").match(
-                                                    /^(\d+\+?)/
-                                                ) || ["", ""])[1]}
+                                                {parseLeadingNumber(virtualGamesTitle)}
                                             </div>
                                             <div className="mt-2 text-xs font-semibold tracking-wide text-gray-900">
-                                                {t("apiIntegration.xpgLiveDealerCasinoSystem.virtualGames.title")
-                                                    .replace(/^(\d+\+?)/, "")
-                                                    .trim()
-                                                    .toUpperCase()}
+                                                {stripLeadingNumber(virtualGamesTitle)}
                                             </div>
                                         </div>
                                     </div>
@@ -191,7 +207,7 @@ function ApiIntegration() {
                             <div className="hidden md:grid grid-cols-2 gap-0 overflow-hidden rounded-md">
                                 <div className="bg-[#f5f5f5] p-8 md:p-12 text-center flex flex-col items-center justify-center md:min-h-[220px]">
                                     <div className="text-primary font-extrabold uppercase text-xl">
-                                        {t("apiIntegration.xpgLiveDealerCasinoSystem.apiIntegration.title")}
+                                        {xpgApiTitle}
                                     </div>
                                     <p className="mt-4 text-base text-gray-800 max-w-[520px]">
                                         {t("apiIntegration.xpgLiveDealerCasinoSystem.apiIntegration.description")}
@@ -200,11 +216,11 @@ function ApiIntegration() {
 
                                 <div className="bg-[#dfe7e4] p-8 md:p-12 text-center flex flex-col items-center justify-center md:min-h-[220px]">
                                     <div className="text-primary font-extrabold text-xl">
-                                        {games?.length || 0}{" "}
+                                        {loadingGames ? "…" : games.length}{" "}
                                         {t("apiIntegration.xpgLiveDealerCasinoSystem.games.title")}
                                     </div>
                                     <p className="mt-4 text-base text-gray-800 max-w-[620px]">
-                                        {games?.length
+                                        {!loadingGames && games.length
                                             ? games.map((game, i) => (
                                                 <span key={game.id}>
                                                     {game.name}
@@ -217,7 +233,7 @@ function ApiIntegration() {
 
                                 <div className="bg-[#e9efed] p-8 md:p-12 text-center flex flex-col items-center justify-center md:min-h-[220px]">
                                     <div className="text-primary font-extrabold text-xl">
-                                        {t("apiIntegration.xpgLiveDealerCasinoSystem.partners.title")}
+                                        {partnersTitle}
                                     </div>
                                     <p className="mt-4 text-base text-gray-800 max-w-[620px]">
                                         BetSoft, 1xBet, EveryMatrix, Pronet Gaming, and{" "}
@@ -230,7 +246,7 @@ function ApiIntegration() {
 
                                 <div className="bg-[#f3f7f5] p-8 md:p-12 text-center flex flex-col items-center justify-center md:min-h-[220px]">
                                     <div className="text-primary font-extrabold text-xl">
-                                        {t("apiIntegration.xpgLiveDealerCasinoSystem.virtualGames.title")}
+                                        {virtualGamesTitle}
                                     </div>
                                     <p className="mt-4 text-base text-gray-800 max-w-[620px]">
                                         {t("apiIntegration.xpgLiveDealerCasinoSystem.virtualGames.description")}
@@ -239,37 +255,40 @@ function ApiIntegration() {
                             </div>
                         </div>
 
-                        <div
-                            className="w-full h-full bg-center bg-fixed mt-10 rounded-xl overflow-hidden"
-                            style={{ backgroundImage: `url(${ctaBg})` }}
-                        >
-                            <div
-                                style={{
-                                    background:
-                                        "linear-gradient(to top, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 34%, rgba(255, 255, 255, 0.4) 100%)",
-                                }}
-                                className="flex flex-col w-full h-full justify-center items-center py-6 px-4"
-                            >
-                                <h1 className="lg:text-3xl md:text-2xl text-xl uppercase mt-2 text-center">
-                                    {t("apiIntegration.integrationProcess.title.pre")}{" "}
-                                    <b className="font-extrabold">
-                                        {t("apiIntegration.integrationProcess.title.highlight")}:
-                                    </b>
-                                </h1>
+                        <div className="w-full mt-10 rounded-xl overflow-hidden">
+                            <div className="relative w-full min-h-[260px] md:min-h-[320px]">
+                                <LazyBackground
+                                    imageUrl={ctaBg}
+                                    className="absolute inset-0 w-full h-full bg-center bg-cover"
+                                />
+                                <div
+                                    style={{
+                                        background:
+                                            "linear-gradient(to top, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.65) 34%, rgba(255, 255, 255, 0.45) 100%)",
+                                    }}
+                                    className="relative flex flex-col w-full h-full justify-center items-center py-10 px-4"
+                                >
+                                    <h1 className="lg:text-3xl md:text-2xl text-xl uppercase mt-2 text-center">
+                                        {t("apiIntegration.integrationProcess.title.pre")}{" "}
+                                        <b className="font-extrabold">
+                                            {t("apiIntegration.integrationProcess.title.highlight")}:
+                                        </b>
+                                    </h1>
 
-                                <div className="flex flex-col w-full h-full text-sm md:text-base lg:max-w-[780px] md:max-w-[614px] mt-6 mb-4">
-                                    <ul className="space-y-2">
-                                        {t("apiIntegration.integrationProcess.steps", {
-                                            returnObjects: true,
-                                        }).map((step, index) => (
-                                            <li key={index} className="flex items-start">
-                                                <CheckSquare className="w-4 h-4 mr-2 mt-1 text-[#ff7f50] shrink-0" />
-                                                <span className="text-sm font-regular md:text-base">
-                                                    {step}
-                                                </span>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <div className="flex flex-col w-full h-full text-sm md:text-base lg:max-w-[780px] md:max-w-[614px] mt-6">
+                                        <ul className="space-y-2">
+                                            {(t("apiIntegration.integrationProcess.steps", {
+                                                returnObjects: true,
+                                            }) || []).map((step, index) => (
+                                                <li key={index} className="flex items-start">
+                                                    <CheckSquare className="w-4 h-4 mr-2 mt-1 text-[#ff7f50] shrink-0" />
+                                                    <span className="text-sm font-regular md:text-base">
+                                                        {step}
+                                                    </span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -291,9 +310,9 @@ function ApiIntegration() {
                                 </span>
 
                                 <ul className="md:text-base text-sm space-y-2">
-                                    {t("apiIntegration.walletOptions.seamlessWallet.items", {
+                                    {(t("apiIntegration.walletOptions.seamlessWallet.items", {
                                         returnObjects: true,
-                                    }).map((item, index) => (
+                                    }) || []).map((item, index) => (
                                         <li key={index} className="flex items-start">
                                             <CheckSquare className="w-4 h-4 mr-2 mt-1 text-[#ff7f50] shrink-0" />
                                             <span className="text-sm font-regular md:text-base">
@@ -323,9 +342,9 @@ function ApiIntegration() {
                                 </span>
 
                                 <ul className="md:text-base text-sm space-y-2">
-                                    {t("apiIntegration.walletOptions.balanceTransfer.items", {
+                                    {(t("apiIntegration.walletOptions.balanceTransfer.items", {
                                         returnObjects: true,
-                                    }).map((item, index) => (
+                                    }) || []).map((item, index) => (
                                         <li key={index} className="flex items-start">
                                             <CheckSquare className="w-4 h-4 mr-2 mt-1 text-[#ff7f50] shrink-0" />
                                             <span className="text-sm font-regular md:text-base">

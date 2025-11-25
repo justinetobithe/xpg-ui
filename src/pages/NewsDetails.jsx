@@ -1,6 +1,4 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
-import { db } from "@/firebase";
 import { useNavigate, useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
 import { format, parseISO, isValid } from "date-fns";
@@ -9,14 +7,22 @@ import { useTranslation } from "react-i18next";
 import SEO from "@/components/SEO";
 import Loader from "@/components/Loader";
 import Newsletter from "@/components/Newsletter";
+import FastImage from "@/components/FastImage";
+
+import { useQuery } from "@tanstack/react-query";
+import { fetchNews } from "@/api/news";
 
 function NewsDetails() {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const { slug } = useParams();
 
-    const [isLoading, setLoading] = useState(true);
-    const [news, setNews] = useState([]);
+    const { data: news = [], isLoading } = useQuery({
+        queryKey: ["news"],
+        queryFn: fetchNews,
+        staleTime: 1000 * 60 * 5,
+    });
+
     const [selectedNews, setSelectedNews] = useState(slug || null);
 
     useEffect(() => {
@@ -27,29 +33,10 @@ function NewsDetails() {
         window.scrollTo(0, 0);
     }, [selectedNews]);
 
-    useEffect(() => {
-        setLoading(true);
-        const unsub = onSnapshot(
-            query(collection(db, "pages", "home", "news"), orderBy("date", "desc")),
-            (snapshot) => {
-                const fetched = snapshot.docs.map((d) => ({
-                    id: d.id,
-                    ...d.data(),
-                }));
-                setNews(fetched);
-                if (!selectedNews && fetched.length) setSelectedNews(fetched[0].id);
-                setLoading(false);
-            },
-            () => setLoading(false)
-        );
-
-        return () => unsub();
-    }, [selectedNews]);
-
-    const newsData = useMemo(
-        () => news.find((n) => n.id === selectedNews) || null,
-        [news, selectedNews]
-    );
+    const newsData = useMemo(() => {
+        if (!selectedNews && news.length) return news[0];
+        return news.find((n) => n.id === selectedNews) || null;
+    }, [news, selectedNews]);
 
     const getDateObject = (dateString) => {
         if (!dateString) return null;
@@ -92,6 +79,8 @@ function NewsDetails() {
         return doc.body.innerHTML;
     };
 
+    if (isLoading || !newsData) return <Loader />;
+
     const title =
         newsData?.translation?.[i18n.language]?.title ||
         newsData?.title ||
@@ -111,9 +100,7 @@ function NewsDetails() {
     const dateObj = getDateObject(newsData?.date);
     const dateLabel = dateObj ? format(dateObj, "MMM dd, yyyy") : "";
 
-    if (isLoading || !newsData) return <Loader />;
-
-    const currentIndex = news.findIndex((n) => n.id === selectedNews);
+    const currentIndex = news.findIndex((n) => n.id === newsData.id);
     const prevItem = currentIndex > 0 ? news[currentIndex - 1] : null;
     const nextItem =
         currentIndex >= 0 && currentIndex < news.length - 1
@@ -125,7 +112,7 @@ function NewsDetails() {
             <SEO
                 title={`${title} – XPG News`}
                 description={descriptionPlain}
-                url={`/news/${selectedNews}`}
+                url={`/news/${newsData.id}`}
                 image={newsData.imageURL}
                 keywords="XPG news, live casino news, XPG updates"
             />
@@ -150,11 +137,11 @@ function NewsDetails() {
 
                             <article className="w-full">
                                 {newsData.imageURL && (
-                                    <img
-                                        src={newsData.imageURL}
+                                    <FastImage
+                                        src={newsData.imageThumbURL || newsData.imageURL}
                                         alt={title}
                                         className="w-full max-h-[320px] object-cover mb-5 rounded-lg"
-                                        loading="lazy"
+                                        priority
                                     />
                                 )}
 
@@ -184,9 +171,9 @@ function NewsDetails() {
 
                             <div className="space-y-4">
                                 {news
-                                    .filter((item) => item.id !== selectedNews)
+                                    .filter((item) => item.id !== newsData.id)
                                     .slice(0, 5)
-                                    .map((item) => {
+                                    .map((item, idx) => {
                                         const sideTitle =
                                             item?.translation?.[i18n.language]?.title ||
                                             item?.title ||
@@ -204,11 +191,11 @@ function NewsDetails() {
                                                 onClick={() => navigate(`/news/${item.id}`)}
                                             >
                                                 {item.imageURL && (
-                                                    <img
-                                                        src={item.imageURL}
+                                                    <FastImage
+                                                        src={item.imageThumbURL || item.imageURL}
                                                         alt={sideTitle}
                                                         className="w-[100px] h-[80px] object-cover rounded"
-                                                        loading="lazy"
+                                                        priority={idx < 2}
                                                     />
                                                 )}
                                                 <div className="flex-1">

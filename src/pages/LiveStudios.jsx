@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation } from "swiper/modules";
 import "swiper/css";
+
 import {
     ourLiveStudiosImg1,
     ourLiveStudiosImg2,
@@ -15,19 +16,22 @@ import {
     musicRepeat,
     personBadge,
 } from "@/utils/images";
+
 import heroMobile from "@/assets/images/company/european-sophisticated-mobile.jpg";
 import heroDesktop from "@/assets/images/company/european-sophisticated.jpg";
 import casinoImage from "@/assets/images/company/casino-0648.jpg";
 import studioImage from "@/assets/images/company/our-studio.jpg";
 
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { db } from "@/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { CheckSquare } from "lucide-react";
 
 import SEO from "@/components/SEO";
 import PrevNextNav from "@/components/PrevNextNav";
+import FastImage from "@/components/FastImage";
+import LazyBackground from "@/components/LazyBackground";
+
+import { fetchLiveGames } from "@/api/liveGames";
 
 function LiveStudios() {
     const { t } = useTranslation();
@@ -38,37 +42,48 @@ function LiveStudios() {
     const [mainSwiper, setMainSwiper] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
     const [games, setGames] = useState([]);
+    const [loadingGames, setLoadingGames] = useState(true);
 
-    const images = [
-        ourLiveStudiosImg1,
-        ourLiveStudiosImg2,
-        ourLiveStudiosImg3,
-        ourLiveStudiosImg4,
-        ourLiveStudiosImg5,
-        ourLiveStudiosImg6,
-        ourLiveStudiosImg7,
-    ];
+    const images = useMemo(
+        () => [
+            ourLiveStudiosImg1,
+            ourLiveStudiosImg2,
+            ourLiveStudiosImg3,
+            ourLiveStudiosImg4,
+            ourLiveStudiosImg5,
+            ourLiveStudiosImg6,
+            ourLiveStudiosImg7,
+        ],
+        []
+    );
 
     useEffect(() => {
-        const unsub = onSnapshot(
-            query(collection(db, "liveGames"), orderBy("priority", "asc")),
-            (snapshot) => {
-                setGames(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-            }
-        );
-        return () => unsub();
+        let alive = true;
+        setLoadingGames(true);
+        fetchLiveGames()
+            .then((data) => {
+                if (!alive) return;
+                setGames(data || []);
+                setLoadingGames(false);
+            })
+            .catch(() => {
+                if (!alive) return;
+                setGames([]);
+                setLoadingGames(false);
+            });
+        return () => {
+            alive = false;
+        };
     }, []);
 
     useEffect(() => {
         const check = () => {
             const w = window.innerWidth;
-
             if (w > 1024) setDisplay("xl");
             else if (w > 768) setDisplay("lg");
             else if (w > 425) setDisplay("md");
             else setDisplay("sm");
         };
-
         check();
         window.addEventListener("resize", check);
         return () => window.removeEventListener("resize", check);
@@ -78,13 +93,26 @@ function LiveStudios() {
         window.scrollTo(0, 0);
     }, []);
 
-    const heroBg = display === "sm" ? heroMobile : heroDesktop;
+    useEffect(() => {
+        [heroDesktop, heroMobile, casinoImage, studioImage, ...images.slice(0, 2)].forEach(
+            (src) => {
+                const img = new Image();
+                img.src = src;
+            }
+        );
+    }, [images]);
+
+    const heroBg = display === "sm" || display === "md" ? heroMobile : heroDesktop;
 
     const popularGames = ["Blackjack", "Roulette", "Baccarat"];
-    const matchedGames = games.filter((g) =>
-        popularGames.some((name) =>
-            g.name?.toLowerCase().includes(name.toLowerCase())
-        )
+    const matchedGames = useMemo(
+        () =>
+            (games || []).filter((g) =>
+                popularGames.some((name) =>
+                    (g.name || "").toLowerCase().includes(name.toLowerCase())
+                )
+            ),
+        [games]
     );
 
     return (
@@ -97,10 +125,11 @@ function LiveStudios() {
                 keywords="XPG live studios, live casino studios, European studio, live dealer studio, XProGaming studios, live casino streaming, professional dealers"
             />
 
-            <main
-                className="relative w-full bg-no-repeat bg-top bg-cover md:h-[70vh] h-[100vh] bg-center flex items-center"
-                style={{ backgroundImage: `url(${heroBg})` }}
-            >
+            <main className="relative w-full md:h-[70vh] h-[100vh] flex items-center overflow-hidden bg-black">
+                <LazyBackground
+                    imageUrl={heroBg}
+                    className="absolute inset-0 bg-no-repeat bg-top bg-cover bg-center w-full h-full"
+                />
                 <div
                     className="w-full h-full absolute"
                     style={{
@@ -122,9 +151,7 @@ function LiveStudios() {
                     <div className="flex items-center justify-start md:hidden h-full absolute top-1/2 left-1/2 z-10">
                         <button
                             type="button"
-                            onClick={() => {
-                                itemRef.current?.scrollIntoView({ behavior: "smooth" });
-                            }}
+                            onClick={() => itemRef.current?.scrollIntoView({ behavior: "smooth" })}
                             className="absolute w-[24px] h-[24px] left-[48%] flex items-center justify-center top-0 animate-bounce"
                         >
                             <div className="h-full w-[24px] rotate-[-45deg] border-l border-b-white border-l-white border-b" />
@@ -182,10 +209,12 @@ function LiveStudios() {
                             </div>
                         </div>
 
-                        <div
-                            className="lg:w-[45%] w-full rounded-md shadow-md bg-center bg-cover border-4 border-primary aspect-[4/3]"
-                            style={{ backgroundImage: `url(${casinoImage})` }}
-                        />
+                        <div className="lg:w-[45%] w-full rounded-md shadow-md border-4 border-primary aspect-[4/3] overflow-hidden bg-black">
+                            <LazyBackground
+                                imageUrl={casinoImage}
+                                className="w-full h-full bg-center bg-cover"
+                            />
+                        </div>
                     </div>
                 </div>
             </section>
@@ -207,11 +236,11 @@ function LiveStudios() {
                                         key={idx}
                                         className="flex items-center justify-center bg-black"
                                     >
-                                        <img
+                                        <FastImage
                                             src={image}
-                                            loading="lazy"
-                                            className="w-full h-full object-cover border-4 border-primary"
                                             alt=""
+                                            className="w-full h-full object-cover border-4 border-primary"
+                                            priority={idx === 0}
                                         />
                                     </SwiperSlide>
                                 ))}
@@ -241,22 +270,21 @@ function LiveStudios() {
                                             <button
                                                 type="button"
                                                 onClick={() => {
-                                                    if (mainSwiper) {
-                                                        mainSwiper.slideTo(idx);
-                                                    }
+                                                    mainSwiper?.slideTo(idx);
                                                     setActiveIndex(idx);
                                                 }}
                                                 className={`h-[70px] w-[105px] transition-opacity ${isActive
-                                                    ? "opacity-100"
-                                                    : "opacity-70 hover:opacity-100"
+                                                        ? "opacity-100"
+                                                        : "opacity-70 hover:opacity-100"
                                                     }`}
                                             >
-                                                <img
+                                                <FastImage
                                                     src={image}
-                                                    className={`h-full w-full object-cover rounded border-4 ${isActive ? "border-orange-500" : "border-primary"
-                                                        }`}
-                                                    loading="lazy"
                                                     alt=""
+                                                    className={`h-full w-full object-cover rounded border-4 ${isActive
+                                                            ? "border-orange-500"
+                                                            : "border-primary"
+                                                        }`}
                                                 />
                                             </button>
                                         </SwiperSlide>
@@ -268,36 +296,21 @@ function LiveStudios() {
                         <div className="lg:w-[55%] w-full flex flex-col justify-start">
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 {[
-                                    {
-                                        img: houseRepeat,
-                                        key: "renovatedStudios",
-                                        alt: "Renovated studios",
-                                    },
-                                    {
-                                        img: bulbSettings,
-                                        key: "cuttingEdgeTech",
-                                        alt: "Cutting edge technologies",
-                                    },
-                                    {
-                                        img: musicRepeat,
-                                        key: "hdStreaming",
-                                        alt: "Round-the-clock HD Streaming",
-                                    },
-                                    {
-                                        img: personBadge,
-                                        key: "femaleDealers",
-                                        alt: "Professional female dealers",
-                                    },
+                                    { img: houseRepeat, key: "renovatedStudios", alt: "Renovated studios" },
+                                    { img: bulbSettings, key: "cuttingEdgeTech", alt: "Cutting edge technologies" },
+                                    { img: musicRepeat, key: "hdStreaming", alt: "Round-the-clock HD Streaming" },
+                                    { img: personBadge, key: "femaleDealers", alt: "Professional female dealers" },
                                 ].map(({ img, key, alt }, idx) => (
                                     <div
                                         key={idx}
                                         className="group rounded-xl border-4 border-primary bg-white p-4 shadow-sm hover:shadow-md transition flex flex-col items-center text-center"
                                     >
                                         <div className="w-full flex items-center justify-center">
-                                            <img
+                                            <FastImage
                                                 src={img}
                                                 alt={alt}
                                                 className="block h-20 w-auto object-contain rounded"
+                                                priority={idx < 2}
                                             />
                                         </div>
 
@@ -335,31 +348,31 @@ function LiveStudios() {
                             </h3>
                             <p className="text-justify md:text-base text-sm">
                                 {t("liveStudios.section2.tailoredStudios.descriptionPrefix")}{" "}
-                                {matchedGames.map((game, index) => (
-                                    <button
-                                        key={game.id}
-                                        type="button"
-                                        onClick={() => navigate(`/live-games/${game.id}`)}
-                                        className="text-primary font-semibold hover:text-primary inline"
-                                    >
-                                        {game.name}
-                                        {index < matchedGames.length - 1 && <span>, </span>}
-                                    </button>
-                                ))}
-                                <Link
-                                    to="/live-games"
-                                    className="text-primary font-semibold ml-1"
-                                >
+                                {!loadingGames &&
+                                    matchedGames.map((game, index) => (
+                                        <button
+                                            key={game.id}
+                                            type="button"
+                                            onClick={() => navigate(`/live-games/${game.id}`)}
+                                            className="text-primary font-semibold hover:text-primary inline"
+                                        >
+                                            {game.name}
+                                            {index < matchedGames.length - 1 && <span>, </span>}
+                                        </button>
+                                    ))}
+                                <Link to="/live-games" className="text-primary font-semibold ml-1">
                                     {t("liveStudios.section2.tailoredStudios.andMore")}
                                 </Link>
                                 {t("liveStudios.section2.tailoredStudios.descriptionSuffix")}
                             </p>
                         </div>
 
-                        <div
-                            className="md:w-1/2 rounded-md min-h-[360px] md:min-h-[460px] lg:min-h-[520px] shadow bg-cover bg-center border-4 border-primary"
-                            style={{ backgroundImage: `url(${studioImage})` }}
-                        />
+                        <div className="md:w-1/2 rounded-md min-h-[360px] md:min-h-[460px] lg:min-h-[520px] shadow border-4 border-primary overflow-hidden bg-black">
+                            <LazyBackground
+                                imageUrl={studioImage}
+                                className="w-full h-full bg-cover bg-center"
+                            />
+                        </div>
                     </div>
 
                     <p className="mt-8 text-justify md:text-base text-sm">

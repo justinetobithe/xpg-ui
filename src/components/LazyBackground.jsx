@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 
 const LazyBackground = ({ imageUrl, className }) => {
     const [loaded, setLoaded] = useState(false);
-    const ref = useRef();
+    const ref = useRef(null);
 
     useEffect(() => {
+        if (!ref.current) return;
+
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
@@ -26,7 +28,7 @@ const LazyBackground = ({ imageUrl, className }) => {
             style={{
                 backgroundImage: loaded ? `url(${imageUrl})` : "none",
             }}
-        ></div>
+        />
     );
 };
 

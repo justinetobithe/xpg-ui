@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 import SEO from "@/components/SEO";
 import PrevNextNav from "@/components/PrevNextNav";
+import LazyBackground from "@/components/LazyBackground";
 
 import heroMobile from "@/assets/images/company/casino-0280-mobile.png";
 import heroDesktop from "@/assets/images/company/casino-0280.png";
@@ -14,13 +15,16 @@ function FairGaming() {
     const [collapse, setCollapse] = useState([]);
     const itemRef = useRef(null);
 
-    const contents = t("fairGaming.items", { returnObjects: true }) || [];
+    const contents = useMemo(
+        () => t("fairGaming.items", { returnObjects: true }) || [],
+        [t]
+    );
 
-    const handleToggle = (id) => {
+    const handleToggle = useCallback((id) => {
         setCollapse((prev) =>
             prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
         );
-    };
+    }, []);
 
     useEffect(() => {
         const checkScreenSize = () => {
@@ -40,7 +44,14 @@ function FairGaming() {
         window.scrollTo(0, 0);
     }, []);
 
-    const heroBg = display === "sm" ? heroMobile : heroDesktop;
+    useEffect(() => {
+        [heroDesktop, heroMobile].forEach((src) => {
+            const img = new Image();
+            img.src = src;
+        });
+    }, []);
+
+    const heroBg = display === "sm" || display === "md" ? heroMobile : heroDesktop;
 
     return (
         <section className="w-full flex flex-col text-text pb-12 font-sans">
@@ -52,10 +63,11 @@ function FairGaming() {
                 keywords="fair gaming, certified RNG, live casino fairness, XPG security, game audits, responsible gaming"
             />
 
-            <main
-                className="relative w-full bg-no-repeat bg-top bg-cover md:h-[70vh] h-[100vh] bg-center flex items-center"
-                style={{ backgroundImage: `url(${heroBg})` }}
-            >
+            <main className="relative w-full md:h-[70vh] h-[100vh] flex items-center overflow-hidden bg-black">
+                <LazyBackground
+                    imageUrl={heroBg}
+                    className="absolute inset-0 bg-no-repeat bg-top bg-cover bg-center w-full h-full"
+                />
                 <div
                     className="w-full h-full absolute"
                     style={{
@@ -77,9 +89,7 @@ function FairGaming() {
                     <div className="flex items-center justify-start md:hidden h-full absolute top-1/2 left-1/2 z-10">
                         <button
                             type="button"
-                            onClick={() => {
-                                itemRef.current?.scrollIntoView({ behavior: "smooth" });
-                            }}
+                            onClick={() => itemRef.current?.scrollIntoView({ behavior: "smooth" })}
                             className="absolute left-1/2 -translate-x-1/2 top-0 animate-bounce flex items-center justify-center"
                         >
                             <ChevronDown className="w-6 h-6 text-white" />
@@ -137,8 +147,9 @@ function FairGaming() {
                                             onClick={() => handleToggle(index)}
                                             className="w-full flex flex-row min-h-[92px] bg-[#f0f0f0] items-center px-4 cursor-pointer text-left"
                                         >
-                                            <p className="xl:text-2xl lg:text-xl text-lg font-extrabold text-primary pr-8">{`0${index + 1
-                                                }`}</p>
+                                            <p className="xl:text-2xl lg:text-xl text-lg font-extrabold text-primary pr-8">
+                                                {`0${index + 1}`}
+                                            </p>
                                             <div className="flex items-center justify-between flex-1">
                                                 <p className="xl:text-lg lg:text-base text-sm font-medium uppercase hover:text-primary">
                                                     {item.title}
@@ -167,10 +178,7 @@ function FairGaming() {
                 </div>
             </section>
 
-            <PrevNextNav
-                prevTo="/company/partners"
-                nextTo="/company/get-to-know"
-            />
+            <PrevNextNav prevTo="/company/partners" nextTo="/company/get-to-know" />
         </section>
     );
 }

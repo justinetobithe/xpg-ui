@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
-import { db } from "@/firebase";
 import { useTranslation } from "react-i18next";
+import { useQuery } from "@tanstack/react-query";
 
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -14,24 +13,29 @@ import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 
 import Loader from "@/components/Loader";
 import SEO from "@/components/SEO";
+import Multigames from "@/components/Multigames";
+import FastImage from "@/components/FastImage";
+import LazyBackground from "@/components/LazyBackground";
 
 import inIcon from "@/assets/images/02_inter_fact.png";
 import mg from "@/assets/images/011_mg_icon1.png";
 
-import Multigames from "@/components/Multigames";
+import { fetchLiveGames } from "@/api/liveGames";
+import { stripDescription } from "@/utils/text";
 
 function GameDetails() {
     const { t, i18n } = useTranslation();
     const { gameId } = useParams();
-
     const categoriesRef = useRef(null);
 
-    const [games, setGames] = useState([]);
-    const [selectedGame, setSelectedGame] = useState(gameId || "multi-games");
-    const [gameData, setGameData] = useState(null);
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const { data: games = [], isLoading } = useQuery({
+        queryKey: ["liveGames"],
+        queryFn: fetchLiveGames,
+        staleTime: 1000 * 60 * 5,
+    });
 
-    const [loading, setLoading] = useState(true);
+    const [selectedGame, setSelectedGame] = useState(gameId || "multi-games");
+    const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [display, setDisplay] = useState("lg");
     const [isPlay, setIsPlay] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
@@ -39,24 +43,6 @@ function GameDetails() {
     useEffect(() => {
         setSelectedGame(gameId || "multi-games");
     }, [gameId]);
-
-    useEffect(() => {
-        setLoading(true);
-        const unsub = onSnapshot(
-            query(collection(db, "liveGames"), orderBy("priority", "asc")),
-            (snapshot) => {
-                const data = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
-                setGames(data);
-                if (selectedGame === "multi-games") {
-                    setGameData(null);
-                } else {
-                    setGameData(data.find((g) => g.id === selectedGame) || null);
-                }
-                setLoading(false);
-            }
-        );
-        return () => unsub();
-    }, [selectedGame]);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -76,6 +62,11 @@ function GameDetails() {
         window.addEventListener("resize", checkScreenSize);
         return () => window.removeEventListener("resize", checkScreenSize);
     }, []);
+
+    const gameData = useMemo(() => {
+        if (selectedGame === "multi-games") return null;
+        return games.find((g) => g.id === selectedGame) || null;
+    }, [games, selectedGame]);
 
     const heroBg = useMemo(() => {
         if (selectedGame === "multi-games") {
@@ -97,6 +88,8 @@ function GameDetails() {
 
     const handlePrevNext = useCallback(
         (dir) => {
+            if (!games.length) return;
+
             if (selectedGame === "multi-games") {
                 if (dir === "prev") {
                     const last = games[games.length - 1];
@@ -110,6 +103,7 @@ function GameDetails() {
             }
 
             const currentIndex = games.findIndex((g) => g.id === selectedGame);
+
             if (currentIndex === -1) {
                 setSelectedGame("multi-games");
                 categoriesRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -130,7 +124,7 @@ function GameDetails() {
         [games, selectedGame]
     );
 
-    if (loading) return <Loader />;
+    if (isLoading) return <Loader />;
 
     if (selectedGame !== "multi-games" && !gameData) {
         return (
@@ -183,15 +177,18 @@ function GameDetails() {
                         : `/live-games/${selectedGame}`
                 }
                 image={
-                    selectedGame === "multi-games" ? games?.[0]?.cover : gameData?.cover
+                    selectedGame === "multi-games"
+                        ? games?.[0]?.cover
+                        : gameData?.cover
                 }
                 keywords="XPG live games, live dealer casino, blackjack, roulette, baccarat, multigames"
             />
 
-            <main
-                style={{ backgroundImage: `url(${heroBg})` }}
-                className="relative w-full bg-no-repeat bg-center bg-cover h-[52vh] md:h-[60vh] lg:h-[70vh] flex items-end"
-            >
+            <main className="relative w-full h-[60vh] md:h-[70vh] lg:h-[80vh] flex items-end overflow-hidden">
+                <LazyBackground
+                    imageUrl={heroBg}
+                    className="absolute inset-0 w-full h-full bg-cover bg-center"
+                />
                 <div
                     className="absolute inset-0"
                     style={{
@@ -201,7 +198,9 @@ function GameDetails() {
                 />
                 <div className="relative w-full max-w-[1280px] mx-auto px-4 md:px-10 pb-10 md:pb-14 lg:pb-16">
                     <h1
-                        style={{ textShadow: "1px 1px 0 #7e7e7e, 2px 2px 0 #514f4f" }}
+                        style={{
+                            textShadow: "1px 1px 0 #7e7e7e, 2px 2px 0 #514f4f",
+                        }}
                         className="text-white text-3xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-wide"
                     >
                         {titleText}
@@ -209,10 +208,13 @@ function GameDetails() {
                 </div>
             </main>
 
-            <section ref={categoriesRef} className="w-full bg-white border-b border-gray-200">
+            <section
+                ref={categoriesRef}
+                className="w-full bg-white border-b border-gray-200"
+            >
                 <div className="max-w-[1280px] mx-auto px-2 md:px-8 py-2 md:py-0">
                     <div className="flex md:flex-wrap gap-0 overflow-x-auto no-scrollbar">
-                        {games.map((game) => {
+                        {games.map((game, idx) => {
                             const active = game.id === selectedGame;
                             const label =
                                 game?.translation?.[i18n.language]?.name || game.name;
@@ -229,14 +231,16 @@ function GameDetails() {
                                             : "bg-white hover:bg-gray-50",
                                     ].join(" ")}
                                 >
-                                    <img
+                                    <FastImage
                                         src={game.icon}
                                         alt={label}
+                                        priority={idx < 6}
                                         className={[
                                             "w-10 h-10 object-contain transition",
-                                            active ? "grayscale-0 opacity-100" : "grayscale opacity-60",
+                                            active
+                                                ? "grayscale-0 opacity-100"
+                                                : "grayscale opacity-60",
                                         ].join(" ")}
-                                        loading="lazy"
                                     />
                                     <p
                                         className={[
@@ -260,21 +264,23 @@ function GameDetails() {
                                     : "bg-white hover:bg-gray-50",
                             ].join(" ")}
                         >
-                            <img
+                            <FastImage
                                 src={mg}
                                 alt={t("gameDetails.multiGames")}
+                                priority
                                 className={[
                                     "w-10 h-10 object-contain transition",
                                     selectedGame === "multi-games"
                                         ? "grayscale-0 opacity-100"
                                         : "grayscale opacity-60",
                                 ].join(" ")}
-                                loading="lazy"
                             />
                             <p
                                 className={[
                                     "mt-2 text-[10px] md:text-xs uppercase font-semibold text-center leading-tight line-clamp-2",
-                                    selectedGame === "multi-games" ? "text-primary" : "text-gray-500",
+                                    selectedGame === "multi-games"
+                                        ? "text-primary"
+                                        : "text-gray-500",
                                 ].join(" ")}
                             >
                                 {t("gameDetails.multiGames")}
@@ -311,8 +317,7 @@ function GameDetails() {
                                                 if (hide) return null;
                                                 return (
                                                     <span key={index}>
-                                                        {word}
-                                                        {" "}
+                                                        {word}{" "}
                                                     </span>
                                                 );
                                             })}
@@ -331,17 +336,16 @@ function GameDetails() {
                                     )}
                                 </div>
 
-                                <div
-                                    style={{ backgroundImage: `url(${gameData.highlightImage})` }}
-                                    className="relative w-full aspect-video rounded-2xl overflow-hidden bg-center bg-cover shadow-md"
-                                    role="img"
-                                    aria-label="Game highlight"
-                                >
+                                <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-md">
+                                    <LazyBackground
+                                        imageUrl={gameData.highlightImage}
+                                        className="absolute inset-0 w-full h-full bg-cover bg-center"
+                                    />
                                     {!isPlay && gameData.highlightLink && (
                                         <button
                                             type="button"
                                             onClick={() => setIsPlay(true)}
-                                            className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition"
+                                            className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/30 transition z-10"
                                             aria-label="Play highlight video"
                                         >
                                             <div className="w-20 h-20 rounded-full bg-black/60 border-2 border-white flex items-center justify-center">
@@ -355,7 +359,7 @@ function GameDetails() {
                                             src={gameData.highlightLink + "?autoplay=1"}
                                             width="100%"
                                             height="100%"
-                                            className="absolute inset-0 w-full h-full"
+                                            className="absolute inset-0 w-full h-full z-10"
                                             title="Game highlight"
                                             allow="autoplay; fullscreen"
                                         />
@@ -385,11 +389,11 @@ function GameDetails() {
                                         >
                                             {gameData.gallery.map((image, index) => (
                                                 <SwiperSlide key={index}>
-                                                    <img
+                                                    <FastImage
                                                         src={image}
-                                                        className="w-full h-full object-cover"
+                                                        className="w-full h-full"
                                                         alt={`Gallery ${index + 1}`}
-                                                        loading="lazy"
+                                                        priority={index === 0}
                                                     />
                                                 </SwiperSlide>
                                             ))}
@@ -416,11 +420,10 @@ function GameDetails() {
                                             {gameData.gallery.map((image, index) => (
                                                 <SwiperSlide key={index} className="!w-auto">
                                                     <div className="h-[64px] w-[96px] md:h-[72px] md:w-[110px] rounded-lg overflow-hidden opacity-70 hover:opacity-100 transition">
-                                                        <img
+                                                        <FastImage
                                                             src={image}
-                                                            className="w-full h-full object-cover"
+                                                            className="w-full h-full"
                                                             alt={`Thumb ${index + 1}`}
-                                                            loading="lazy"
                                                         />
                                                     </div>
                                                 </SwiperSlide>
@@ -431,10 +434,10 @@ function GameDetails() {
 
                                 <div className="w-full border border-gray-200 rounded-2xl p-5 md:p-6 shadow-sm">
                                     <div className="flex items-center gap-3 mb-3">
-                                        <img
+                                        <FastImage
                                             src={inIcon}
                                             alt=""
-                                            loading="lazy"
+                                            priority
                                             className="w-12 h-12 object-contain"
                                         />
                                         <h3 className="uppercase font-extrabold text-base md:text-lg text-black">
@@ -502,11 +505,6 @@ function GameDetails() {
             </nav>
         </div>
     );
-}
-
-function stripDescription(text = "", max = 160) {
-    const clean = text.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
-    return clean.length > max ? clean.slice(0, max) + "..." : clean;
 }
 
 export default React.memo(GameDetails);

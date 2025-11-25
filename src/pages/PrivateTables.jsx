@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { CheckSquare, Filter } from "lucide-react";
@@ -9,6 +9,7 @@ import privateTableImg from "@/assets/images/solutions/private-table.jpg";
 
 import SEO from "@/components/SEO";
 import PrevNextNav from "@/components/PrevNextNav";
+import LazyBackground from "@/components/LazyBackground";
 
 function PrivateTables() {
     const { t } = useTranslation();
@@ -24,7 +25,6 @@ function PrivateTables() {
         if (w > 1024) next = "xl";
         else if (w > 768) next = "lg";
         else if (w > 425) next = "md";
-
         setDisplay(next);
         setIsMobile(next === "sm");
     }, []);
@@ -39,7 +39,20 @@ function PrivateTables() {
         window.scrollTo(0, 0);
     }, [location.pathname]);
 
-    const heroBg = display === "sm" ? heroMobile : heroDesktop;
+    useEffect(() => {
+        [heroDesktop, heroMobile, privateTableImg].forEach((src) => {
+            const im = new Image();
+            im.src = src;
+        });
+    }, []);
+
+    const heroBg = useMemo(
+        () => (display === "sm" || display === "md" ? heroMobile : heroDesktop),
+        [display]
+    );
+
+    const customizationOptions =
+        t("privateTables.customizationOptions", { returnObjects: true }) || [];
 
     return (
         <section className="w-full flex flex-col text-text pb-12 font-sans">
@@ -51,10 +64,11 @@ function PrivateTables() {
                 keywords="Private Tables, VIP live dealer, custom live casino tables, branded live casino, XPG private tables"
             />
 
-            <main
-                className="relative w-full bg-no-repeat bg-top bg-cover md:h-[70vh] h-[100vh] bg-center flex items-center"
-                style={{ backgroundImage: `url(${heroBg})` }}
-            >
+            <main className="relative w-full md:h-[70vh] h-[100vh] flex items-center overflow-hidden bg-black">
+                <LazyBackground
+                    imageUrl={heroBg}
+                    className="absolute inset-0 bg-no-repeat bg-top bg-cover bg-center w-full h-full"
+                />
                 <div
                     className="w-full h-full absolute"
                     style={{
@@ -65,9 +79,7 @@ function PrivateTables() {
                 <div className="container w-full h-full flex md:justify-normal justify-center relative mt-16">
                     <h1
                         style={{ textShadow: "1px 1px 0 #7e7e7e, 2px 2px 0 #514f4f" }}
-                        className={`text-white text-2xl md:text-4xl lg:text-6xl font-bold md:pt-[calc(15%-50px)] pt-[calc(40%-50px)] uppercase z-10 mx-10 block ${display === "sm"
-                            ? "w-full text-center"
-                            : "w-[350px] text-justify"
+                        className={`text-white text-2xl md:text-4xl lg:text-6xl font-bold md:pt-[calc(15%-50px)] pt-[calc(40%-50px)] uppercase z-10 mx-10 block ${display === "sm" ? "w-full text-center" : "w-[350px] text-justify"
                             }`}
                     >
                         {t("privateTables.titleLine1")}
@@ -75,17 +87,19 @@ function PrivateTables() {
                         {t("privateTables.titleLine2")}
                     </h1>
 
-                    <div className="flex items-center justify-start md:hidden h-full absolute top-1/2 left-1/2 z-10">
-                        <button
-                            type="button"
-                            onClick={() =>
-                                itemRef.current?.scrollIntoView({ behavior: "smooth" })
-                            }
-                            className="absolute w-[24px] h-[24px] left-[48%] flex items-center justify-center top-0 animate-bounce"
-                        >
-                            <div className="h-full w-[24px] rotate-[-45deg] border-l border-b-white border-l-white border-b" />
-                        </button>
-                    </div>
+                    {isMobile && (
+                        <div className="flex items-center justify-start md:hidden h-full absolute top-1/2 left-1/2 z-10">
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    itemRef.current?.scrollIntoView({ behavior: "smooth" })
+                                }
+                                className="absolute w-[24px] h-[24px] left-[48%] flex items-center justify-center top-0 animate-bounce"
+                            >
+                                <div className="h-full w-[24px] rotate-[-45deg] border-l border-b-white border-l-white border-b" />
+                            </button>
+                        </div>
+                    )}
                 </div>
             </main>
 
@@ -116,9 +130,7 @@ function PrivateTables() {
                         </h2>
 
                         <ul className="space-y-2 text-sm md:text-base">
-                            {t("privateTables.customizationOptions", {
-                                returnObjects: true,
-                            }).map((option, index) => (
+                            {customizationOptions.map((option, index) => (
                                 <li key={index} className="flex items-start">
                                     <CheckSquare className="w-4 h-4 mr-2 mt-1 text-[#ff7f50] shrink-0" />
                                     <span>{option}</span>
@@ -127,12 +139,12 @@ function PrivateTables() {
                         </ul>
                     </div>
 
-                    <div
-                        className="w-full lg:w-1/2 h-[240px] md:h-[320px] bg-center bg-cover border-4 border-primary rounded-md"
-                        style={{ backgroundImage: `url(${privateTableImg})` }}
-                        role="img"
-                        aria-label="Private table example"
-                    />
+                    <div className="w-full lg:w-1/2 h-[240px] md:h-[320px] rounded-md border-4 border-primary overflow-hidden bg-black">
+                        <LazyBackground
+                            imageUrl={privateTableImg}
+                            className="w-full h-full bg-center bg-cover"
+                        />
+                    </div>
                 </div>
             </section>
 
@@ -151,10 +163,7 @@ function PrivateTables() {
                 </div>
             </section>
 
-            <PrevNextNav
-                prevTo="/solution/html5-mobile"
-                nextTo="/solution/printing-materials"
-            />
+            <PrevNextNav prevTo="/solution/html5-mobile" nextTo="/solution/printing-materials" />
         </section>
     );
 }
